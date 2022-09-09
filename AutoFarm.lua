@@ -1115,7 +1115,6 @@ end)
 Minimize.MouseButton1Down:connect(function()
 	TopFrame.Visible = true
 	MainFrame.Visible = false
-	StatsFrame.Visible = true
 end)
 
 Close.MouseButton1Down:connect(function()
