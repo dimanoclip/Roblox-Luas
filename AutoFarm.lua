@@ -1,16 +1,3 @@
-local plr = game:GetService("Players").LocalPlayer
-local char = plr.Character
-local root = char.HumanoidRootPart
-local Plrs = game:GetService("Players")
-local MyPlr = Plrs.LocalPlayer
-local MyChar = MyPlr.Character
-local UIS = game:GetService'UserInputService'
-local RepStor = game:GetService("ReplicatedStorage")
-local CoreGui = game:GetService("CoreGui")
-local Run = game:GetService("RunService")
-local mouse = game.Players.LocalPlayer:GetMouse()
-local human = plr.Character:WaitForChild("Humanoid")
-
 showstartmessage = false
 showtopplayersactive = false
 showtopplayersfistactive = false
@@ -210,107 +197,7 @@ function RemoveESP(plr)
 	end
 end
 
-local MainGUI = Instance.new("ScreenGui")
-local TopFrame = Instance.new("Frame")
-local MainFrame = Instance.new("Frame")
-local Open = Instance.new("TextButton")
-local Close = Instance.new("TextButton")
-local Minimize = Instance.new("TextButton")
-local cf = Instance.new("Frame")
-local c1 = Instance.new("TextLabel")
-local c = Instance.new("TextButton")
-local PunchMode = Instance.new("TextButton")
-local WayPoints = Instance.new("TextButton")
-local WayPointsFrame = Instance.new("Frame")
-local FarmExp = Instance.new("TextButton")
-local FarmExpFrame = Instance.new("Frame")
-local ShowLocation = Instance.new("TextLabel")
-local SetLocation = Instance.new("TextButton")
-local TPLocation = Instance.new("TextButton")
-local Location1 = Instance.new("TextButton")
-local Location2 = Instance.new("TextButton")
-local LocationFS1B = Instance.new("TextButton")
-local LocationFS100B = Instance.new("TextButton")
-local LocationFS10T = Instance.new("TextButton")
-local Location3 = Instance.new("TextButton")
-local Location4 = Instance.new("TextButton")
-local Location5 = Instance.new("TextButton")
-local Location6 = Instance.new("TextButton")
-local Location7 = Instance.new("TextButton")
-local Location8 = Instance.new("TextButton")
-local Location9 = Instance.new("TextButton")
-local Location10 = Instance.new("TextButton")
-local LocationBT1B = Instance.new("TextButton")
-local LocationBT100B = Instance.new("TextButton")
-local LocationBT10T = Instance.new("TextButton")
-local LocationPP1M = Instance.new("TextButton")
-local LocationPP1B = Instance.new("TextButton")
-local LocationPP1T = Instance.new("TextButton")
-local LocationPP1Qa = Instance.new("TextButton")
-local LocationBody1B = Instance.new("TextButton")
-local FarmAll = Instance.new("TextButton")
-local FarmFist = Instance.new("TextButton")
-local FarmBody = Instance.new("TextButton")
-local FarmSpeed = Instance.new("TextButton")
-local FarmJump = Instance.new("TextButton")
-local SavePosition = Instance.new("TextLabel")
-local FarmPsychic = Instance.new("TextButton")
-local FarmBodyLabel = Instance.new("TextLabel")
-local FarmSpeedLabel = Instance.new("TextLabel")
-local esptrack = Instance.new("TextButton")
-local ESPLength = Instance.new("TextBox")
-local Extras = Instance.new("TextButton")
-local ExtrasFrame = Instance.new("Frame")
-local PlayerInfo = Instance.new("TextButton")
-local PlayerInfoFrame = Instance.new("Frame")
-local ShowTopPlayers = Instance.new("TextButton")
-local ShowBetterFS = Instance.new("TextButton")
-local ShowBetterBT = Instance.new("TextButton")
-local ShowBetterPP = Instance.new("TextButton")
-local ShowWorseFS = Instance.new("TextButton")
-local ShowWorseBT = Instance.new("TextButton")
-local ShowWorsePP = Instance.new("TextButton")
-local PlayerInfoStatsFrame = Instance.new("Frame")
-local PlayerInfoStatsClose = Instance.new("TextButton")
-local StatBestFistText1 = Instance.new("TextLabel")
-local StatBestBodyText1 = Instance.new("TextLabel")
-local StatBestSpeedText1 = Instance.new("TextLabel")
-local StatBestJumpText1 = Instance.new("TextLabel")
-local StatBestPsychicText1 = Instance.new("TextLabel")
-local PlayerInfoStatsText1 = Instance.new("TextLabel")
-local ShowStatsFist1 = Instance.new("TextLabel")
-local ShowStatsBody1 = Instance.new("TextLabel")
-local ShowStatsSpeed1 = Instance.new("TextLabel")
-local ShowStatsJump1 = Instance.new("TextLabel")
-local ShowStatsPsychic1 = Instance.new("TextLabel")
-local ShowStatsFist2 = Instance.new("TextLabel")
-local ShowStatsBody2 = Instance.new("TextLabel")
-local ShowStatsSpeed2 = Instance.new("TextLabel")
-local ShowStatsJump2 = Instance.new("TextLabel")
-local ShowStatsPsychic2 = Instance.new("TextLabel")
-local AnnoyNameLabel = Instance.new("TextLabel")
-local AnnoyName = Instance.new("TextBox")
-local AnnoyStart = Instance.new("TextButton")
-local KillPlayerStart = Instance.new("TextButton")
-local TptoPlayer = Instance.new("TextButton")
-local PanicToggleLabel = Instance.new("TextLabel")
-local farmbtsafety = Instance.new("TextButton")
-local farmbtsafetyText1 = Instance.new("TextLabel")
-local farmbtsafetylevel = Instance.new("TextBox")
-local farmbtsafety2 = Instance.new("TextButton")
-local farmbtsafetylabel = Instance.new("TextLabel")
-local PanicToggle = Instance.new("TextBox")
-local ReJoinServer = Instance.new("TextButton")
-local InfoScreen = Instance.new("TextButton")
-local InfoFrame = Instance.new("Frame")
-local InfoText1 = Instance.new("TextLabel")
-local PlayerName = Instance.new("TextBox")
-local StatsFrame = Instance.new("Frame")
-local ShowStats1 = Instance.new("TextLabel")
-local ShowStats2 = Instance.new("TextLabel")
-local StatNameSet = Instance.new("TextButton")
-local NoClip = Instance.new("TextButton")
-local GodMode = Instance.new("TextButton")
+s
 
 -- Properties
 
@@ -1172,22 +1059,6 @@ ReJoinServer.Text = "ReJoin Server"
 ReJoinServer.TextSize = 16
 ReJoinServer.TextWrapped = true
 
-InfoText1.Name = "InfoText1"
-InfoText1.Parent = MainFrame
-InfoText1.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
-InfoText1.BorderColor3 = Color3.new(0, 0, 0)
-InfoText1.BackgroundTransparency = 0
-InfoText1.Position = UDim2.new(0, 405, 0, 32)
-InfoText1.Size = UDim2.new(0, 190, 0, 180)
-InfoText1.TextColor3 = Color3.new(1, 1, 1)
-InfoText1.Font = Enum.Font.Fantasy
-InfoText1.Text = "This Gui was created by LuckyMMB@V3rmillion.net\nDiscord https://discord.gg/GKzJnUC\n\nCredits:\n-racist dolphin for the original ESP script which I edited and customised and whoever found the remotes for farming exp."
-InfoText1.TextSize = 15
-InfoText1.TextWrapped = true
-InfoText1.Visible = false
-InfoText1.ZIndex = 7
-InfoText1.TextYAlignment = Enum.TextYAlignment.Top
-
 PlayerName.Name = "PlayerName"
 PlayerName.Parent = MainFrame
 PlayerName.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
@@ -1244,6 +1115,7 @@ end)
 Minimize.MouseButton1Down:connect(function()
 	TopFrame.Visible = true
 	MainFrame.Visible = false
+	StatsFrame.Visible = true
 end)
 
 Close.MouseButton1Down:connect(function()
