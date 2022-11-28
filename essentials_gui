@@ -299,7 +299,7 @@ local PlayerName = Instance.new("TextBox")
 local StatsFrame = Instance.new("Frame")
 local ShowStats1 = Instance.new("TextLabel")
 local ShowStats2 = Instance.new("TextLabel")
-local PlayerName1 = Instance.new("TextBox")
+local PlayerName1 = Instance.new("TextLabel")
 local StatsFrame1 = Instance.new("Frame")
 local ShowStats3 = Instance.new("TextLabel")
 local ShowStats4 = Instance.new("TextLabel")
@@ -922,6 +922,8 @@ PlayerName.TextWrapped = false
 
 StatsFrame.Name = "StatsFrame"
 StatsFrame.Parent = MainFrame
+StatsFrame.Active = true
+StatsFrame.Draggable = true
 StatsFrame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 StatsFrame.BorderColor3 = Color3.new(0.1, 0.1, 0.1)
 StatsFrame.BackgroundTransparency = 0
@@ -968,35 +970,37 @@ PlayerName1.TextWrapped = false
 
 StatsFrame1.Name = "StatsFrame1"
 StatsFrame1.Parent = MainFrame
+StatsFrame1.Active = true
+StatsFrame1.Draggable = true
 StatsFrame1.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 StatsFrame1.BorderColor3 = Color3.new(0.1, 0.1, 0.1)
 StatsFrame1.BackgroundTransparency = 0
 StatsFrame1.Position = UDim2.new(0, 450, 0, 33)
-StatsFrame1.Size = UDim2.new(0, 161, 0, 90)
+StatsFrame1.Size = UDim2.new(0, 240, 0, 130)
 StatsFrame1.Visible = false
 
 ShowStats3.Name = "ShowStats3"
 ShowStats3.Parent = StatsFrame1
 ShowStats3.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 ShowStats3.BackgroundTransparency = 1
-ShowStats3.Position = UDim2.new(0, 0, 0, 0)
-ShowStats3.Size = UDim2.new(0, 50, 0, 90)
+ShowStats3.Position = UDim2.new(0, 20, 0, 20)
+ShowStats3.Size = UDim2.new(0, 55, 0, 90)
 ShowStats3.Font = Enum.Font.Fantasy
 ShowStats3.TextColor3 = Color3.new(1, 1, 1)
 ShowStats3.Text = " "
-ShowStats3.TextSize = 15
+ShowStats3.TextSize = 22
 ShowStats3.TextXAlignment = Enum.TextXAlignment.Right
 
 ShowStats4.Name = "ShowStats4"
 ShowStats4.Parent = StatsFrame1
 ShowStats4.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 ShowStats4.BackgroundTransparency = 1
-ShowStats4.Position = UDim2.new(0, 55, 0, 0)
+ShowStats4.Position = UDim2.new(0, 130, 0, 20)
 ShowStats4.Size = UDim2.new(0, 103, 0, 90)
 ShowStats4.Font = Enum.Font.Fantasy
 ShowStats4.TextColor3 = Color3.new(1, 1, 1)
 ShowStats4.Text = "Stats"
-ShowStats4.TextSize = 15
+ShowStats4.TextSize = 22
 ShowStats4.TextXAlignment = Enum.TextXAlignment.Right
 
 -- Close --
