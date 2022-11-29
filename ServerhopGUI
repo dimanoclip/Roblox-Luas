@@ -4,8 +4,6 @@ Button = Instance.new("TextButton", Gui)
 min = Instance.new("TextButton", Button)
 open = Instance.new("TextButton", Gui)
 
--- Setup
-
 --Hop Button
 Button.Size = UDim2.new(0, 100, 0, 40)
 Button.BackgroundTransparency = 0
