@@ -1,0 +1,37 @@
+local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+local Enable = Instance.new("TextButton", ScreenGui)
+local SavePosition = Instance.new("TextLabel", ScreenGui)
+
+Enable.Name = "Enable"
+Enable.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+Enable.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+Enable.Size = UDim2.new(0, 90, 0, 40)
+Enable.Position = UDim2.new(0.48, 0, 0, -38)
+Enable.Font = Enum.Font.Fantasy
+Enable.Text = "Get"
+Enable.TextColor3 = Color3.new(1, 1, 1)
+Enable.TextSize = 18
+Enable.Visible = true
+
+SavePosition.Name = "Pos"
+SavePosition.BackgroundColor3 = Color3.new(0, 0, 0)
+SavePosition.BackgroundTransparency = 0.5
+SavePosition.BorderColor3 = Color3.new(1, 1, 1)
+SavePosition.BorderSizePixel = 2
+SavePosition.Size = UDim2.new(0, 600, 0, 40)
+SavePosition.Position = UDim2.new(0.35, 0, 0, 5)
+SavePosition.Font = Enum.Font.Fantasy
+SavePosition.Text = " "
+SavePosition.TextColor3 = Color3.new(1, 1, 1)
+SavePosition.TextSize = 18
+SavePosition.Visible = true
+
+
+
+Enable.MouseButton1Down:connect(function()
+	lastlocationx = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.x
+	lastlocationy = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.y
+	lastlocationz = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.z
+	SavePosition.Text = "Last Place: " ..lastlocationx.. ", " ..lastlocationy.. ", " ..lastlocationz
+	print(tostring(SavePosition.Text))
+end)
