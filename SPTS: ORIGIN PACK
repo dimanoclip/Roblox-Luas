@@ -1,5 +1,4 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Gammatixx/GammaHub/main/Script"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/Anti-AFK.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/ServerhopGUI"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FPScount"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/essentials_gui"))()
