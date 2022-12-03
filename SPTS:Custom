@@ -25,22 +25,11 @@ showtopplayersbodyactive = false
 showtopplayersspeedactive = false
 showtopplayersjumpactive = false
 showtopplayerspsychicactive = false
-farmbtsafetyactive = false
-farmbtsafety2active = false
 settplocation = false
 playerdied = false
 deathreturnactive = false
-godmodeactive = false
-noclip = false
 resetplayerstat = false
 killplayeractive = false
-farmallactive = false
-farmfistactive = false
-farmbodyactive = false
-farmspeedactive = false
-farmjumpactive = false
-farmpsychicactive = false
-punchmodeactive = false
 ESPEnabled = false
 ESPLength = 5000
 
@@ -142,19 +131,19 @@ function UpdateESP(plr)
 	if Find then
 		local plrStatus = game.Players[plr.Name].leaderstats.Status
 		if plrStatus.Value == "Criminal" then
-			Find.Frame.Names.TextColor3 = Color3.new(1, 0.1, 1)
+			Find.Frame.Names.TextColor3 = Color3.fromRGB(255, 113, 106)
 		elseif plrStatus.Value == "Lawbreaker" then
-			Find.Frame.Names.TextColor3 = Color3.new(1, 0.1, 0.1)
+			Find.Frame.Names.TextColor3 = Color3.fromRGB(255, 142, 100)
 		elseif plrStatus.Value == "Guardian" then
-			Find.Frame.Names.TextColor3 = Color3.new(0.1, 0.8, 1)
+			Find.Frame.Names.TextColor3 = Color3.fromRGB(3, 12, 255)
 		elseif plrStatus.Value == "Protector" then
-			Find.Frame.Names.TextColor3 = Color3.new(0.1, 0.1, 1)
+			Find.Frame.Names.TextColor3 = Color3.fromRGB(0, 144, 211)
 		elseif plrStatus.Value == "Supervillain" then
-			Find.Frame.Names.TextColor3 = Color3.new(0.3, 0.1, 0.1)
+			Find.Frame.Names.TextColor3 = Color3.fromRGB(187, 0, 250)
 		elseif plrStatus.Value == "Superhero" then
-			Find.Frame.Names.TextColor3 = Color3.new(0.8, 0.8, 0)
-		else
-			Find.Frame.Names.TextColor3 = Color3.new(1, 1, 1)
+			Find.Frame.Names.TextColor3 = Color3.fromRGB(209, 255, 59)
+		elseif plrStatus.Value == "Innocent" then
+			Find.Frame.Names.TextColor3 = Color3.fromRGB(255, 255, 255)
 		end
 		Find.Frame.Dist.TextColor3 = Color3.new(1, 1, 1)
 		Find.Frame.Fist.TextColor3 = Color3.new(1, 1, 1)
@@ -181,8 +170,8 @@ function UpdateESP(plr)
 				end
 				Find.Frame.Dist.Text = "Distance: " .. string.format("%.0f", Dist)
 				if Find4 then
-					Find.Frame.Fist.Text = "Fist: " ..converttoletter(string.format("%.0f", game.Players[plr.Name].PrivateStats.FistStrength.Value))
-					Find.Frame.BT.Text = "Body: " ..converttoletter(string.format("%.0f", game.Players[plr.Name].PrivateStats.BodyToughness.Value))
+					Find.Frame.Fist.Text = "Fist: " ..converttoletter(string.format("%.0f", game.Players[plr.Name].PlayerFolder.DataFolder.FS.Value))
+					Find.Frame.BT.Text = "Body: " ..converttoletter(string.format("%.0f", game.Players[plr.Name].PlayerFolder.DataFolder.BT.Value))
 				else
 					Find.Frame.Fist.Text = ""
 					Find.Frame.BT.Text = ""
@@ -199,68 +188,74 @@ function RemoveESP(plr)
 	end
 end
 
-
 local MainGUI = Instance.new("ScreenGui")
 local TopFrame = Instance.new("Frame")
 local MainFrame = Instance.new("Frame")
 local Open = Instance.new("TextButton")
 local Close = Instance.new("TextButton")
 local Minimize = Instance.new("TextButton")
-local cf = Instance.new("Frame")
-local c1 = Instance.new("TextLabel")
-local c = Instance.new("TextButton")
-local DeathReturn = Instance.new("TextButton")
-local PunchMode = Instance.new("TextButton")
+
+-- Teleports
+
 local WayPoints = Instance.new("TextButton")
 local WayPointsFrame = Instance.new("Frame")
-local FarmExp = Instance.new("TextButton")
-local FarmExpFrame = Instance.new("Frame")
 local ShowLocation = Instance.new("TextLabel")
 local SetLocation = Instance.new("TextButton")
 local TPLocation = Instance.new("TextButton")
-local Location1 = Instance.new("TextButton")
-local Location2 = Instance.new("TextButton")
-local LocationFS1B = Instance.new("TextButton")
-local LocationFS100B = Instance.new("TextButton")
-local LocationFS10T = Instance.new("TextButton")
-local Location3 = Instance.new("TextButton")
-local Location4 = Instance.new("TextButton")
-local Location5 = Instance.new("TextButton")
-local Location6 = Instance.new("TextButton")
-local Location7 = Instance.new("TextButton")
-local Location8 = Instance.new("TextButton")
-local Location9 = Instance.new("TextButton")
-local Location10 = Instance.new("TextButton")
-local LocationBT1B = Instance.new("TextButton")
-local LocationBT100B = Instance.new("TextButton")
-local LocationBT10T = Instance.new("TextButton")
-local LocationPP1M = Instance.new("TextButton")
-local LocationPP1B = Instance.new("TextButton")
-local LocationPP1T = Instance.new("TextButton")
-local LocationPP1Qa = Instance.new("TextButton")
+local SafeZone = Instance.new("TextButton")
+
+-- FS
+
+local FS1k = Instance.new("TextButton")
+local FS100k100M = Instance.new("TextButton")
+local FS1B = Instance.new("TextButton")
+local FS100B = Instance.new("TextButton")
+local FS1T = Instance.new("TextButton")
+local FS100T = Instance.new("TextButton")
+local FS5Qa = Instance.new("TextButton")
+local FS35Qa = Instance.new("TextButton")
+local FS500Qa = Instance.new("TextButton")
+local FS5Qi = Instance.new("TextButton")
+local FS350Qi = Instance.new("TextButton")
+
+-- BT
+
+local BT1k = Instance.new("TextButton")
+local BT100k = Instance.new("TextButton")
+local BT1M = Instance.new("TextButton")
+local BT100M = Instance.new("TextButton")
+local BT1B = Instance.new("TextButton")
+local BT100B = Instance.new("TextButton")
 local LocationBody1B = Instance.new("TextButton")
-local FarmAll = Instance.new("TextButton")
-local FarmFist = Instance.new("TextButton")
-local FarmBody = Instance.new("TextButton")
-local FarmSpeed = Instance.new("TextButton")
-local FarmJump = Instance.new("TextButton")
+local BT1T = Instance.new("TextButton")
+local BT100T = Instance.new("TextButton")
+local BT5Qa = Instance.new("TextButton")
+local BT35Qa = Instance.new("TextButton")
+local BT500Qa = Instance.new("TextButton")
+local BT5Qi = Instance.new("TextButton")
+local BT350Qi = Instance.new("TextButton")
+
+-- PP
+
+local PP1M = Instance.new("TextButton")
+local PP1B = Instance.new("TextButton")
+local PP1T = Instance.new("TextButton")
+local PP1Qa = Instance.new("TextButton")
+local PP350Qa = Instance.new("TextButton")
+local PP3Qi = Instance.new("TextButton")
+local PP50Qi = Instance.new("TextButton")
+local PP1Sx = Instance.new("TextButton")
+
+-- Others
+
+local FarmBody = Instance.new("TextButton") -- For example button
 local SavePosition = Instance.new("TextLabel")
-local FarmPsychic = Instance.new("TextButton")
-local FarmBodyLabel = Instance.new("TextLabel")
-local FarmSpeedLabel = Instance.new("TextLabel")
+local FarmBodyLabel = Instance.new("TextLabel") -- For example button
 local esptrack = Instance.new("TextButton")
 local ESPLength = Instance.new("TextBox")
-local Extras = Instance.new("TextButton")
-local ExtrasFrame = Instance.new("Frame")
 local PlayerInfo = Instance.new("TextButton")
 local PlayerInfoFrame = Instance.new("Frame")
 local ShowTopPlayers = Instance.new("TextButton")
-local ShowBetterFS = Instance.new("TextButton")
-local ShowBetterBT = Instance.new("TextButton")
-local ShowBetterPP = Instance.new("TextButton")
-local ShowWorseFS = Instance.new("TextButton")
-local ShowWorseBT = Instance.new("TextButton")
-local ShowWorsePP = Instance.new("TextButton")
 local PlayerInfoStatsFrame = Instance.new("Frame")
 local PlayerInfoStatsClose = Instance.new("TextButton")
 local StatBestFistText1 = Instance.new("TextLabel")
@@ -279,22 +274,6 @@ local ShowStatsBody2 = Instance.new("TextLabel")
 local ShowStatsSpeed2 = Instance.new("TextLabel")
 local ShowStatsJump2 = Instance.new("TextLabel")
 local ShowStatsPsychic2 = Instance.new("TextLabel")
-local AnnoyNameLabel = Instance.new("TextLabel")
-local AnnoyName = Instance.new("TextBox")
-local AnnoyStart = Instance.new("TextButton")
-local KillPlayerStart = Instance.new("TextButton")
-local TptoPlayer = Instance.new("TextButton")
-local PanicToggleLabel = Instance.new("TextLabel")
-local farmbtsafety = Instance.new("TextButton")
-local farmbtsafetyText1 = Instance.new("TextLabel")
-local farmbtsafetylevel = Instance.new("TextBox")
-local farmbtsafety2 = Instance.new("TextButton")
-local farmbtsafetylabel = Instance.new("TextLabel")
-local PanicToggle = Instance.new("TextBox")
-local ReJoinServer = Instance.new("TextButton")
-local InfoScreen = Instance.new("TextButton")
-local InfoFrame = Instance.new("Frame")
-local InfoText1 = Instance.new("TextLabel")
 local PlayerName = Instance.new("TextBox")
 local StatsFrame = Instance.new("Frame")
 local ShowStats1 = Instance.new("TextLabel")
@@ -303,9 +282,6 @@ local PlayerName1 = Instance.new("TextLabel")
 local StatsFrame1 = Instance.new("Frame")
 local ShowStats3 = Instance.new("TextLabel")
 local ShowStats4 = Instance.new("TextLabel")
-local StatNameSet = Instance.new("TextButton")
-local NoClip = Instance.new("TextButton")
-local GodMode = Instance.new("TextButton")
 
 -- Properties
 
@@ -343,7 +319,6 @@ MainFrame.BorderColor3 = Color3.new(1, 1, 1)
 MainFrame.BorderSizePixel = 2
 MainFrame.Position = UDim2.new(0.5, -272.5, 0, -32)
 MainFrame.Size = UDim2.new(0, 690, 0, 30)
-if not cf.Visible then MainGUI:Destroy() else MainFrame.Visible = true end
 
 Close.Name = "Close"
 Close.Parent = MainFrame
@@ -388,8 +363,8 @@ WayPointsFrame.Parent = MainFrame
 WayPointsFrame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 WayPointsFrame.BorderColor3 = Color3.new(0, 0, 0)
 WayPointsFrame.BackgroundTransparency = 0.2
-WayPointsFrame.Position = UDim2.new(0, 1, 0, 33)
-WayPointsFrame.Size = UDim2.new(0, 375, 0, 480)
+WayPointsFrame.Position = UDim2.new(0, -100, 0, 33)
+WayPointsFrame.Size = UDim2.new(0, 375, 0, 855)
 WayPointsFrame.Visible = false
 
 
@@ -429,222 +404,409 @@ TPLocation.Text = "Tp to"
 TPLocation.TextWrapped = true
 TPLocation.TextSize = 16
 
-Location1.Name = "Location1"
-Location1.Parent = WayPointsFrame
-Location1.BackgroundColor3 = Color3.new(255/255, 94/255, 40/255)
-Location1.TextColor3 = Color3.new(1, 1, 1)
-Location1.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-Location1.Position = UDim2.new(0, 5, 0, 30)
-Location1.Size = UDim2.new(0, 365, 0, 20)
-Location1.Font = Enum.Font.Fantasy
-Location1.Text = "Teleport to Safe Zone"
-Location1.TextWrapped = true
-Location1.TextSize = 16
+SafeZone.Name = "SafeZone"
+SafeZone.Parent = WayPointsFrame
+SafeZone.BackgroundColor3 = Color3.new(255/255, 94/255, 40/255)
+SafeZone.TextColor3 = Color3.new(1, 1, 1)
+SafeZone.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+SafeZone.Position = UDim2.new(0, 5, 0, 30)
+SafeZone.Size = UDim2.new(0, 365, 0, 20)
+SafeZone.Font = Enum.Font.Fantasy
+SafeZone.Text = "Teleport to Safe Zone"
+SafeZone.TextWrapped = true
+SafeZone.TextSize = 16
 
-Location2.Name = "Location2"
-Location2.Parent = WayPointsFrame
-Location2.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
-Location2.TextColor3 = Color3.new(1, 1, 1)
-Location2.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-Location2.Position = UDim2.new(0, 5, 0, 55)
-Location2.Size = UDim2.new(0, 365, 0, 20)
-Location2.Font = Enum.Font.Fantasy
-Location2.Text = "Teleport to Rock [10x Fist Strength]"
-Location2.TextWrapped = true
-Location2.TextSize = 16
+-- FS
 
-Location7.Name = "Location7"
-Location7.Parent = WayPointsFrame
-Location7.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
-Location7.TextColor3 = Color3.new(1, 1, 1)
-Location7.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-Location7.Position = UDim2.new(0, 5, 0, 80)
-Location7.Size = UDim2.new(0, 365, 0, 20)
-Location7.Font = Enum.Font.Fantasy
-Location7.Text = "Teleport to Crystal [100x Fist Strength]"
-Location7.TextWrapped = true
-Location7.TextSize = 16
+FS1k.Name = "FS1k"
+FS1k.Parent = WayPointsFrame
+FS1k.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS1k.TextColor3 = Color3.new(1, 1, 1)
+FS1k.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FS1k.Position = UDim2.new(0, 5, 0, 55)
+FS1k.Size = UDim2.new(0, 365, 0, 20)
+FS1k.Font = Enum.Font.Fantasy
+FS1k.Text = "Teleport to Rock [10 x Fist Strength] 1k+ FS required"
+FS1k.TextWrapped = true
+FS1k.TextSize = 16
 
-LocationFS1B.Name = "LocationFS1B"
-LocationFS1B.Parent = WayPointsFrame
-LocationFS1B.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
-LocationFS1B.TextColor3 = Color3.new(1, 1, 1)
-LocationFS1B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-LocationFS1B.Position = UDim2.new(0, 5, 0, 105)
-LocationFS1B.Size = UDim2.new(0, 365, 0, 20)
-LocationFS1B.Font = Enum.Font.Fantasy
-LocationFS1B.Text = "Teleport to Blue Star [2k x FS]: 1B+ FS required"
-LocationFS1B.TextWrapped = true
-LocationFS1B.TextSize = 16
+FS100k100M.Name = "FS100k100M"
+FS100k100M.Parent = WayPointsFrame
+FS100k100M.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS100k100M.TextColor3 = Color3.new(1, 1, 1)
+FS100k100M.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FS100k100M.Position = UDim2.new(0, 5, 0, 80)
+FS100k100M.Size = UDim2.new(0, 365, 0, 20)
+FS100k100M.Font = Enum.Font.Fantasy
+FS100k100M.Text = "Teleport to Crystals [50-1k x Fist Strength] 100k-100M FS required "
+FS100k100M.TextWrapped = true
+FS100k100M.TextSize = 16
 
-LocationFS100B.Name = "LocationFS100B"
-LocationFS100B.Parent = WayPointsFrame
-LocationFS100B.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
-LocationFS100B.TextColor3 = Color3.new(1, 1, 1)
-LocationFS100B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-LocationFS100B.Position = UDim2.new(0, 5, 0, 130)
-LocationFS100B.Size = UDim2.new(0, 365, 0, 20)
-LocationFS100B.Font = Enum.Font.Fantasy
-LocationFS100B.Text = "Teleport to Green Star [40k x FS]: 100B+ FS required"
-LocationFS100B.TextWrapped = true
-LocationFS100B.TextSize = 16
+FS1B.Name = "FS1B"
+FS1B.Parent = WayPointsFrame
+FS1B.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS1B.TextColor3 = Color3.new(1, 1, 1)
+FS1B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FS1B.Position = UDim2.new(0, 5, 0, 105)
+FS1B.Size = UDim2.new(0, 365, 0, 20)
+FS1B.Font = Enum.Font.Fantasy
+FS1B.Text = "Teleport to Blue Star [10k x FS]: 1B+ FS required"
+FS1B.TextWrapped = true
+FS1B.TextSize = 16
 
-LocationFS10T.Name = "LocationFS10T"
-LocationFS10T.Parent = WayPointsFrame
-LocationFS10T.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
-LocationFS10T.TextColor3 = Color3.new(1, 1, 1)
-LocationFS10T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-LocationFS10T.Position = UDim2.new(0, 5, 0, 155)
-LocationFS10T.Size = UDim2.new(0, 365, 0, 20)
-LocationFS10T.Font = Enum.Font.Fantasy
-LocationFS10T.Text = "Teleport to Orange Star [800k x FS]: 10T+ FS required"
-LocationFS10T.TextWrapped = true
-LocationFS10T.TextSize = 16
+FS100B.Name = "FS100B"
+FS100B.Parent = WayPointsFrame
+FS100B.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS100B.TextColor3 = Color3.new(1, 1, 1)
+FS100B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FS100B.Position = UDim2.new(0, 5, 0, 130)
+FS100B.Size = UDim2.new(0, 365, 0, 20)
+FS100B.Font = Enum.Font.Fantasy
+FS100B.Text = "Teleport to Green Star [50k x FS]: 100B+ FS required"
+FS100B.TextWrapped = true
+FS100B.TextSize = 16
 
-Location3.Name = "Location3"
-Location3.Parent = WayPointsFrame
-Location3.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
-Location3.TextColor3 = Color3.new(1, 1, 1)
-Location3.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-Location3.Position = UDim2.new(0, 5, 0, 180)
-Location3.Size = UDim2.new(0, 365, 0, 20)
-Location3.Font = Enum.Font.Fantasy
-Location3.Text = "Tp to City Port Training 1 [5x BT]: 100+ BT required"
-Location3.TextWrapped = true
-Location3.TextSize = 16
+FS1T.Name = "FS1T"
+FS1T.Parent = WayPointsFrame
+FS1T.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS1T.TextColor3 = Color3.new(1, 1, 1)
+FS1T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FS1T.Position = UDim2.new(0, 5, 0, 155)
+FS1T.Size = UDim2.new(0, 365, 0, 20)
+FS1T.Font = Enum.Font.Fantasy
+FS1T.Text = "Teleport to Orange Star [500k x FS]: 1T+ FS required"
+FS1T.TextWrapped = true
+FS1T.TextSize = 16
 
-Location4.Name = "Location4"
-Location4.Parent = WayPointsFrame
-Location4.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
-Location4.TextColor3 = Color3.new(1, 1, 1)
-Location4.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-Location4.Position = UDim2.new(0, 5, 0, 205)
-Location4.Size = UDim2.new(0, 365, 0, 20)
-Location4.Font = Enum.Font.Fantasy
-Location4.Text = "Tp to City Port Training 2 [10x BT]: 10k+ BT required"
-Location4.TextWrapped = true
-Location4.TextSize = 16
+FS100T.Name = "FS100T"
+FS100T.Parent = WayPointsFrame
+FS100T.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS100T.TextColor3 = Color3.new(1, 1, 1)
+FS100T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FS100T.Position = UDim2.new(0, 5, 0, 180)
+FS100T.Size = UDim2.new(0, 365, 0, 20)
+FS100T.Font = Enum.Font.Fantasy
+FS100T.Text = "Teleport to Red Star [3M x FS]: 100T+ FS required"
+FS100T.TextWrapped = true
+FS100T.TextSize = 16
 
-Location5.Name = "Location5"
-Location5.Parent = WayPointsFrame
-Location5.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
-Location5.TextColor3 = Color3.new(1, 1, 1)
-Location5.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-Location5.Position = UDim2.new(0, 5, 0, 230)
-Location5.Size = UDim2.new(0, 365, 0, 20)
-Location5.Font = Enum.Font.Fantasy
-Location5.Text = "Tp to Ice Mountain [20x BT]: 100k+ BT required"
-Location5.TextWrapped = true
-Location5.TextSize = 16
+FS5Qa.Name = "FS5Qa"
+FS5Qa.Parent = WayPointsFrame
+FS5Qa.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS5Qa.TextColor3 = Color3.new(1, 1, 1)
+FS5Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FS5Qa.Position = UDim2.new(0, 5, 0, 205)
+FS5Qa.Size = UDim2.new(0, 365, 0, 20)
+FS5Qa.Font = Enum.Font.Fantasy
+FS5Qa.Text = "Teleport to Magma Crystal [50M x FS]: 5Qa+ FS required"
+FS5Qa.TextWrapped = true
+FS5Qa.TextSize = 16
 
-Location6.Name = "Location6"
-Location6.Parent = WayPointsFrame
-Location6.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
-Location6.TextColor3 = Color3.new(1, 1, 1)
-Location6.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-Location6.Position = UDim2.new(0, 5, 0, 255)
-Location6.Size = UDim2.new(0, 365, 0, 20)
-Location6.Font = Enum.Font.Fantasy
-Location6.Text = "Tp to Tornado [50x BT]: 1M+ BT required"
-Location6.TextWrapped = true
-Location6.TextSize = 16
+FS35Qa.Name = "FS35Qa"
+FS35Qa.Parent = WayPointsFrame
+FS35Qa.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS35Qa.TextColor3 = Color3.new(1, 1, 1)
+FS35Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FS35Qa.Position = UDim2.new(0, 5, 0, 230)
+FS35Qa.Size = UDim2.new(0, 365, 0, 20)
+FS35Qa.Font = Enum.Font.Fantasy
+FS35Qa.Text = "Teleport to Pink Crystal [200M x FS]: 35Qa+ FS required"
+FS35Qa.TextWrapped = true
+FS35Qa.TextSize = 16
 
-Location8.Name = "Location8"
-Location8.Parent = WayPointsFrame
-Location8.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
-Location8.TextColor3 = Color3.new(1, 1, 1)
-Location8.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-Location8.Position = UDim2.new(0, 5, 0, 280)
-Location8.Size = UDim2.new(0, 365, 0, 20)
-Location8.Font = Enum.Font.Fantasy
-Location8.Text = "Tp to Volcano [100x BT]: 10M+ BT required"
-Location8.TextWrapped = true
-Location8.TextSize = 16
+FS500Qa.Name = "FS500Qa"
+FS500Qa.Parent = WayPointsFrame
+FS500Qa.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS500Qa.TextColor3 = Color3.new(1, 1, 1)
+FS500Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FS500Qa.Position = UDim2.new(0, 5, 0, 255)
+FS500Qa.Size = UDim2.new(0, 365, 0, 20)
+FS500Qa.Font = Enum.Font.Fantasy
+FS500Qa.Text = "Teleport to Purple Star [1B x FS]: 500Qa+ FS required"
+FS500Qa.TextWrapped = true
+FS500Qa.TextSize = 16
 
-LocationBT1B.Name = "LocationBT1B"
-LocationBT1B.Parent = WayPointsFrame
-LocationBT1B.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
-LocationBT1B.TextColor3 = Color3.new(1, 1, 1)
-LocationBT1B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-LocationBT1B.Position = UDim2.new(0, 5, 0, 305)
-LocationBT1B.Size = UDim2.new(0, 365, 0, 20)
-LocationBT1B.Font = Enum.Font.Fantasy
-LocationBT1B.Text = "Tp to [2k x BT] Area: 1B+ BT required"
-LocationBT1B.TextWrapped = true
-LocationBT1B.TextSize = 16
+FS5Qi.Name = "FS5Qi"
+FS5Qi.Parent = WayPointsFrame
+FS5Qi.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS5Qi.TextColor3 = Color3.new(1, 1, 1)
+FS5Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FS5Qi.Position = UDim2.new(0, 5, 0, 280)
+FS5Qi.Size = UDim2.new(0, 365, 0, 20)
+FS5Qi.Font = Enum.Font.Fantasy
+FS5Qi.Text = "Teleport to Real Green Star [5B x FS]: 5Qi+ FS required"
+FS5Qi.TextWrapped = true
+FS5Qi.TextSize = 16
 
-LocationBT100B.Name = "LocationBT100B"
-LocationBT100B.Parent = WayPointsFrame
-LocationBT100B.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
-LocationBT100B.TextColor3 = Color3.new(1, 1, 1)
-LocationBT100B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-LocationBT100B.Position = UDim2.new(0, 5, 0, 330)
-LocationBT100B.Size = UDim2.new(0, 365, 0, 20)
-LocationBT100B.Font = Enum.Font.Fantasy
-LocationBT100B.Text = "Tp to [40k x BT] Area: 100B+ BT required"
-LocationBT100B.TextWrapped = true
-LocationBT100B.TextSize = 16
+FS350Qi.Name = "FS350Qi"
+FS350Qi.Parent = WayPointsFrame
+FS350Qi.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS350Qi.TextColor3 = Color3.new(1, 1, 1)
+FS350Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FS350Qi.Position = UDim2.new(0, 5, 0, 305)
+FS350Qi.Size = UDim2.new(0, 365, 0, 20)
+FS350Qi.Font = Enum.Font.Fantasy
+FS350Qi.Text = "Teleport to Real Orange Star [25B x FS]: 350Qi+ FS required"
+FS350Qi.TextWrapped = true
+FS350Qi.TextSize = 16
 
-LocationBT10T.Name = "LocationBT10T"
-LocationBT10T.Parent = WayPointsFrame
-LocationBT10T.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
-LocationBT10T.TextColor3 = Color3.new(1, 1, 1)
-LocationBT10T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-LocationBT10T.Position = UDim2.new(0, 5, 0, 355)
-LocationBT10T.Size = UDim2.new(0, 365, 0, 20)
-LocationBT10T.Font = Enum.Font.Fantasy
-LocationBT10T.Text = "Tp to [800k x BT] Area: 10T+ BT required"
-LocationBT10T.TextWrapped = true
-LocationBT10T.TextSize = 16
+-- BT
 
-LocationPP1M.Name = "LocationPP1M"
-LocationPP1M.Parent = WayPointsFrame
-LocationPP1M.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
-LocationPP1M.TextColor3 = Color3.new(1, 1, 1)
-LocationPP1M.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-LocationPP1M.Position = UDim2.new(0, 5, 0, 380)
-LocationPP1M.Size = UDim2.new(0, 365, 0, 20)
-LocationPP1M.Font = Enum.Font.Fantasy
-LocationPP1M.Text = "Tp to Psychic Island [100x PP]: 1M+ PP required"
-LocationPP1M.TextWrapped = true
-LocationPP1M.TextSize = 16
+BT1k.Name = "BT1k"
+BT1k.Parent = WayPointsFrame
+BT1k.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT1k.TextColor3 = Color3.new(1, 1, 1)
+BT1k.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+BT1k.Position = UDim2.new(0, 5, 0, 330)
+BT1k.Size = UDim2.new(0, 365, 0, 20)
+BT1k.Font = Enum.Font.Fantasy
+BT1k.Text = "Tp to Pool [10 x BT]: 1K+ BT required"
+BT1k.TextWrapped = true
+BT1k.TextSize = 16
 
-LocationPP1B.Name = "LocationPP1B"
-LocationPP1B.Parent = WayPointsFrame
-LocationPP1B.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
-LocationPP1B.TextColor3 = Color3.new(1, 1, 1)
-LocationPP1B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-LocationPP1B.Position = UDim2.new(0, 5, 0, 405)
-LocationPP1B.Size = UDim2.new(0, 365, 0, 20)
-LocationPP1B.Font = Enum.Font.Fantasy
-LocationPP1B.Text = "Tp to Psychic Island [10k x PP]: 1B+ PP required"
-LocationPP1B.TextWrapped = true
-LocationPP1B.TextSize = 16
+BT100k.Name = "BT100k"
+BT100k.Parent = WayPointsFrame
+BT100k.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT100k.TextColor3 = Color3.new(1, 1, 1)
+BT100k.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+BT100k.Position = UDim2.new(0, 5, 0, 355)
+BT100k.Size = UDim2.new(0, 365, 0, 20)
+BT100k.Font = Enum.Font.Fantasy
+BT100k.Text = "Tp to Ice Mountain [50 x BT]: 100K+ BT required"
+BT100k.TextWrapped = true
+BT100k.TextSize = 16
 
-LocationPP1T.Name = "LocationPP1T"
-LocationPP1T.Parent = WayPointsFrame
-LocationPP1T.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
-LocationPP1T.TextColor3 = Color3.new(1, 1, 1)
-LocationPP1T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-LocationPP1T.Position = UDim2.new(0, 5, 0, 430)
-LocationPP1T.Size = UDim2.new(0, 365, 0, 20)
-LocationPP1T.Font = Enum.Font.Fantasy
-LocationPP1T.Text = "Tp to Psychic Island [1M x PP]: 1T+ PP required"
-LocationPP1T.TextWrapped = true
-LocationPP1T.TextSize = 16
+BT1M.Name = "BT1M"
+BT1M.Parent = WayPointsFrame
+BT1M.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT1M.TextColor3 = Color3.new(1, 1, 1)
+BT1M.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+BT1M.Position = UDim2.new(0, 5, 0, 380)
+BT1M.Size = UDim2.new(0, 365, 0, 20)
+BT1M.Font = Enum.Font.Fantasy
+BT1M.Text = "Tp to Tornado [100 x BT]: 1M+ BT required"
+BT1M.TextWrapped = true
+BT1M.TextSize = 16
 
-LocationPP1Qa.Name = "LocationPP1Qa"
-LocationPP1Qa.Parent = WayPointsFrame
-LocationPP1Qa.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
-LocationPP1Qa.TextColor3 = Color3.new(1, 1, 1)
-LocationPP1Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-LocationPP1Qa.Position = UDim2.new(0, 5, 0, 455)
-LocationPP1Qa.Size = UDim2.new(0, 365, 0, 20)
-LocationPP1Qa.Font = Enum.Font.Fantasy
-LocationPP1Qa.Text = "Tp to Psychic Island [100M x PP]: 1Qa+ PP required"
-LocationPP1Qa.TextWrapped = true
-LocationPP1Qa.TextSize = 16
+BT100M.Name = "BT100M"
+BT100M.Parent = WayPointsFrame
+BT100M.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT100M.TextColor3 = Color3.new(1, 1, 1)
+BT100M.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+BT100M.Position = UDim2.new(0, 5, 0, 405)
+BT100M.Size = UDim2.new(0, 365, 0, 20)
+BT100M.Font = Enum.Font.Fantasy
+BT100M.Text = "Tp to Volcano [1k x BT]: 100M+ BT required"
+BT100M.TextWrapped = true
+BT100M.TextSize = 16
 
+BT1B.Name = "BT1B"
+BT1B.Parent = WayPointsFrame
+BT1B.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT1B.TextColor3 = Color3.new(1, 1, 1)
+BT1B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+BT1B.Position = UDim2.new(0, 5, 0, 430)
+BT1B.Size = UDim2.new(0, 365, 0, 20)
+BT1B.Font = Enum.Font.Fantasy
+BT1B.Text = "Tp to Electrical wiring [10k x BT]: 1B+ BT required"
+BT1B.TextWrapped = true
+BT1B.TextSize = 16
+
+BT100B.Name = "BT100B"
+BT100B.Parent = WayPointsFrame
+BT100B.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT100B.TextColor3 = Color3.new(1, 1, 1)
+BT100B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+BT100B.Position = UDim2.new(0, 5, 0, 455)
+BT100B.Size = UDim2.new(0, 365, 0, 20)
+BT100B.Font = Enum.Font.Fantasy
+BT100B.Text = "Tp to Stone Pool [50k x BT] Area: 100B+ BT required"
+BT100B.TextWrapped = true
+BT100B.TextSize = 16
+
+BT1T.Name = "BT1T"
+BT1T.Parent = WayPointsFrame
+BT1T.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT1T.TextColor3 = Color3.new(1, 1, 1)
+BT1T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+BT1T.Position = UDim2.new(0, 5, 0, 480)
+BT1T.Size = UDim2.new(0, 365, 0, 20)
+BT1T.Font = Enum.Font.Fantasy
+BT1T.Text = "Tp to Dark Smoke[100k x BT] Area: 1T+ BT required"
+BT1T.TextWrapped = true
+BT1T.TextSize = 16
+
+BT100T.Name = "BT100T"
+BT100T.Parent = WayPointsFrame
+BT100T.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT100T.TextColor3 = Color3.new(1, 1, 1)
+BT100T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+BT100T.Position = UDim2.new(0, 5, 0, 505)
+BT100T.Size = UDim2.new(0, 365, 0, 20)
+BT100T.Font = Enum.Font.Fantasy
+BT100T.Text = "Tp to Dance Pad[500k x BT] Area: 100T+ BT required"
+BT100T.TextWrapped = true
+BT100T.TextSize = 16
+
+BT5Qa.Name = "BT5Qa"
+BT5Qa.Parent = WayPointsFrame
+BT5Qa.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT5Qa.TextColor3 = Color3.new(1, 1, 1)
+BT5Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+BT5Qa.Position = UDim2.new(0, 5, 0, 530)
+BT5Qa.Size = UDim2.new(0, 365, 0, 20)
+BT5Qa.Font = Enum.Font.Fantasy
+BT5Qa.Text = "Tp to Pool of Blood[50M x BT] Area: 5Qa+ BT required"
+BT5Qa.TextWrapped = true
+BT5Qa.TextSize = 16
+
+BT35Qa.Name = "BT35Qa"
+BT35Qa.Parent = WayPointsFrame
+BT35Qa.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT35Qa.TextColor3 = Color3.new(1, 1, 1)
+BT35Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+BT35Qa.Position = UDim2.new(0, 5, 0, 555)
+BT35Qa.Size = UDim2.new(0, 365, 0, 20)
+BT35Qa.Font = Enum.Font.Fantasy
+BT35Qa.Text = "Tp to Purple Pool[200M x BT] Area: 35Qa+ BT required"
+BT35Qa.TextWrapped = true
+BT35Qa.TextSize = 16
+
+BT500Qa.Name = "BT500Qa"
+BT500Qa.Parent = WayPointsFrame
+BT500Qa.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT500Qa.TextColor3 = Color3.new(1, 1, 1)
+BT500Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+BT500Qa.Position = UDim2.new(0, 5, 0, 580)
+BT500Qa.Size = UDim2.new(0, 365, 0, 20)
+BT500Qa.Font = Enum.Font.Fantasy
+BT500Qa.Text = "Tp to Strong Light[1B x BT] Area: 500Qa+ BT required"
+BT500Qa.TextWrapped = true
+BT500Qa.TextSize = 16
+
+BT5Qi.Name = "BT5Qi"
+BT5Qi.Parent = WayPointsFrame
+BT5Qi.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT5Qi.TextColor3 = Color3.new(1, 1, 1)
+BT5Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+BT5Qi.Position = UDim2.new(0, 5, 0, 605)
+BT5Qi.Size = UDim2.new(0, 365, 0, 20)
+BT5Qi.Font = Enum.Font.Fantasy
+BT5Qi.Text = "Tp to Blue Magma[5B x BT] Area: 5Qi+ BT required"
+BT5Qi.TextWrapped = true
+BT5Qi.TextSize = 16
+
+BT350Qi.Name = "BT350Qi"
+BT350Qi.Parent = WayPointsFrame
+BT350Qi.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT350Qi.TextColor3 = Color3.new(1, 1, 1)
+BT350Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+BT350Qi.Position = UDim2.new(0, 5, 0, 630)
+BT350Qi.Size = UDim2.new(0, 365, 0, 20)
+BT350Qi.Font = Enum.Font.Fantasy
+BT350Qi.Text = "Tp to Pink Fire[25B x BT] Area: 350Qi+ BT required"
+BT350Qi.TextWrapped = true
+BT350Qi.TextSize = 16
+
+-- PP
+
+PP1M.Name = "PP1M"
+PP1M.Parent = WayPointsFrame
+PP1M.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP1M.TextColor3 = Color3.new(1, 1, 1)
+PP1M.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+PP1M.Position = UDim2.new(0, 5, 0, 655)
+PP1M.Size = UDim2.new(0, 365, 0, 20)
+PP1M.Font = Enum.Font.Fantasy
+PP1M.Text = "Tp to Tree [100x PP]: 1M+ PP required"
+PP1M.TextWrapped = true
+PP1M.TextSize = 16
+
+PP1B.Name = "PP1B"
+PP1B.Parent = WayPointsFrame
+PP1B.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP1B.TextColor3 = Color3.new(1, 1, 1)
+PP1B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+PP1B.Position = UDim2.new(0, 5, 0, 680)
+PP1B.Size = UDim2.new(0, 365, 0, 20)
+PP1B.Font = Enum.Font.Fantasy
+PP1B.Text = "Tp to Tree [10k x PP]: 1B+ PP required"
+PP1B.TextWrapped = true
+PP1B.TextSize = 16
+
+PP1T.Name = "PP1T"
+PP1T.Parent = WayPointsFrame
+PP1T.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP1T.TextColor3 = Color3.new(1, 1, 1)
+PP1T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+PP1T.Position = UDim2.new(0, 5, 0, 705)
+PP1T.Size = UDim2.new(0, 365, 0, 20)
+PP1T.Font = Enum.Font.Fantasy
+PP1T.Text = "Tp to Waterfall [10M x PP]: 1T+ PP required"
+PP1T.TextWrapped = true
+PP1T.TextSize = 16
+
+PP1Qa.Name = "PP1Qa"
+PP1Qa.Parent = WayPointsFrame
+PP1Qa.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP1Qa.TextColor3 = Color3.new(1, 1, 1)
+PP1Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+PP1Qa.Position = UDim2.new(0, 5, 0, 730)
+PP1Qa.Size = UDim2.new(0, 365, 0, 20)
+PP1Qa.Font = Enum.Font.Fantasy
+PP1Qa.Text = "Tp to Tree [100M x PP]: 1Qa+ PP required"
+PP1Qa.TextWrapped = true
+PP1Qa.TextSize = 16
+
+PP350Qa.Name = "PP350Qa"
+PP350Qa.Parent = WayPointsFrame
+PP350Qa.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP350Qa.TextColor3 = Color3.new(1, 1, 1)
+PP350Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+PP350Qa.Position = UDim2.new(0, 5, 0, 755)
+PP350Qa.Size = UDim2.new(0, 365, 0, 20)
+PP350Qa.Font = Enum.Font.Fantasy
+PP350Qa.Text = "Tp to Tree [1B x PP]: 35Qa+ PP required"
+PP350Qa.TextWrapped = true
+PP350Qa.TextSize = 16
+
+PP3Qi.Name = "PP3Qi"
+PP3Qi.Parent = WayPointsFrame
+PP3Qi.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP3Qi.TextColor3 = Color3.new(1, 1, 1)
+PP3Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+PP3Qi.Position = UDim2.new(0, 5, 0, 780)
+PP3Qi.Size = UDim2.new(0, 365, 0, 20)
+PP3Qi.Font = Enum.Font.Fantasy
+PP3Qi.Text = "Tp to Bridge [10B x PP]: 3Qi+ PP required"
+PP3Qi.TextWrapped = true
+PP3Qi.TextSize = 16
+
+PP50Qi.Name = "PP50Qi"
+PP50Qi.Parent = WayPointsFrame
+PP50Qi.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP50Qi.TextColor3 = Color3.new(1, 1, 1)
+PP50Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+PP50Qi.Position = UDim2.new(0, 5, 0, 805)
+PP50Qi.Size = UDim2.new(0, 365, 0, 20)
+PP50Qi.Font = Enum.Font.Fantasy
+PP50Qi.Text = "Tp to Bridge [100B x PP]: 50Qi+ PP required"
+PP50Qi.TextWrapped = true
+PP50Qi.TextSize = 16
+
+PP1Sx.Name = "PP1Sx"
+PP1Sx.Parent = WayPointsFrame
+PP1Sx.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP1Sx.TextColor3 = Color3.new(1, 1, 1)
+PP1Sx.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+PP1Sx.Position = UDim2.new(0, 5, 0, 830)
+PP1Sx.Size = UDim2.new(0, 365, 0, 20)
+PP1Sx.Font = Enum.Font.Fantasy
+PP1Sx.Text = "Tp to Sakura Tree [1T x PP]: 1Sx+ PP required"
+PP1Sx.TextWrapped = true
+PP1Sx.TextSize = 16
+
+-- Others
 
 esptrack.Name = "esptrack"
 esptrack.Parent = MainFrame
@@ -1030,8 +1192,6 @@ end)
 
 local Menus = {
 	[WayPoints] = WayPointsFrame;
-	[FarmExp] = FarmExpFrame;
-	[Extras] = ExtrasFrame;
 }
 for button,frame in pairs(Menus) do
 	button.MouseButton1Click:connect(function()
@@ -1049,46 +1209,6 @@ FarmBody.MouseEnter:connect(function()
 	FarmBodyLabel.Visible = true
 end)
 
-FarmBody.MouseLeave:connect(function()
-	FarmBodyLabel.Visible = false
-end)
-
-FarmSpeed.MouseEnter:connect(function()
-	FarmSpeedLabel.Visible = true
-end)
-
-FarmSpeed.MouseLeave:connect(function()
-	FarmSpeedLabel.Visible = false
-end)
-
-FarmJump.MouseEnter:connect(function()
-	FarmSpeedLabel.Visible = true
-end)
-
-FarmJump.MouseLeave:connect(function()
-	FarmSpeedLabel.Visible = false
-end)
-
-farmbtsafety.MouseEnter:connect(function()
-	farmbtsafetyText1.Visible = true
-end)
-
-farmbtsafety.MouseLeave:connect(function()
-	farmbtsafetyText1.Visible = false
-end)
-
-InfoScreen.MouseEnter:connect(function()
-	InfoText1.Visible = true
-end)
-
-InfoScreen.MouseLeave:connect(function()
-	InfoText1.Visible = false
-end)
-
-c.MouseButton1Down:connect(function()
-	cf.Visible = false
-end)
-
 -- Round Number to decimal places and convert to letter value --
 
 function round(num, numDecimalPlaces)
@@ -1097,27 +1217,30 @@ function round(num, numDecimalPlaces)
 end
 		
 function converttoletter(num)
-	if num / 1e21 >=1 then
+	if num / 1e24 >=1 then
+		newnum = num / 1e24
+		return round(newnum, 3).. "Sp"
+	elseif num / 1e21 >=1 then
 		newnum = num / 1e21
-		return round(newnum, 6).. "Sx"
+		return round(newnum, 3).. "Sx"
 	elseif num / 1e18 >=1 then
 		newnum = num / 1e18
-		return round(newnum, 6).. "Qi"
+		return round(newnum, 3).. "Qi"
 	elseif num / 1e15 >=1 then
 		newnum = num / 1e15
-		return round(newnum, 6).. "Qa"
+		return round(newnum, 3).. "Qa"
 	elseif num / 1e12 >=1 then
 		newnum = num / 1e12
-		return round(newnum, 6).. "T"
+		return round(newnum, 3).. "T"
 	elseif num / 1e09 >=1 then
 		newnum = num / 1e09
-		return round(newnum, 6).. "B"
+		return round(newnum, 3).. "B"
 	elseif num / 1e06 >=1 then
 		newnum = num / 1e06
-		return round(newnum, 6).. "M"
+		return round(newnum, 3).. "M"
 	elseif num / 1e03 >=1 then
 		newnum = num / 1e03
-		return round(newnum, 6).. "K"
+		return round(newnum, 3).. "K"
 	else return num
 	end
 end
@@ -1160,105 +1283,174 @@ TPLocation.MouseButton1Down:connect(function()
 	end
 end)
 
-Location1.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(459, 248, 887)
-	WayPointsFrame.Visible = false
-end)
-	
-Location2.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(409, 271, 978)
+SafeZone.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-190.5, 50, 28)
 	WayPointsFrame.Visible = false
 end)
 
-LocationFS1B.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1176, 4789, -2293)
+-- FS
+
+FS1k.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-92, 60, -66)
 	WayPointsFrame.Visible = false
 end)
 
-LocationFS10T.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-369, 15735, -9)
+FS100k100M.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2425, 55, -2297)
 	WayPointsFrame.Visible = false
 end)
 
-LocationFS100B.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1381, 9274, 1647)
+FS1B.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-143, 1558, -68)
 	WayPointsFrame.Visible = false
 end)
 
-Location7.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2279, 1944, 1053)
+FS100B.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(179, 2520, -466)
 	WayPointsFrame.Visible = false
 end)
 
-Location3.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(365, 249, -445)
-	settplocation = "BT100Area"
+FS1T.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(207, 3500, 113)
 	WayPointsFrame.Visible = false
 end)
 
-Location4.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(349, 263, -490)
-	settplocation = "BT10KArea"
+FS100T.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(812, 5581, -1697)
 	WayPointsFrame.Visible = false
 end)
 
-Location5.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1640, 258, 2244)
-	settplocation = "BT100KArea"
+FS5Qa.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1135, 1816, 985)
 	WayPointsFrame.Visible = false
 end)
 
-Location6.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2307, 976, 1068)
-	settplocation = "BT1MArea"
+FS35Qa.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-224, 513, 328)
 	WayPointsFrame.Visible = false
 end)
 
-Location8.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2024, 714, -1860)
-	settplocation = "BT10MArea"
+FS500Qa.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2300, 7290, 2636)
 	WayPointsFrame.Visible = false
 end)
 
-LocationBT1B.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-254, 286, 980)
-	settplocation = "BT1BArea"
+FS5Qi.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1926, 13220, 2144)
 	WayPointsFrame.Visible = false
 end)
 
-LocationBT100B.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-271, 279, 991)
-	settplocation = "BT100BArea"
+FS350Qi.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2790, 21225, -2944)
 	WayPointsFrame.Visible = false
 end)
 
-LocationBT10T.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-279, 279, 1007)
-	settplocation = "BT10TArea"
+-- BT
+
+BT1k.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-225, 45, -288)
 	WayPointsFrame.Visible = false
 end)
 
-LocationPP1M.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2527, 5486, -532)
-	settplocation = "PP1MArea"
+BT100k.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1479, 52, 1108)
 	WayPointsFrame.Visible = false
 end)
 
-LocationPP1B.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2560, 5500, -439)
-	settplocation = "PP1BArea"
+BT1M.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-502, 270, -1255)
 	WayPointsFrame.Visible = false
 end)
 
-LocationPP1T.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2582, 5516, -504)
-	settplocation = "PP1TArea"
+BT100M.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2440.62, 558.521, -2338.16)
 	WayPointsFrame.Visible = false
 end)
 
-LocationPP1Qa.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2544, 5412, -495)
-	settplocation = "PP1QaArea"
+BT1B.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-242, 40, -320)
+	WayPointsFrame.Visible = false
+end)
+
+BT100B.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-248, 40, -350)
+	WayPointsFrame.Visible = false
+end)
+
+BT1T.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-80, 40, -325)
+	WayPointsFrame.Visible = false
+end)
+
+BT100T.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-82, 45, -370)
+	WayPointsFrame.Visible = false
+end)
+
+BT5Qa.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-78, 44, -412)
+	WayPointsFrame.Visible = false
+end)
+
+BT35Qa.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-245, 40, -404)
+	WayPointsFrame.Visible = false
+end)
+
+BT500Qa.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1805, 45, 653)
+	WayPointsFrame.Visible = false
+end)
+
+BT5Qi.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1810, 60, 756)
+	WayPointsFrame.Visible = false
+end)
+
+BT350Qi.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1823, 61, 802)
+	WayPointsFrame.Visible = false
+end)
+
+-- PP
+
+PP1M.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-340, 1055, -263)
+	WayPointsFrame.Visible = false
+end)
+
+PP1B.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-352, 1055, -133)
+	WayPointsFrame.Visible = false
+end)
+
+PP1T.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-323, 1067, -196)
+	WayPointsFrame.Visible = false
+end)
+
+PP1Qa.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-423, 1120, -267)
+	WayPointsFrame.Visible = false
+end)
+
+PP350Qa.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-429, 1120, -140)
+	WayPointsFrame.Visible = false
+end)
+
+PP3Qi.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-425, 1144, -200)
+	WayPointsFrame.Visible = false
+end)
+
+PP50Qi.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-496, 1234, -209)
+	WayPointsFrame.Visible = false
+end)
+
+PP1Sx.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(462, 1010, -844)
 	WayPointsFrame.Visible = false
 end)
 
@@ -1268,6 +1460,107 @@ Run:BindToRenderStep("UpdateESP", Enum.RenderPriority.Character.Value, function(
 	for _, v in next, Plrs:GetPlayers() do
 		UpdateESP(v)
 	end
+end)
+
+-- Clicker
+
+local Enable = Instance.new("TextButton", MainGUI)
+local Disable = Instance.new("TextButton", MainGUI)
+
+Enable.Name = "Enable"
+Enable.BackgroundColor3 = Color3.new(0, 0, 0)
+Enable.BackgroundTransparency = 0.5
+Enable.BorderColor3 = Color3.new(1, 1, 1)
+Enable.BorderSizePixel = 2
+Enable.Size = UDim2.new(0, 90, 0, 30)
+Enable.Position = UDim2.new(0.3, 0, 0, -32)
+Enable.Font = Enum.Font.Fantasy
+Enable.Text = "Disabled"
+Enable.TextColor3 = Color3.new(1, 1, 1)
+Enable.TextSize = 18
+Enable.Visible = true
+
+Disable.Name = "Disable"
+Disable.BackgroundColor3 = Color3.new(0, 0, 0)
+Disable.BackgroundTransparency = 0.5
+Disable.BorderColor3 = Color3.new(1, 1, 1)
+Disable.BorderSizePixel = 2
+Disable.Size = UDim2.new(0, 90, 0, 30)
+Disable.Position = UDim2.new(0.3, 0, 0, -32)
+Disable.Font = Enum.Font.Fantasy
+Disable.Text = "Enabled"
+Disable.TextColor3 = Color3.new(1, 1, 1)
+Disable.TextSize = 18
+Disable.Visible = false
+
+
+Disable.MouseButton1Down:connect(function()
+	autoclick = false
+	deathreturnactive = false
+	print("Clicker: " ..tostring(autoclick))
+	Disable.Visible = false
+	Enable.Visible = true
+end)
+
+Enable.MouseButton1Down:connect(function()
+	autoclick = true
+	deathreturnactive = true
+	print("Clicker: " ..tostring(autoclick))
+	Disable.Visible = true
+	Enable.Visible = false
+end)
+
+spawn(function()
+	while true do
+		if autoclick == true then
+    		VirtualUser:CaptureController()
+    		VirtualUser:ClickButton1(Vector2.new())
+		end
+		wait(1)
+	end
+	wait(1)
+end)
+
+-- Return On Death
+
+spawn(function()
+	while true do
+		if deathreturnactive then
+			player = game:GetService("Players").LocalPlayer
+			player.Character.Humanoid.Died:connect(function()
+				playerdied = true
+			end)
+		end
+		if not playerdied then
+			wait(1)
+			lastlocationx = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.x
+			lastlocationy = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.y
+			lastlocationz = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.z
+			SavePosition.Text = "Last Place: " ..lastlocationx.. "," ..lastlocationy.. "," ..lastlocationz
+			--print(tostring(SavePosition.Text))
+			wait(0.5)
+		end
+		if playerdied then
+			--print("Player " ..tostring(game.Players.LocalPlayer.Name).. " Died")
+			--print(tostring(SavePosition.Text))
+			wait(5)
+			game:GetService("ReplicatedStorage").RespawnEvent:FireServer()
+			wait(1)
+            game.Players.LocalPlayer.PlayerGui.Play.Enabled = false
+            game.Players.LocalPlayer.PlayerGui.plrstats.Enabled = true
+			wait(4)
+			--print("screengui disabled")
+			repeat wait(2) until game.Players.LocalPlayer.Character.Humanoid
+			--print("Teleporting back to " ..tostring(SavePosition.Text))
+			if deathreturnactive then
+				wait(5)
+				local FindHum = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(lastlocationx, lastlocationy, lastlocationz)
+			end
+			playerdied = false
+		end
+		wait(1)
+	end		
 end)
 
 -- ESP --
@@ -1337,7 +1630,7 @@ spawn(function()
 			BestPlayerFist = 1
 			PlayerFistName = false
 			for i,v in pairs(game:GetService("Players"):GetChildren()) do
-				local PlayerFist = tonumber(game.Players[v.Name].PrivateStats.FistStrength.Value)
+				local PlayerFist = tonumber(game.Players[v.Name].PlayerFolder.DataFolder.FS.Value)
 				if PlayerFist > tonumber(BestPlayerFist) then 
 					BestPlayerFist = PlayerFist
 					PlayerFistName = tostring(v.Name)
@@ -1361,11 +1654,11 @@ spawn(function()
 				StatBestFistText1.TextColor3 = Color3.new(1, 1, 1)
 			end
 			local FindHum = game.Players[PlayerFistName].Character.Humanoid
-			local FistPlayerFist = converttoletter(string.format("%.0f", game.Players[PlayerFistName].PrivateStats.FistStrength.Value))
-			local FistPlayerBody = converttoletter(string.format("%.0f", game.Players[PlayerFistName].PrivateStats.BodyToughness.Value))
-			local FistPlayerSpeed = converttoletter(string.format("%.0f", game.Players[PlayerFistName].PrivateStats.MovementSpeed.Value))
-			local FistPlayerJump = converttoletter(string.format("%.0f", game.Players[PlayerFistName].PrivateStats.JumpForce.Value))
-			local FistPlayerPsychic = converttoletter(string.format("%.0f", game.Players[PlayerFistName].PrivateStats.PsychicPower.Value))
+			local FistPlayerFist = converttoletter(string.format("%.0f", game.Players[PlayerFistName].PlayerFolder.DataFolder.FS.Value))
+			local FistPlayerBody = converttoletter(string.format("%.0f", game.Players[PlayerFistName].PlayerFolder.DataFolder.BT.Value))
+			local FistPlayerSpeed = converttoletter(string.format("%.0f", game.Players[PlayerFistName].PlayerFolder.DataFolder.WS.Value))
+			local FistPlayerJump = converttoletter(string.format("%.0f", game.Players[PlayerFistName].PlayerFolder.DataFolder.JF.Value))
+			local FistPlayerPsychic = converttoletter(string.format("%.0f", game.Players[PlayerFistName].PlayerFolder.DataFolder.PP.Value))
 			ShowStatsFist2.Text = tostring(FistPlayerFist.. "\n" ..FistPlayerBody.. "\n" ..FistPlayerSpeed.. "\n" ..FistPlayerJump.. "\n" ..FistPlayerPsychic)
 		end
 		wait(0.3)
@@ -1378,7 +1671,7 @@ spawn(function()
 			BestPlayerBody = 1
 			PlayerBodyName = false
 			for i,v in pairs(game:GetService("Players"):GetChildren()) do
-				local PlayerBody = tonumber(game.Players[v.Name].PrivateStats.BodyToughness.Value)
+				local PlayerBody = tonumber(game.Players[v.Name].PlayerFolder.DataFolder.BT.Value)
 				if PlayerBody > tonumber(BestPlayerBody) then 
 					BestPlayerBody = PlayerBody
 					PlayerBodyName = tostring(v.Name)
@@ -1402,11 +1695,11 @@ spawn(function()
 				StatBestBodyText1.TextColor3 = Color3.new(1, 1, 1)
 			end
 			local FindHum = game.Players[PlayerBodyName].Character.Humanoid
-			local BodyPlayerFist = converttoletter(string.format("%.0f", game.Players[PlayerBodyName].PrivateStats.FistStrength.Value))
-			local BodyPlayerBody = converttoletter(string.format("%.0f", game.Players[PlayerBodyName].PrivateStats.BodyToughness.Value))
-			local BodyPlayerSpeed = converttoletter(string.format("%.0f", game.Players[PlayerBodyName].PrivateStats.MovementSpeed.Value))
-			local BodyPlayerJump = converttoletter(string.format("%.0f", game.Players[PlayerBodyName].PrivateStats.JumpForce.Value))
-			local BodyPlayerPsychic = converttoletter(string.format("%.0f", game.Players[PlayerBodyName].PrivateStats.PsychicPower.Value))
+			local BodyPlayerFist = converttoletter(string.format("%.0f", game.Players[PlayerBodyName].PlayerFolder.DataFolder.FS.Value))
+			local BodyPlayerBody = converttoletter(string.format("%.0f", game.Players[PlayerBodyName].PlayerFolder.DataFolder.BT.Value))
+			local BodyPlayerSpeed = converttoletter(string.format("%.0f", game.Players[PlayerBodyName].PlayerFolder.DataFolder.WS.Value))
+			local BodyPlayerJump = converttoletter(string.format("%.0f", game.Players[PlayerBodyName].PlayerFolder.DataFolder.JF.Value))
+			local BodyPlayerPsychic = converttoletter(string.format("%.0f", game.Players[PlayerBodyName].PlayerFolder.DataFolder.PP.Value))
 			ShowStatsBody2.Text = tostring(BodyPlayerFist.. "\n" ..BodyPlayerBody.. "\n" ..BodyPlayerSpeed.. "\n" ..BodyPlayerJump.. "\n" ..BodyPlayerPsychic)
 		end
 		wait(0.3)
@@ -1419,7 +1712,7 @@ spawn(function()
 			BestPlayerSpeed = 1
 			PlayerSpeedName = false
 			for i,v in pairs(game:GetService("Players"):GetChildren()) do
-				local PlayerSpeed = tonumber(game.Players[v.Name].PrivateStats.MovementSpeed.Value)
+				local PlayerSpeed = tonumber(game.Players[v.Name].PlayerFolder.DataFolder.WS.Value)
 				if PlayerSpeed > tonumber(BestPlayerSpeed) then 
 					BestPlayerSpeed = PlayerSpeed
 					PlayerSpeedName = tostring(v.Name)
@@ -1443,11 +1736,11 @@ spawn(function()
 				StatBestSpeedText1.TextColor3 = Color3.new(1, 1, 1)
 			end
 			local FindHum = game.Players[PlayerSpeedName].Character.Humanoid
-			local SpeedPlayerFist = converttoletter(string.format("%.0f", game.Players[PlayerSpeedName].PrivateStats.FistStrength.Value))
-			local SpeedPlayerBody = converttoletter(string.format("%.0f", game.Players[PlayerSpeedName].PrivateStats.BodyToughness.Value))
-			local SpeedPlayerSpeed = converttoletter(string.format("%.0f", game.Players[PlayerSpeedName].PrivateStats.MovementSpeed.Value))
-			local SpeedPlayerJump = converttoletter(string.format("%.0f", game.Players[PlayerSpeedName].PrivateStats.JumpForce.Value))
-			local SpeedPlayerPsychic = converttoletter(string.format("%.0f", game.Players[PlayerSpeedName].PrivateStats.PsychicPower.Value))
+			local SpeedPlayerFist = converttoletter(string.format("%.0f", game.Players[PlayerSpeedName].PlayerFolder.DataFolder.FS.Value))
+			local SpeedPlayerBody = converttoletter(string.format("%.0f", game.Players[PlayerSpeedName].PlayerFolder.DataFolder.BT.Value))
+			local SpeedPlayerSpeed = converttoletter(string.format("%.0f", game.Players[PlayerSpeedName].PlayerFolder.DataFolder.WS.Value))
+			local SpeedPlayerJump = converttoletter(string.format("%.0f", game.Players[PlayerSpeedName].PlayerFolder.DataFolder.JF.Value))
+			local SpeedPlayerPsychic = converttoletter(string.format("%.0f", game.Players[PlayerSpeedName].PlayerFolder.DataFolder.PP.Value))
 			ShowStatsSpeed2.Text = tostring(SpeedPlayerFist.. "\n" ..SpeedPlayerBody.. "\n" ..SpeedPlayerSpeed.. "\n" ..SpeedPlayerJump.. "\n" ..SpeedPlayerPsychic)
 		end
 		wait(0.3)
@@ -1460,7 +1753,7 @@ spawn(function()
 			BestPlayerJump = 1
 			PlayerJumpName = false
 			for i,v in pairs(game:GetService("Players"):GetChildren()) do
-				local PlayerJump = tonumber(game.Players[v.Name].PrivateStats.JumpForce.Value)
+				local PlayerJump = tonumber(game.Players[v.Name].PlayerFolder.DataFolder.JF.Value)
 				if PlayerJump > tonumber(BestPlayerJump) then 
 					BestPlayerJump = PlayerJump
 					PlayerJumpName = tostring(v.Name)
@@ -1484,11 +1777,11 @@ spawn(function()
 				StatBestJumpText1.TextColor3 = Color3.new(1, 1, 1)
 			end
 			local FindHum = game.Players[PlayerJumpName].Character.Humanoid
-			local JumpPlayerFist = converttoletter(string.format("%.0f", game.Players[PlayerJumpName].PrivateStats.FistStrength.Value))
-			local JumpPlayerBody = converttoletter(string.format("%.0f", game.Players[PlayerJumpName].PrivateStats.BodyToughness.Value))
-			local JumpPlayerSpeed = converttoletter(string.format("%.0f", game.Players[PlayerJumpName].PrivateStats.MovementSpeed.Value))
-			local JumpPlayerJump = converttoletter(string.format("%.0f", game.Players[PlayerJumpName].PrivateStats.JumpForce.Value))
-			local JumpPlayerPsychic = converttoletter(string.format("%.0f", game.Players[PlayerJumpName].PrivateStats.PsychicPower.Value))
+			local JumpPlayerFist = converttoletter(string.format("%.0f", game.Players[PlayerJumpName].PlayerFolder.DataFolder.FS.Value))
+			local JumpPlayerBody = converttoletter(string.format("%.0f", game.Players[PlayerJumpName].PlayerFolder.DataFolder.BT.Value))
+			local JumpPlayerSpeed = converttoletter(string.format("%.0f", game.Players[PlayerJumpName].PlayerFolder.DataFolder.WS.Value))
+			local JumpPlayerJump = converttoletter(string.format("%.0f", game.Players[PlayerJumpName].PlayerFolder.DataFolder.JF.Value))
+			local JumpPlayerPsychic = converttoletter(string.format("%.0f", game.Players[PlayerJumpName].PlayerFolder.DataFolder.PP.Value))
 			ShowStatsJump2.Text = tostring(JumpPlayerFist.. "\n" ..JumpPlayerBody.. "\n" ..JumpPlayerSpeed.. "\n" ..JumpPlayerJump.. "\n" ..JumpPlayerPsychic)
 		end
 		wait(0.3)
@@ -1501,7 +1794,7 @@ spawn(function()
 			BestPlayerPsychic = 1
 			PlayerPsychicName = false
 			for i,v in pairs(game:GetService("Players"):GetChildren()) do
-				local PlayerPsychic = tonumber(game.Players[v.Name].PrivateStats.PsychicPower.Value)
+				local PlayerPsychic = tonumber(game.Players[v.Name].PlayerFolder.DataFolder.PP.Value)
 				if PlayerPsychic > tonumber(BestPlayerPsychic) then 
 					BestPlayerPsychic = PlayerPsychic
 					PlayerPsychicName = tostring(v.Name)
@@ -1525,11 +1818,11 @@ spawn(function()
 				StatBestPsychicText1.TextColor3 = Color3.new(1, 1, 1)
 			end
 			local FindHum = game.Players[PlayerPsychicName].Character.Humanoid
-			local PsychicPlayerFist = converttoletter(string.format("%.0f", game.Players[PlayerPsychicName].PrivateStats.FistStrength.Value))
-			local PsychicPlayerBody = converttoletter(string.format("%.0f", game.Players[PlayerPsychicName].PrivateStats.BodyToughness.Value))
-			local PsychicPlayerSpeed = converttoletter(string.format("%.0f", game.Players[PlayerPsychicName].PrivateStats.MovementSpeed.Value))
-			local PsychicPlayerJump = converttoletter(string.format("%.0f", game.Players[PlayerPsychicName].PrivateStats.JumpForce.Value))
-			local PsychicPlayerPsychic = converttoletter(string.format("%.0f", game.Players[PlayerPsychicName].PrivateStats.PsychicPower.Value))
+			local PsychicPlayerFist = converttoletter(string.format("%.0f", game.Players[PlayerPsychicName].PlayerFolder.DataFolder.FS.Value))
+			local PsychicPlayerBody = converttoletter(string.format("%.0f", game.Players[PlayerPsychicName].PlayerFolder.DataFolder.BT.Value))
+			local PsychicPlayerSpeed = converttoletter(string.format("%.0f", game.Players[PlayerPsychicName].PlayerFolder.DataFolder.WS.Value))
+			local PsychicPlayerJump = converttoletter(string.format("%.0f", game.Players[PlayerPsychicName].PlayerFolder.DataFolder.JF.Value))
+			local PsychicPlayerPsychic = converttoletter(string.format("%.0f", game.Players[PlayerPsychicName].PlayerFolder.DataFolder.PP.Value))
 			ShowStatsPsychic2.Text = tostring(PsychicPlayerFist.. "\n" ..PsychicPlayerBody.. "\n" ..PsychicPlayerSpeed.. "\n" ..PsychicPlayerJump.. "\n" ..PsychicPlayerPsychic)
 		end
 		wait(0.3)
@@ -1547,13 +1840,14 @@ spawn(function()
 			if string.lower(v.Name) == string.lower(statplayer) then
 				StatsFrame.Visible = true
 				local FindHum = v.Character:WaitForChild("Humanoid")
-				local PlayerFist = converttoletter(string.format("%.0f", game.Players[v.Name].PrivateStats.FistStrength.Value))
-				local PlayerBody = converttoletter(string.format("%.0f", game.Players[v.Name].PrivateStats.BodyToughness.Value))
-				local PlayerSpeed = converttoletter(string.format("%.0f", game.Players[v.Name].PrivateStats.MovementSpeed.Value))
-				local PlayerJump = converttoletter(string.format("%.0f", game.Players[v.Name].PrivateStats.JumpForce.Value))
-				local PlayerPsychic = converttoletter(string.format("%.0f", game.Players[v.Name].PrivateStats.PsychicPower.Value))
-				ShowStats1.Text = "Fist:\nBody:\nSpeed:\nJump:\nPsychic:"
-				ShowStats2.Text = PlayerFist.. "\n" ..PlayerBody.. "\n" ..PlayerSpeed.. "\n" ..PlayerJump.. "\n" ..PlayerPsychic
+				local PlayerFist = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.FS.Value))
+				local PlayerBody = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.BT.Value))
+				local PlayerSpeed = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.WS.Value))
+				local PlayerJump = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.JF.Value))
+				local PlayerPsychic = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.PP.Value))
+				local PlayerTokens = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.Tokens.Value))
+				ShowStats1.Text = "Fist:\nBody:\nSpeed:\nJump:\nPsychic:\nTokens:"
+				ShowStats2.Text = PlayerFist.. "\n" ..PlayerBody.. "\n" ..PlayerSpeed.. "\n" ..PlayerJump.. "\n" ..PlayerPsychic.. "\n" ..PlayerTokens
 				break
 			end
 		end
@@ -1572,13 +1866,14 @@ spawn(function()
 			if string.lower(v.Name) == string.lower(statplayer) then
 				StatsFrame1.Visible = true
 				local FindHum = v.Character:WaitForChild("Humanoid")
-				local PlayerFist = converttoletter(string.format("%.0f", game.Players[v.Name].PrivateStats.FistStrength.Value))
-				local PlayerBody = converttoletter(string.format("%.0f", game.Players[v.Name].PrivateStats.BodyToughness.Value))
-				local PlayerSpeed = converttoletter(string.format("%.0f", game.Players[v.Name].PrivateStats.MovementSpeed.Value))
-				local PlayerJump = converttoletter(string.format("%.0f", game.Players[v.Name].PrivateStats.JumpForce.Value))
-				local PlayerPsychic = converttoletter(string.format("%.0f", game.Players[v.Name].PrivateStats.PsychicPower.Value))
-				ShowStats3.Text = "Fist:\nBody:\nSpeed:\nJump:\nPsychic:"
-				ShowStats4.Text = PlayerFist.. "\n" ..PlayerBody.. "\n" ..PlayerSpeed.. "\n" ..PlayerJump.. "\n" ..PlayerPsychic
+				local PlayerFist = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.FS.Value))
+				local PlayerBody = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.BT.Value))
+				local PlayerSpeed = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.WS.Value))
+				local PlayerJump = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.JF.Value))
+				local PlayerPsychic = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.PP.Value))
+				local PlayerTokens = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.Tokens.Value))
+				ShowStats3.Text = "Fist:\nBody:\nSpeed:\nJump:\nPsychic:\nTokens:"
+				ShowStats4.Text = PlayerFist.. "\n" ..PlayerBody.. "\n" ..PlayerSpeed.. "\n" ..PlayerJump.. "\n" ..PlayerPsychic.. "\n" ..PlayerTokens
 				break
 			end
 		end
