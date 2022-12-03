@@ -422,7 +422,7 @@ SafeZone.TextSize = 16
 
 FS1k.Name = "FS1k"
 FS1k.Parent = WayPointsFrame
-FS1k.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS1k.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS1k.TextColor3 = Color3.new(1, 1, 1)
 FS1k.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 FS1k.Position = UDim2.new(0, 5, 0, 55)
@@ -434,7 +434,7 @@ FS1k.TextSize = 16
 
 FS100k100M.Name = "FS100k100M"
 FS100k100M.Parent = WayPointsFrame
-FS100k100M.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS100k100M.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS100k100M.TextColor3 = Color3.new(1, 1, 1)
 FS100k100M.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 FS100k100M.Position = UDim2.new(0, 5, 0, 80)
@@ -446,7 +446,7 @@ FS100k100M.TextSize = 16
 
 FS1B.Name = "FS1B"
 FS1B.Parent = WayPointsFrame
-FS1B.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS1B.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS1B.TextColor3 = Color3.new(1, 1, 1)
 FS1B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 FS1B.Position = UDim2.new(0, 5, 0, 105)
@@ -458,7 +458,7 @@ FS1B.TextSize = 16
 
 FS100B.Name = "FS100B"
 FS100B.Parent = WayPointsFrame
-FS100B.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS100B.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS100B.TextColor3 = Color3.new(1, 1, 1)
 FS100B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 FS100B.Position = UDim2.new(0, 5, 0, 130)
@@ -470,7 +470,7 @@ FS100B.TextSize = 16
 
 FS1T.Name = "FS1T"
 FS1T.Parent = WayPointsFrame
-FS1T.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS1T.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS1T.TextColor3 = Color3.new(1, 1, 1)
 FS1T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 FS1T.Position = UDim2.new(0, 5, 0, 155)
@@ -482,7 +482,7 @@ FS1T.TextSize = 16
 
 FS100T.Name = "FS100T"
 FS100T.Parent = WayPointsFrame
-FS100T.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS100T.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS100T.TextColor3 = Color3.new(1, 1, 1)
 FS100T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 FS100T.Position = UDim2.new(0, 5, 0, 180)
@@ -494,7 +494,7 @@ FS100T.TextSize = 16
 
 FS5Qa.Name = "FS5Qa"
 FS5Qa.Parent = WayPointsFrame
-FS5Qa.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS5Qa.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS5Qa.TextColor3 = Color3.new(1, 1, 1)
 FS5Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 FS5Qa.Position = UDim2.new(0, 5, 0, 205)
@@ -506,7 +506,7 @@ FS5Qa.TextSize = 16
 
 FS35Qa.Name = "FS35Qa"
 FS35Qa.Parent = WayPointsFrame
-FS35Qa.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS35Qa.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS35Qa.TextColor3 = Color3.new(1, 1, 1)
 FS35Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 FS35Qa.Position = UDim2.new(0, 5, 0, 230)
@@ -518,7 +518,7 @@ FS35Qa.TextSize = 16
 
 FS500Qa.Name = "FS500Qa"
 FS500Qa.Parent = WayPointsFrame
-FS500Qa.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS500Qa.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS500Qa.TextColor3 = Color3.new(1, 1, 1)
 FS500Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 FS500Qa.Position = UDim2.new(0, 5, 0, 255)
@@ -530,7 +530,7 @@ FS500Qa.TextSize = 16
 
 FS5Qi.Name = "FS5Qi"
 FS5Qi.Parent = WayPointsFrame
-FS5Qi.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS5Qi.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS5Qi.TextColor3 = Color3.new(1, 1, 1)
 FS5Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 FS5Qi.Position = UDim2.new(0, 5, 0, 280)
@@ -542,7 +542,7 @@ FS5Qi.TextSize = 16
 
 FS350Qi.Name = "FS350Qi"
 FS350Qi.Parent = WayPointsFrame
-FS350Qi.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
+FS350Qi.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS350Qi.TextColor3 = Color3.new(1, 1, 1)
 FS350Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 FS350Qi.Position = UDim2.new(0, 5, 0, 305)
@@ -556,7 +556,7 @@ FS350Qi.TextSize = 16
 
 BT1k.Name = "BT1k"
 BT1k.Parent = WayPointsFrame
-BT1k.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT1k.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT1k.TextColor3 = Color3.new(1, 1, 1)
 BT1k.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 BT1k.Position = UDim2.new(0, 5, 0, 330)
@@ -568,7 +568,7 @@ BT1k.TextSize = 16
 
 BT100k.Name = "BT100k"
 BT100k.Parent = WayPointsFrame
-BT100k.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT100k.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT100k.TextColor3 = Color3.new(1, 1, 1)
 BT100k.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 BT100k.Position = UDim2.new(0, 5, 0, 355)
@@ -580,7 +580,7 @@ BT100k.TextSize = 16
 
 BT1M.Name = "BT1M"
 BT1M.Parent = WayPointsFrame
-BT1M.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT1M.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT1M.TextColor3 = Color3.new(1, 1, 1)
 BT1M.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 BT1M.Position = UDim2.new(0, 5, 0, 380)
@@ -592,7 +592,7 @@ BT1M.TextSize = 16
 
 BT100M.Name = "BT100M"
 BT100M.Parent = WayPointsFrame
-BT100M.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT100M.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT100M.TextColor3 = Color3.new(1, 1, 1)
 BT100M.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 BT100M.Position = UDim2.new(0, 5, 0, 405)
@@ -604,7 +604,7 @@ BT100M.TextSize = 16
 
 BT1B.Name = "BT1B"
 BT1B.Parent = WayPointsFrame
-BT1B.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT1B.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT1B.TextColor3 = Color3.new(1, 1, 1)
 BT1B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 BT1B.Position = UDim2.new(0, 5, 0, 430)
@@ -616,7 +616,7 @@ BT1B.TextSize = 16
 
 BT100B.Name = "BT100B"
 BT100B.Parent = WayPointsFrame
-BT100B.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT100B.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT100B.TextColor3 = Color3.new(1, 1, 1)
 BT100B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 BT100B.Position = UDim2.new(0, 5, 0, 455)
@@ -628,85 +628,85 @@ BT100B.TextSize = 16
 
 BT1T.Name = "BT1T"
 BT1T.Parent = WayPointsFrame
-BT1T.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT1T.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT1T.TextColor3 = Color3.new(1, 1, 1)
 BT1T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 BT1T.Position = UDim2.new(0, 5, 0, 480)
 BT1T.Size = UDim2.new(0, 365, 0, 20)
 BT1T.Font = Enum.Font.Fantasy
-BT1T.Text = "Tp to Dark Smoke[100k x BT] Area: 1T+ BT required"
+BT1T.Text = "Tp to Dark Smoke [100k x BT] Area: 1T+ BT required"
 BT1T.TextWrapped = true
 BT1T.TextSize = 16
 
 BT100T.Name = "BT100T"
 BT100T.Parent = WayPointsFrame
-BT100T.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT100T.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT100T.TextColor3 = Color3.new(1, 1, 1)
 BT100T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 BT100T.Position = UDim2.new(0, 5, 0, 505)
 BT100T.Size = UDim2.new(0, 365, 0, 20)
 BT100T.Font = Enum.Font.Fantasy
-BT100T.Text = "Tp to Dance Pad[500k x BT] Area: 100T+ BT required"
+BT100T.Text = "Tp to Dance Pad [500k x BT] Area: 100T+ BT required"
 BT100T.TextWrapped = true
 BT100T.TextSize = 16
 
 BT5Qa.Name = "BT5Qa"
 BT5Qa.Parent = WayPointsFrame
-BT5Qa.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT5Qa.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT5Qa.TextColor3 = Color3.new(1, 1, 1)
 BT5Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 BT5Qa.Position = UDim2.new(0, 5, 0, 530)
 BT5Qa.Size = UDim2.new(0, 365, 0, 20)
 BT5Qa.Font = Enum.Font.Fantasy
-BT5Qa.Text = "Tp to Pool of Blood[50M x BT] Area: 5Qa+ BT required"
+BT5Qa.Text = "Tp to Pool of Blood [50M x BT] Area: 5Qa+ BT required"
 BT5Qa.TextWrapped = true
 BT5Qa.TextSize = 16
 
 BT35Qa.Name = "BT35Qa"
 BT35Qa.Parent = WayPointsFrame
-BT35Qa.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT35Qa.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT35Qa.TextColor3 = Color3.new(1, 1, 1)
 BT35Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 BT35Qa.Position = UDim2.new(0, 5, 0, 555)
 BT35Qa.Size = UDim2.new(0, 365, 0, 20)
 BT35Qa.Font = Enum.Font.Fantasy
-BT35Qa.Text = "Tp to Purple Pool[200M x BT] Area: 35Qa+ BT required"
+BT35Qa.Text = "Tp to Purple Pool [200M x BT] Area: 35Qa+ BT required"
 BT35Qa.TextWrapped = true
 BT35Qa.TextSize = 16
 
 BT500Qa.Name = "BT500Qa"
 BT500Qa.Parent = WayPointsFrame
-BT500Qa.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT500Qa.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT500Qa.TextColor3 = Color3.new(1, 1, 1)
 BT500Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 BT500Qa.Position = UDim2.new(0, 5, 0, 580)
 BT500Qa.Size = UDim2.new(0, 365, 0, 20)
 BT500Qa.Font = Enum.Font.Fantasy
-BT500Qa.Text = "Tp to Strong Light[1B x BT] Area: 500Qa+ BT required"
+BT500Qa.Text = "Tp to Strong Light [1B x BT] Area: 500Qa+ BT required"
 BT500Qa.TextWrapped = true
 BT500Qa.TextSize = 16
 
 BT5Qi.Name = "BT5Qi"
 BT5Qi.Parent = WayPointsFrame
-BT5Qi.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT5Qi.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT5Qi.TextColor3 = Color3.new(1, 1, 1)
 BT5Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 BT5Qi.Position = UDim2.new(0, 5, 0, 605)
 BT5Qi.Size = UDim2.new(0, 365, 0, 20)
 BT5Qi.Font = Enum.Font.Fantasy
-BT5Qi.Text = "Tp to Blue Magma[5B x BT] Area: 5Qi+ BT required"
+BT5Qi.Text = "Tp to Blue Magma [5B x BT] Area: 5Qi+ BT required"
 BT5Qi.TextWrapped = true
 BT5Qi.TextSize = 16
 
 BT350Qi.Name = "BT350Qi"
 BT350Qi.Parent = WayPointsFrame
-BT350Qi.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+BT350Qi.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT350Qi.TextColor3 = Color3.new(1, 1, 1)
 BT350Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 BT350Qi.Position = UDim2.new(0, 5, 0, 630)
 BT350Qi.Size = UDim2.new(0, 365, 0, 20)
 BT350Qi.Font = Enum.Font.Fantasy
-BT350Qi.Text = "Tp to Pink Fire[25B x BT] Area: 350Qi+ BT required"
+BT350Qi.Text = "Tp to Pink Fire [25B x BT] Area: 350Qi+ BT required"
 BT350Qi.TextWrapped = true
 BT350Qi.TextSize = 16
 
@@ -714,7 +714,7 @@ BT350Qi.TextSize = 16
 
 PP1M.Name = "PP1M"
 PP1M.Parent = WayPointsFrame
-PP1M.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP1M.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
 PP1M.TextColor3 = Color3.new(1, 1, 1)
 PP1M.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 PP1M.Position = UDim2.new(0, 5, 0, 655)
@@ -726,7 +726,7 @@ PP1M.TextSize = 16
 
 PP1B.Name = "PP1B"
 PP1B.Parent = WayPointsFrame
-PP1B.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP1B.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
 PP1B.TextColor3 = Color3.new(1, 1, 1)
 PP1B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 PP1B.Position = UDim2.new(0, 5, 0, 680)
@@ -738,7 +738,7 @@ PP1B.TextSize = 16
 
 PP1T.Name = "PP1T"
 PP1T.Parent = WayPointsFrame
-PP1T.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP1T.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
 PP1T.TextColor3 = Color3.new(1, 1, 1)
 PP1T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 PP1T.Position = UDim2.new(0, 5, 0, 705)
@@ -750,7 +750,7 @@ PP1T.TextSize = 16
 
 PP1Qa.Name = "PP1Qa"
 PP1Qa.Parent = WayPointsFrame
-PP1Qa.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP1Qa.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
 PP1Qa.TextColor3 = Color3.new(1, 1, 1)
 PP1Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 PP1Qa.Position = UDim2.new(0, 5, 0, 730)
@@ -762,7 +762,7 @@ PP1Qa.TextSize = 16
 
 PP350Qa.Name = "PP350Qa"
 PP350Qa.Parent = WayPointsFrame
-PP350Qa.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP350Qa.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
 PP350Qa.TextColor3 = Color3.new(1, 1, 1)
 PP350Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 PP350Qa.Position = UDim2.new(0, 5, 0, 755)
@@ -774,7 +774,7 @@ PP350Qa.TextSize = 16
 
 PP3Qi.Name = "PP3Qi"
 PP3Qi.Parent = WayPointsFrame
-PP3Qi.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP3Qi.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
 PP3Qi.TextColor3 = Color3.new(1, 1, 1)
 PP3Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 PP3Qi.Position = UDim2.new(0, 5, 0, 780)
@@ -786,7 +786,7 @@ PP3Qi.TextSize = 16
 
 PP50Qi.Name = "PP50Qi"
 PP50Qi.Parent = WayPointsFrame
-PP50Qi.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP50Qi.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
 PP50Qi.TextColor3 = Color3.new(1, 1, 1)
 PP50Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 PP50Qi.Position = UDim2.new(0, 5, 0, 805)
@@ -798,7 +798,7 @@ PP50Qi.TextSize = 16
 
 PP1Sx.Name = "PP1Sx"
 PP1Sx.Parent = WayPointsFrame
-PP1Sx.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
+PP1Sx.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
 PP1Sx.TextColor3 = Color3.new(1, 1, 1)
 PP1Sx.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 PP1Sx.Position = UDim2.new(0, 5, 0, 830)
