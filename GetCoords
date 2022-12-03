@@ -1,37 +1,33 @@
 local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
-local Enable = Instance.new("TextButton", ScreenGui)
 local SavePosition = Instance.new("TextLabel", ScreenGui)
-
-Enable.Name = "Enable"
-Enable.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
-Enable.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-Enable.Size = UDim2.new(0, 90, 0, 40)
-Enable.Position = UDim2.new(0.48, 0, 0, -38)
-Enable.Font = Enum.Font.Fantasy
-Enable.Text = "Get"
-Enable.TextColor3 = Color3.new(1, 1, 1)
-Enable.TextSize = 18
-Enable.Visible = true
 
 SavePosition.Name = "Pos"
 SavePosition.BackgroundColor3 = Color3.new(0, 0, 0)
 SavePosition.BackgroundTransparency = 0.5
 SavePosition.BorderColor3 = Color3.new(1, 1, 1)
 SavePosition.BorderSizePixel = 2
-SavePosition.Size = UDim2.new(0, 600, 0, 40)
-SavePosition.Position = UDim2.new(0.35, 0, 0, 5)
+SavePosition.Size = UDim2.new(0, 150, 0, 40)
+SavePosition.Position = UDim2.new(0.466, 0, 0, -38)
 SavePosition.Font = Enum.Font.Fantasy
 SavePosition.Text = " "
 SavePosition.TextColor3 = Color3.new(1, 1, 1)
 SavePosition.TextSize = 18
+SavePosition.TextWrapped = true
 SavePosition.Visible = true
 
+function round(num, numDecimalPlaces)
+	local mult = 10^(numDecimalPlaces or 0)
+	return math.floor(num * mult + 0.5) / mult
+end
 
-
-Enable.MouseButton1Down:connect(function()
-	lastlocationx = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.x
-	lastlocationy = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.y
-	lastlocationz = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.z
-	SavePosition.Text = "Last Place: " ..lastlocationx.. ", " ..lastlocationy.. ", " ..lastlocationz
-	print(tostring(SavePosition.Text))
+local curlocation = coroutine.wrap(function()
+	while true do
+		LocationX = round(game.Players.LocalPlayer.Character.HumanoidRootPart.Position.x, 0)
+		LocationY = round(game.Players.LocalPlayer.Character.HumanoidRootPart.Position.y, 0)
+		LocationZ = round(game.Players.LocalPlayer.Character.HumanoidRootPart.Position.z, 0)
+		SavePosition.Text = " "..LocationX..", "..LocationY..", "..LocationZ
+		wait(0.5)
+	end
 end)
+
+curlocation()
