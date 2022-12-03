@@ -18,7 +18,6 @@ game:service'Players'.LocalPlayer.Idled:connect(function()
 	VirtualUser:ClickButton2(Vector2.new())
 end)
 
-showstartmessage = true
 showtopplayersactive = false
 showtopplayersfistactive = false
 showtopplayersbodyactive = false
@@ -30,6 +29,7 @@ playerdied = false
 deathreturnactive = false
 resetplayerstat = false
 killplayeractive = false
+autoclick = false
 ESPEnabled = false
 ESPLength = 5000
 
@@ -138,11 +138,11 @@ function UpdateESP(plr)
 			Find.Frame.Names.TextColor3 = Color3.fromRGB(3, 12, 255)
 		elseif plrStatus.Value == "Protector" then
 			Find.Frame.Names.TextColor3 = Color3.fromRGB(0, 144, 211)
-		elseif plrStatus.Value == "Supervillain" then
+		elseif plrStatus.Value == "SuperVillian" then
 			Find.Frame.Names.TextColor3 = Color3.fromRGB(187, 0, 250)
 		elseif plrStatus.Value == "Superhero" then
 			Find.Frame.Names.TextColor3 = Color3.fromRGB(209, 255, 59)
-		elseif plrStatus.Value == "Innocent" then
+		else
 			Find.Frame.Names.TextColor3 = Color3.fromRGB(255, 255, 255)
 		end
 		Find.Frame.Dist.TextColor3 = Color3.new(1, 1, 1)
@@ -194,6 +194,8 @@ local MainFrame = Instance.new("Frame")
 local Open = Instance.new("TextButton")
 local Close = Instance.new("TextButton")
 local Minimize = Instance.new("TextButton")
+local Enable = Instance.new("TextButton", MainGUI)
+local Disable = Instance.new("TextButton", MainGUI)
 
 -- Teleports
 
@@ -1177,11 +1179,18 @@ ShowStats4.TextXAlignment = Enum.TextXAlignment.Right
 Open.MouseButton1Down:connect(function()
 	TopFrame.Visible = false
 	MainFrame.Visible = true
+	if autoclick == false then
+		Enable.Visible = true
+	elseif autoclick == true then
+		Disable.Visible = true
+	end
 end)
 
 Minimize.MouseButton1Down:connect(function()
 	TopFrame.Visible = true
 	MainFrame.Visible = false
+	Enable.Visible = false
+	Disable.Visible = false
 end)
 
 Close.MouseButton1Down:connect(function()
@@ -1217,7 +1226,40 @@ function round(num, numDecimalPlaces)
 end
 		
 function converttoletter(num)
-	if num / 1e24 >=1 then
+	if num / 1e57 >=1 then
+		newnum = num / 1e57
+		return round(newnum, 3).. "OcDe"
+	elseif num / 1e54 >=1 then
+		newnum = num / 1e54
+		return round(newnum, 3).. "SpDe"
+	elseif num / 1e51 >=1 then
+		newnum = num / 1e51
+		return round(newnum, 3).. "SxDe"
+	elseif num / 1e48 >=1 then
+		newnum = num / 1e48
+		return round(newnum, 3).. "QDe"
+	elseif num / 1e45 >=1 then
+		newnum = num / 1e45
+		return round(newnum, 3).. "QTDe"
+	elseif num / 1e42 >=1 then
+		newnum = num / 1e42
+		return round(newnum, 3).. "TDe"
+	elseif num / 1e39 >=1 then
+		newnum = num / 1e39
+		return round(newnum, 3).. "DDe"
+	elseif num / 1e36 >=1 then
+		newnum = num / 1e36
+		return round(newnum, 3).. "Un"
+	elseif num / 1e33 >=1 then
+		newnum = num / 1e33
+		return round(newnum, 3).. "De"
+	elseif num / 1e30 >=1 then
+		newnum = num / 1e30
+		return round(newnum, 3).. "No"
+	elseif num / 1e27 >=1 then
+		newnum = num / 1e27
+		return round(newnum, 3).. "Oc"
+	elseif num / 1e24 >=1 then
 		newnum = num / 1e24
 		return round(newnum, 3).. "Sp"
 	elseif num / 1e21 >=1 then
@@ -1464,11 +1506,8 @@ end)
 
 -- Clicker
 
-local Enable = Instance.new("TextButton", MainGUI)
-local Disable = Instance.new("TextButton", MainGUI)
-
 Enable.Name = "Enable"
-Enable.BackgroundColor3 = Color3.new(0, 0, 0)
+Enable.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 Enable.BackgroundTransparency = 0.5
 Enable.BorderColor3 = Color3.new(1, 1, 1)
 Enable.BorderSizePixel = 2
@@ -1481,7 +1520,7 @@ Enable.TextSize = 18
 Enable.Visible = true
 
 Disable.Name = "Disable"
-Disable.BackgroundColor3 = Color3.new(0, 0, 0)
+Disable.BackgroundColor3 = Color3.new(0, 0.5, 0)
 Disable.BackgroundTransparency = 0.5
 Disable.BorderColor3 = Color3.new(1, 1, 1)
 Disable.BorderSizePixel = 2
