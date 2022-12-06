@@ -10,6 +10,14 @@ local CoreGui = game:GetService("CoreGui")
 local Run = game:GetService("RunService")
 local mouse = game.Players.LocalPlayer:GetMouse()
 local human = plr.Character:WaitForChild("Humanoid")
+local Humanoid = game:GetService("Players").LocalPlayer.Character.Humanoid
+local Backpack = plr.Backpack
+local camera = game.Workspace.CurrentCamera
+local Workspace = game:GetService("Workspace")
+human:UnequipTools()
+local FSTool = Backpack.FSTool
+local BTTool = Backpack.BTTool
+local PPTool = Backpack.PPTool
 
 -- Anti Idle --
 local VirtualUser=game:service'VirtualUser'
@@ -17,6 +25,8 @@ game:service'Players'.LocalPlayer.Idled:connect(function()
 	VirtualUser:CaptureController()
 	VirtualUser:ClickButton2(Vector2.new())
 end)
+
+workspace[plr.Name].HumanoidRootPart.Anchored = false
 
 showtopplayersactive = false
 showtopplayersfistactive = false
@@ -30,6 +40,7 @@ deathreturnactive = false
 resetplayerstat = false
 killplayeractive = false
 autoclick = false
+
 ESPEnabled = false
 ESPLength = 5000
 
@@ -201,9 +212,6 @@ local Disable = Instance.new("TextButton", MainGUI)
 
 local WayPoints = Instance.new("TextButton")
 local WayPointsFrame = Instance.new("Frame")
-local ShowLocation = Instance.new("TextLabel")
-local SetLocation = Instance.new("TextButton")
-local TPLocation = Instance.new("TextButton")
 local SafeZone = Instance.new("TextButton")
 
 -- FS
@@ -239,6 +247,7 @@ local BT350Qi = Instance.new("TextButton")
 
 -- PP
 
+local PP10k = Instance.new("TextButton")
 local PP1M = Instance.new("TextButton")
 local PP1B = Instance.new("TextButton")
 local PP1T = Instance.new("TextButton")
@@ -247,6 +256,14 @@ local PP350Qa = Instance.new("TextButton")
 local PP3Qi = Instance.new("TextButton")
 local PP50Qi = Instance.new("TextButton")
 local PP1Sx = Instance.new("TextButton")
+
+-- Farm
+
+local FarmExp = Instance.new("TextButton")
+local FarmExpFrame = Instance.new("Frame")
+local FarmFist = Instance.new("TextButton")
+local FarmBody = Instance.new("TextButton")
+local FarmPsychic = Instance.new("TextButton")
 
 -- Others
 
@@ -319,8 +336,8 @@ MainFrame.BackgroundColor3 = Color3.new(0, 0, 0)
 MainFrame.BackgroundTransparency = 0.5
 MainFrame.BorderColor3 = Color3.new(1, 1, 1)
 MainFrame.BorderSizePixel = 2
-MainFrame.Position = UDim2.new(0.5, -272.5, 0, -32)
-MainFrame.Size = UDim2.new(0, 690, 0, 30)
+MainFrame.Position = UDim2.new(0.5, -292.5, 0, -32)
+MainFrame.Size = UDim2.new(0, 740, 0, 30)
 
 Close.Name = "Close"
 Close.Parent = MainFrame
@@ -348,6 +365,8 @@ Minimize.TextSize = 18
 Minimize.TextScaled = true
 Minimize.TextWrapped = true
 
+-- Teleports
+
 WayPoints.Name = "WayPoints"
 WayPoints.Parent = MainFrame
 WayPoints.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
@@ -369,49 +388,12 @@ WayPointsFrame.Position = UDim2.new(0, -100, 0, 33)
 WayPointsFrame.Size = UDim2.new(0, 375, 0, 855)
 WayPointsFrame.Visible = false
 
-
-ShowLocation.Name = "ShowLocation"
-ShowLocation.Parent = WayPointsFrame
-ShowLocation.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
-ShowLocation.TextColor3 = Color3.new(1, 1, 1)
-ShowLocation.BorderColor3 = Color3.new(0, 0, 0)
-ShowLocation.Position = UDim2.new(0, 5, 0, 5)
-ShowLocation.Size = UDim2.new(0, 170, 0, 20)
-ShowLocation.Font = Enum.Font.Fantasy
-ShowLocation.Text = "Current Location"
-ShowLocation.TextWrapped = true
-ShowLocation.TextSize = 15
-
-SetLocation.Name = "SetLocation"
-SetLocation.Parent = WayPointsFrame
-SetLocation.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
-SetLocation.TextColor3 = Color3.new(1, 1, 1)
-SetLocation.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-SetLocation.Position = UDim2.new(0, 180, 0, 5)
-SetLocation.Size = UDim2.new(0, 120, 0, 20)
-SetLocation.Font = Enum.Font.Fantasy
-SetLocation.Text = "Set Location"
-SetLocation.TextWrapped = true
-SetLocation.TextSize = 16
-
-TPLocation.Name = "TPLocation"
-TPLocation.Parent = WayPointsFrame
-TPLocation.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
-TPLocation.TextColor3 = Color3.new(1, 1, 1)
-TPLocation.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-TPLocation.Position = UDim2.new(0, 305, 0, 5)
-TPLocation.Size = UDim2.new(0, 65, 0, 20)
-TPLocation.Font = Enum.Font.Fantasy
-TPLocation.Text = "Tp to"
-TPLocation.TextWrapped = true
-TPLocation.TextSize = 16
-
 SafeZone.Name = "SafeZone"
 SafeZone.Parent = WayPointsFrame
 SafeZone.BackgroundColor3 = Color3.new(255/255, 94/255, 40/255)
 SafeZone.TextColor3 = Color3.new(1, 1, 1)
 SafeZone.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-SafeZone.Position = UDim2.new(0, 5, 0, 30)
+SafeZone.Position = UDim2.new(0, 5, 0, 5)
 SafeZone.Size = UDim2.new(0, 365, 0, 20)
 SafeZone.Font = Enum.Font.Fantasy
 SafeZone.Text = "Teleport to Safe Zone"
@@ -425,7 +407,7 @@ FS1k.Parent = WayPointsFrame
 FS1k.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS1k.TextColor3 = Color3.new(1, 1, 1)
 FS1k.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-FS1k.Position = UDim2.new(0, 5, 0, 55)
+FS1k.Position = UDim2.new(0, 5, 0, 30)
 FS1k.Size = UDim2.new(0, 365, 0, 20)
 FS1k.Font = Enum.Font.Fantasy
 FS1k.Text = "Teleport to Rock [10 x Fist Strength] 1k+ FS required"
@@ -437,7 +419,7 @@ FS100k100M.Parent = WayPointsFrame
 FS100k100M.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS100k100M.TextColor3 = Color3.new(1, 1, 1)
 FS100k100M.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-FS100k100M.Position = UDim2.new(0, 5, 0, 80)
+FS100k100M.Position = UDim2.new(0, 5, 0, 55)
 FS100k100M.Size = UDim2.new(0, 365, 0, 20)
 FS100k100M.Font = Enum.Font.Fantasy
 FS100k100M.Text = "Teleport to Crystals [50-1k x Fist Strength] 100k-100M FS required "
@@ -449,7 +431,7 @@ FS1B.Parent = WayPointsFrame
 FS1B.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS1B.TextColor3 = Color3.new(1, 1, 1)
 FS1B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-FS1B.Position = UDim2.new(0, 5, 0, 105)
+FS1B.Position = UDim2.new(0, 5, 0, 80)
 FS1B.Size = UDim2.new(0, 365, 0, 20)
 FS1B.Font = Enum.Font.Fantasy
 FS1B.Text = "Teleport to Blue Star [10k x FS]: 1B+ FS required"
@@ -461,7 +443,7 @@ FS100B.Parent = WayPointsFrame
 FS100B.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS100B.TextColor3 = Color3.new(1, 1, 1)
 FS100B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-FS100B.Position = UDim2.new(0, 5, 0, 130)
+FS100B.Position = UDim2.new(0, 5, 0, 105)
 FS100B.Size = UDim2.new(0, 365, 0, 20)
 FS100B.Font = Enum.Font.Fantasy
 FS100B.Text = "Teleport to Green Star [50k x FS]: 100B+ FS required"
@@ -473,7 +455,7 @@ FS1T.Parent = WayPointsFrame
 FS1T.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS1T.TextColor3 = Color3.new(1, 1, 1)
 FS1T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-FS1T.Position = UDim2.new(0, 5, 0, 155)
+FS1T.Position = UDim2.new(0, 5, 0, 130)
 FS1T.Size = UDim2.new(0, 365, 0, 20)
 FS1T.Font = Enum.Font.Fantasy
 FS1T.Text = "Teleport to Orange Star [500k x FS]: 1T+ FS required"
@@ -485,7 +467,7 @@ FS100T.Parent = WayPointsFrame
 FS100T.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS100T.TextColor3 = Color3.new(1, 1, 1)
 FS100T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-FS100T.Position = UDim2.new(0, 5, 0, 180)
+FS100T.Position = UDim2.new(0, 5, 0, 155)
 FS100T.Size = UDim2.new(0, 365, 0, 20)
 FS100T.Font = Enum.Font.Fantasy
 FS100T.Text = "Teleport to Red Star [3M x FS]: 100T+ FS required"
@@ -497,7 +479,7 @@ FS5Qa.Parent = WayPointsFrame
 FS5Qa.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS5Qa.TextColor3 = Color3.new(1, 1, 1)
 FS5Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-FS5Qa.Position = UDim2.new(0, 5, 0, 205)
+FS5Qa.Position = UDim2.new(0, 5, 0, 180)
 FS5Qa.Size = UDim2.new(0, 365, 0, 20)
 FS5Qa.Font = Enum.Font.Fantasy
 FS5Qa.Text = "Teleport to Magma Crystal [50M x FS]: 5Qa+ FS required"
@@ -509,7 +491,7 @@ FS35Qa.Parent = WayPointsFrame
 FS35Qa.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS35Qa.TextColor3 = Color3.new(1, 1, 1)
 FS35Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-FS35Qa.Position = UDim2.new(0, 5, 0, 230)
+FS35Qa.Position = UDim2.new(0, 5, 0, 205)
 FS35Qa.Size = UDim2.new(0, 365, 0, 20)
 FS35Qa.Font = Enum.Font.Fantasy
 FS35Qa.Text = "Teleport to Pink Crystal [200M x FS]: 35Qa+ FS required"
@@ -521,7 +503,7 @@ FS500Qa.Parent = WayPointsFrame
 FS500Qa.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS500Qa.TextColor3 = Color3.new(1, 1, 1)
 FS500Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-FS500Qa.Position = UDim2.new(0, 5, 0, 255)
+FS500Qa.Position = UDim2.new(0, 5, 0, 230)
 FS500Qa.Size = UDim2.new(0, 365, 0, 20)
 FS500Qa.Font = Enum.Font.Fantasy
 FS500Qa.Text = "Teleport to Purple Star [1B x FS]: 500Qa+ FS required"
@@ -533,7 +515,7 @@ FS5Qi.Parent = WayPointsFrame
 FS5Qi.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS5Qi.TextColor3 = Color3.new(1, 1, 1)
 FS5Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-FS5Qi.Position = UDim2.new(0, 5, 0, 280)
+FS5Qi.Position = UDim2.new(0, 5, 0, 255)
 FS5Qi.Size = UDim2.new(0, 365, 0, 20)
 FS5Qi.Font = Enum.Font.Fantasy
 FS5Qi.Text = "Teleport to Real Green Star [5B x FS]: 5Qi+ FS required"
@@ -545,7 +527,7 @@ FS350Qi.Parent = WayPointsFrame
 FS350Qi.BackgroundColor3 = Color3.new(195/255, 0, 39/255)
 FS350Qi.TextColor3 = Color3.new(1, 1, 1)
 FS350Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-FS350Qi.Position = UDim2.new(0, 5, 0, 305)
+FS350Qi.Position = UDim2.new(0, 5, 0, 280)
 FS350Qi.Size = UDim2.new(0, 365, 0, 20)
 FS350Qi.Font = Enum.Font.Fantasy
 FS350Qi.Text = "Teleport to Real Orange Star [25B x FS]: 350Qi+ FS required"
@@ -559,7 +541,7 @@ BT1k.Parent = WayPointsFrame
 BT1k.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT1k.TextColor3 = Color3.new(1, 1, 1)
 BT1k.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-BT1k.Position = UDim2.new(0, 5, 0, 330)
+BT1k.Position = UDim2.new(0, 5, 0, 305)
 BT1k.Size = UDim2.new(0, 365, 0, 20)
 BT1k.Font = Enum.Font.Fantasy
 BT1k.Text = "Tp to Pool [10 x BT]: 1K+ BT required"
@@ -571,7 +553,7 @@ BT100k.Parent = WayPointsFrame
 BT100k.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT100k.TextColor3 = Color3.new(1, 1, 1)
 BT100k.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-BT100k.Position = UDim2.new(0, 5, 0, 355)
+BT100k.Position = UDim2.new(0, 5, 0, 330)
 BT100k.Size = UDim2.new(0, 365, 0, 20)
 BT100k.Font = Enum.Font.Fantasy
 BT100k.Text = "Tp to Ice Mountain [50 x BT]: 100K+ BT required"
@@ -583,7 +565,7 @@ BT1M.Parent = WayPointsFrame
 BT1M.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT1M.TextColor3 = Color3.new(1, 1, 1)
 BT1M.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-BT1M.Position = UDim2.new(0, 5, 0, 380)
+BT1M.Position = UDim2.new(0, 5, 0, 355)
 BT1M.Size = UDim2.new(0, 365, 0, 20)
 BT1M.Font = Enum.Font.Fantasy
 BT1M.Text = "Tp to Tornado [100 x BT]: 1M+ BT required"
@@ -595,7 +577,7 @@ BT100M.Parent = WayPointsFrame
 BT100M.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT100M.TextColor3 = Color3.new(1, 1, 1)
 BT100M.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-BT100M.Position = UDim2.new(0, 5, 0, 405)
+BT100M.Position = UDim2.new(0, 5, 0, 380)
 BT100M.Size = UDim2.new(0, 365, 0, 20)
 BT100M.Font = Enum.Font.Fantasy
 BT100M.Text = "Tp to Volcano [1k x BT]: 100M+ BT required"
@@ -607,7 +589,7 @@ BT1B.Parent = WayPointsFrame
 BT1B.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT1B.TextColor3 = Color3.new(1, 1, 1)
 BT1B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-BT1B.Position = UDim2.new(0, 5, 0, 430)
+BT1B.Position = UDim2.new(0, 5, 0, 405)
 BT1B.Size = UDim2.new(0, 365, 0, 20)
 BT1B.Font = Enum.Font.Fantasy
 BT1B.Text = "Tp to Electrical wiring [10k x BT]: 1B+ BT required"
@@ -619,7 +601,7 @@ BT100B.Parent = WayPointsFrame
 BT100B.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT100B.TextColor3 = Color3.new(1, 1, 1)
 BT100B.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-BT100B.Position = UDim2.new(0, 5, 0, 455)
+BT100B.Position = UDim2.new(0, 5, 0, 430)
 BT100B.Size = UDim2.new(0, 365, 0, 20)
 BT100B.Font = Enum.Font.Fantasy
 BT100B.Text = "Tp to Stone Pool [50k x BT] Area: 100B+ BT required"
@@ -631,7 +613,7 @@ BT1T.Parent = WayPointsFrame
 BT1T.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT1T.TextColor3 = Color3.new(1, 1, 1)
 BT1T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-BT1T.Position = UDim2.new(0, 5, 0, 480)
+BT1T.Position = UDim2.new(0, 5, 0, 455)
 BT1T.Size = UDim2.new(0, 365, 0, 20)
 BT1T.Font = Enum.Font.Fantasy
 BT1T.Text = "Tp to Dark Smoke [100k x BT] Area: 1T+ BT required"
@@ -643,7 +625,7 @@ BT100T.Parent = WayPointsFrame
 BT100T.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT100T.TextColor3 = Color3.new(1, 1, 1)
 BT100T.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-BT100T.Position = UDim2.new(0, 5, 0, 505)
+BT100T.Position = UDim2.new(0, 5, 0, 480)
 BT100T.Size = UDim2.new(0, 365, 0, 20)
 BT100T.Font = Enum.Font.Fantasy
 BT100T.Text = "Tp to Dance Pad [500k x BT] Area: 100T+ BT required"
@@ -655,7 +637,7 @@ BT5Qa.Parent = WayPointsFrame
 BT5Qa.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT5Qa.TextColor3 = Color3.new(1, 1, 1)
 BT5Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-BT5Qa.Position = UDim2.new(0, 5, 0, 530)
+BT5Qa.Position = UDim2.new(0, 5, 0, 505)
 BT5Qa.Size = UDim2.new(0, 365, 0, 20)
 BT5Qa.Font = Enum.Font.Fantasy
 BT5Qa.Text = "Tp to Pool of Blood [50M x BT] Area: 5Qa+ BT required"
@@ -667,7 +649,7 @@ BT35Qa.Parent = WayPointsFrame
 BT35Qa.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT35Qa.TextColor3 = Color3.new(1, 1, 1)
 BT35Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-BT35Qa.Position = UDim2.new(0, 5, 0, 555)
+BT35Qa.Position = UDim2.new(0, 5, 0, 530)
 BT35Qa.Size = UDim2.new(0, 365, 0, 20)
 BT35Qa.Font = Enum.Font.Fantasy
 BT35Qa.Text = "Tp to Purple Pool [200M x BT] Area: 35Qa+ BT required"
@@ -679,7 +661,7 @@ BT500Qa.Parent = WayPointsFrame
 BT500Qa.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT500Qa.TextColor3 = Color3.new(1, 1, 1)
 BT500Qa.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-BT500Qa.Position = UDim2.new(0, 5, 0, 580)
+BT500Qa.Position = UDim2.new(0, 5, 0, 555)
 BT500Qa.Size = UDim2.new(0, 365, 0, 20)
 BT500Qa.Font = Enum.Font.Fantasy
 BT500Qa.Text = "Tp to Strong Light [1B x BT] Area: 500Qa+ BT required"
@@ -691,7 +673,7 @@ BT5Qi.Parent = WayPointsFrame
 BT5Qi.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT5Qi.TextColor3 = Color3.new(1, 1, 1)
 BT5Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-BT5Qi.Position = UDim2.new(0, 5, 0, 605)
+BT5Qi.Position = UDim2.new(0, 5, 0, 580)
 BT5Qi.Size = UDim2.new(0, 365, 0, 20)
 BT5Qi.Font = Enum.Font.Fantasy
 BT5Qi.Text = "Tp to Blue Magma [5B x BT] Area: 5Qi+ BT required"
@@ -703,7 +685,7 @@ BT350Qi.Parent = WayPointsFrame
 BT350Qi.BackgroundColor3 = Color3.new(70/255, 105/255, 0)
 BT350Qi.TextColor3 = Color3.new(1, 1, 1)
 BT350Qi.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-BT350Qi.Position = UDim2.new(0, 5, 0, 630)
+BT350Qi.Position = UDim2.new(0, 5, 0, 605)
 BT350Qi.Size = UDim2.new(0, 365, 0, 20)
 BT350Qi.Font = Enum.Font.Fantasy
 BT350Qi.Text = "Tp to Pink Fire [25B x BT] Area: 350Qi+ BT required"
@@ -711,6 +693,18 @@ BT350Qi.TextWrapped = true
 BT350Qi.TextSize = 16
 
 -- PP
+
+PP10k.Name = "PP10k"
+PP10k.Parent = WayPointsFrame
+PP10k.BackgroundColor3 = Color3.new(66/255, 0, 165/255)
+PP10k.TextColor3 = Color3.new(1, 1, 1)
+PP10k.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+PP10k.Position = UDim2.new(0, 5, 0, 630)
+PP10k.Size = UDim2.new(0, 365, 0, 20)
+PP10k.Font = Enum.Font.Fantasy
+PP10k.Text = "Tp to Island [10 x PP]: 10k+ PP required"
+PP10k.TextWrapped = true
+PP10k.TextSize = 16
 
 PP1M.Name = "PP1M"
 PP1M.Parent = WayPointsFrame
@@ -720,7 +714,7 @@ PP1M.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
 PP1M.Position = UDim2.new(0, 5, 0, 655)
 PP1M.Size = UDim2.new(0, 365, 0, 20)
 PP1M.Font = Enum.Font.Fantasy
-PP1M.Text = "Tp to Tree [100x PP]: 1M+ PP required"
+PP1M.Text = "Tp to Tree [100 x PP]: 1M+ PP required"
 PP1M.TextWrapped = true
 PP1M.TextSize = 16
 
@@ -808,13 +802,73 @@ PP1Sx.Text = "Tp to Sakura Tree [1T x PP]: 1Sx+ PP required"
 PP1Sx.TextWrapped = true
 PP1Sx.TextSize = 16
 
+-- Farm
+
+FarmExp.Name = "FarmExp"
+FarmExp.Parent = MainFrame
+FarmExp.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+FarmExp.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FarmExp.Position = UDim2.new(0, 135, 0, 5)
+FarmExp.Size = UDim2.new(0, 45, 0, 20)
+FarmExp.Font = Enum.Font.Fantasy
+FarmExp.TextColor3 = Color3.new(1, 1, 1)
+FarmExp.Text = "Farm"
+FarmExp.TextSize = 17
+FarmExp.TextWrapped = true
+
+FarmExpFrame.Name = "FarmExpFrame"
+FarmExpFrame.Parent = MainFrame
+FarmExpFrame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+FarmExpFrame.BorderColor3 = Color3.new(0, 0, 0)
+FarmExpFrame.BackgroundTransparency = 0.2
+FarmExpFrame.Position = UDim2.new(0, 60.5, 0, 33)
+FarmExpFrame.Size = UDim2.new(0, 210, 0, 80)
+FarmExpFrame.Visible = false
+
+FarmFist.Name = "FarmFist"
+FarmFist.Parent = FarmExpFrame
+FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+FarmFist.TextColor3 = Color3.new(1, 1, 1)
+FarmFist.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FarmFist.Position = UDim2.new(0, 5, 0, 5)
+FarmFist.Size = UDim2.new(0, 200, 0, 20)
+FarmFist.Font = Enum.Font.Fantasy
+FarmFist.Text = "Farm Fist Strength: OFF"
+FarmFist.TextWrapped = true
+FarmFist.TextSize = 16
+
+FarmBody.Name = "FarmBody"
+FarmBody.Parent = FarmExpFrame
+FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+FarmBody.TextColor3 = Color3.new(1, 1, 1)
+FarmBody.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FarmBody.Position = UDim2.new(0, 5, 0, 30)
+FarmBody.Size = UDim2.new(0, 200, 0, 20)
+FarmBody.Font = Enum.Font.Fantasy
+FarmBody.Text = "Farm Body Toughness: OFF"
+FarmBody.TextWrapped = true
+FarmBody.TextSize = 16
+
+FarmPsychic.Name = "FarmPsychic"
+FarmPsychic.Parent = FarmExpFrame
+FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+FarmPsychic.TextColor3 = Color3.new(1, 1, 1)
+FarmPsychic.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
+FarmPsychic.Position = UDim2.new(0, 5, 0, 55)
+FarmPsychic.Size = UDim2.new(0, 200, 0, 20)
+FarmPsychic.Font = Enum.Font.Fantasy
+FarmPsychic.Text = "Farm Psychic Power: OFF"
+FarmPsychic.TextWrapped = true
+FarmPsychic.TextSize = 16
+
+
 -- Others
 
 esptrack.Name = "esptrack"
 esptrack.Parent = MainFrame
 esptrack.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 esptrack.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-esptrack.Position = UDim2.new(0, 135, 0, 5)
+esptrack.Position = UDim2.new(0, 190, 0, 5)
 esptrack.Size = UDim2.new(0, 35, 0, 20)
 esptrack.TextColor3 = Color3.new(1, 1, 1)
 esptrack.Font = Enum.Font.Fantasy
@@ -822,11 +876,13 @@ esptrack.Text = "ESP"
 esptrack.TextSize = 16
 esptrack.TextWrapped = true
 
+-- Top Players
+
 PlayerInfo.Name = "PlayerInfo"
 PlayerInfo.Parent = MainFrame
 PlayerInfo.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 PlayerInfo.BorderColor3 = Color3.new(0.6, 0.6, 0.6)
-PlayerInfo.Position = UDim2.new(0, 180, 0, 5)
+PlayerInfo.Position = UDim2.new(0, 235, 0, 5)
 PlayerInfo.Size = UDim2.new(0, 85, 0, 20)
 PlayerInfo.TextColor3 = Color3.new(1, 1, 1)
 PlayerInfo.Font = Enum.Font.Fantasy
@@ -1072,13 +1128,15 @@ ShowStatsPsychic2.TextSize = 14
 ShowStatsPsychic2.ZIndex = 8
 ShowStatsPsychic2.TextXAlignment = Enum.TextXAlignment.Right
 
+-- Stats Checker
+
 PlayerName.Name = "PlayerName"
 PlayerName.Parent = MainFrame
 PlayerName.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
 PlayerName.BackgroundTransparency = 0
 PlayerName.BorderColor3 = Color3.new(1, 1, 1)
 PlayerName.BorderSizePixel = 1
-PlayerName.Position = UDim2.new(0, 285, 0, 5)
+PlayerName.Position = UDim2.new(0, 335, 0, 5)
 PlayerName.Size = UDim2.new(0, 150, 0, 20)
 PlayerName.Font = Enum.Font.Fantasy
 PlayerName.TextColor3 = Color3.new(1, 1, 1)
@@ -1095,7 +1153,7 @@ StatsFrame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 StatsFrame.BorderColor3 = Color3.new(1, 1, 1)
 StatsFrame.BackgroundTransparency = 0.5
 StatsFrame.BorderSizePixel = 2
-StatsFrame.Position = UDim2.new(0, 280, 0, 33)
+StatsFrame.Position = UDim2.new(0, 330, 0, 33)
 StatsFrame.Size = UDim2.new(0, 161, 0, 90)
 StatsFrame.Visible = false
 
@@ -1129,7 +1187,7 @@ PlayerName1.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
 PlayerName1.BackgroundTransparency = 0
 PlayerName1.BorderColor3 = Color3.new(1, 1, 1)
 PlayerName1.BorderSizePixel = 1
-PlayerName1.Position = UDim2.new(0, 495, 0, 5)
+PlayerName1.Position = UDim2.new(0, 550, 0, 5)
 PlayerName1.Size = UDim2.new(0, 140, 0, 20)
 PlayerName1.Font = Enum.Font.Fantasy
 PlayerName1.TextColor3 = Color3.new(1, 1, 1)
@@ -1146,7 +1204,7 @@ StatsFrame1.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 StatsFrame1.BorderColor3 = Color3.new(1, 1, 1)
 StatsFrame1.BackgroundTransparency = 0.5
 StatsFrame1.BorderSizePixel = 2
-StatsFrame1.Position = UDim2.new(0, 450, 0, 33)
+StatsFrame1.Position = UDim2.new(0, 500, 0, 33)
 StatsFrame1.Size = UDim2.new(0, 240, 0, 130)
 StatsFrame1.Visible = false
 
@@ -1201,6 +1259,7 @@ end)
 
 local Menus = {
 	[WayPoints] = WayPointsFrame;
+	[FarmExp] = FarmExpFrame;
 }
 for button,frame in pairs(Menus) do
 	button.MouseButton1Click:connect(function()
@@ -1214,9 +1273,9 @@ for button,frame in pairs(Menus) do
 	end)
 end
 
-FarmBody.MouseEnter:connect(function()
-	FarmBodyLabel.Visible = true
-end)
+-- FarmBody.MouseEnter:connect(function()
+-- 	FarmBodyLabel.Visible = true
+-- end)
 
 -- Round Number to decimal places and convert to letter value --
 
@@ -1237,10 +1296,10 @@ function converttoletter(num)
 		return round(newnum, 3).. "SxDe"
 	elseif num / 1e48 >=1 then
 		newnum = num / 1e48
-		return round(newnum, 3).. "QDe"
+		return round(newnum, 3).. "QiDe"
 	elseif num / 1e45 >=1 then
 		newnum = num / 1e45
-		return round(newnum, 3).. "QTDe"
+		return round(newnum, 3).. "QaDe"
 	elseif num / 1e42 >=1 then
 		newnum = num / 1e42
 		return round(newnum, 3).. "TDe"
@@ -1287,43 +1346,7 @@ function converttoletter(num)
 	end
 end
 
--- Show Location --
-
-local curlocation = coroutine.wrap(function()
-	while true do
-		LocationX = round(game.Players.LocalPlayer.Character.HumanoidRootPart.Position.x, 0)
-		LocationY = round(game.Players.LocalPlayer.Character.HumanoidRootPart.Position.y, 0)
-		LocationZ = round(game.Players.LocalPlayer.Character.HumanoidRootPart.Position.z, 0)
-		ShowLocation.Text = "Coords: "..LocationX..", "..LocationY..", "..LocationZ
-		wait(0.5)
-	end
-end)
-
-curlocation()
-
--- Set Locations --
-
-SetLocation.MouseButton1Down:connect(function()
-	function round(num, numDecimalPlaces)
-		local mult = 10^(numDecimalPlaces or 0)
-		return math.floor(num * mult + 0.5) / mult
-	end
-	setlocationx = round(game.Players.LocalPlayer.Character.HumanoidRootPart.Position.x, 0)
-	setlocationy = round(game.Players.LocalPlayer.Character.HumanoidRootPart.Position.y, 0)
-	setlocationz = round(game.Players.LocalPlayer.Character.HumanoidRootPart.Position.z, 0)
-	print("Set Custom Location: "..setlocationx..", "..setlocationy..", "..setlocationz)
-    SetLocation.Text = setlocationx..","..setlocationy..","..setlocationz
-	CustomLocationSet = true
-end)
-
---- TP to custom location ---
-
-TPLocation.MouseButton1Down:connect(function()
-	if CustomLocationSet == true then
-		workspace:WaitForChild(game.Players.LocalPlayer.Name).HumanoidRootPart.CFrame = CFrame.new(setlocationx, setlocationy, setlocationz)
-		WayPointsFrame.Visible = false
-	end
-end)
+-- Waypoints
 
 SafeZone.MouseButton1Click:connect(function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-190.5, 50, 28)
@@ -1456,6 +1479,11 @@ end)
 
 -- PP
 
+PP10k.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-108, 774, -86)
+	WayPointsFrame.Visible = false
+end)
+
 PP1M.MouseButton1Click:connect(function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-340, 1055, -263)
 	WayPointsFrame.Visible = false
@@ -1560,6 +1588,440 @@ spawn(function()
 	wait(1)
 end)
 
+-- Farm Exp --
+FarmFist.MouseButton1Click:Connect(function()
+	if farmfistactive ~= true then
+		farmfistactive = true
+		FarmFist.BackgroundColor3 = Color3.new(0, 0.5, 0)
+		FarmFist.Text = "Farm Fist Strength: ON"
+	else
+		farmfistactive = false
+		FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+		FarmFist.Text = "Farm Fist Strength: OFF"
+	end
+end)
+
+FarmBody.MouseButton1Click:Connect(function()
+	if farmbodyactive ~= true then
+		farmbodyactive = true
+		FarmBody.BackgroundColor3 = Color3.new(0, 0.5, 0)
+		FarmBody.Text = "Farm Body Toughness: ON"
+	else
+		farmbodyactive = false
+		FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+		FarmBody.Text = "Farm Body Toughness: OFF"
+	end
+end)
+
+FarmPsychic.MouseButton1Click:Connect(function()
+	if farmpsychicactive ~= true then
+		farmpsychicactive = true
+		FarmPsychic.BackgroundColor3 = Color3.new(0, 0.5, 0)
+		FarmPsychic.Text = "Farm Psychic Power: ON"
+	else
+		farmpsychicactive = false
+		FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+		FarmPsychic.Text = "Farm Psychic Power: OFF"
+	end
+end)
+
+spawn(function()
+	while true do
+		if farmfistactive and game.Players.LocalPlayer.Character:WaitForChild("Humanoid") then
+			if tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 350e18 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2790, 21025, -2944)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 5e18 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1926, 13100, 2144)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 500e15 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2300, 7100, 2636)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 35e15 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-233, 523, 321)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 5e15 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1125, 1846, 985)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e12 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(820, 5481, -1697)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e12 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(207, 3450, 113)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e09 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(179, 2480, -466)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e09 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-143, 1528, -68)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e06 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2476, 54, -2369)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e06 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2400, 54, -2325)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e03 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2468, 54, -2309)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e03 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-92, 30, -66)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+			end
+			while farmfistactive do
+				wait(0.1)
+				FSTool.Parent = workspace[plr.Name]
+				wait(1)
+				FSTool:Activate()
+				deathreturnactive = true
+			end
+		end
+		wait(1)
+	end
+end)
+
+spawn(function()
+	while true do
+		if farmbodyactive and game.Players.LocalPlayer.Character:WaitForChild("Humanoid") then
+			if tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 120e18 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1823, 59, 802)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 2e18 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1810, 58, 756)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false  
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 200e15 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1805, 45, 653)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 10e15 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-245, 33, -404)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 2e15 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-78, 33, -412)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 50e12 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-82, 37, -370)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 500e09 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-80, 37, -325)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 50e09 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-248, 38, -350)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false  
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 500e06 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-242, 38, -320)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 50e06 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2440.62, 535, -2338.16)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 500e03 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-502, 262, -1255)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 50e03 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1479, 30, 1108)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 5e02 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-225, 30, -288)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false  
+				FarmPsychic.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmPsychic.Text = "Farm Psychic Power: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			end
+			while farmbodyactive do
+				wait(0.5)
+				deathreturnactive = true
+			end
+		end
+		wait(1)
+	end
+	deathreturnactive = false
+end)
+
+spawn(function()
+	while true do
+		if farmpsychicactive and game.Players.LocalPlayer.Character:WaitForChild("Humanoid") then
+			if tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 1e21 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(462, 1010, -844)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmbodyactive = false
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 50e18 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-496, 1234, -209)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmbodyactive = false
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 3e18 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-425, 1144, -200)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmbodyactive = false
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 350e15 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-429, 1120, -140)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmbodyactive = false
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 1e15 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-423, 1120, -267)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmbodyactive = false
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 1e12 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-323, 1067, -196)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmbodyactive = false
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 1e09 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-352, 1055, -133)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmbodyactive = false
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 1e06 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-340, 1055, -263)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmbodyactive = false
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 10e03 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-108, 774, -86)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmbodyactive = false
+				FarmBody.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmBody.Text = "Farm Body Toughness: OFF"
+				FarmFist.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+				FarmFist.Text = "Farm Fist Strength: OFF"
+			end
+			while farmpsychicactive do
+				wait(0.1)
+				PPTool.Parent = workspace[plr.Name]
+				deathreturnactive = true
+			end
+		end
+		wait(1)
+	end
+	deathreturnactive = false
+end)
+
 -- Return On Death
 
 spawn(function()
@@ -1575,32 +2037,47 @@ spawn(function()
 			lastlocationx = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.x
 			lastlocationy = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.y
 			lastlocationz = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.z
-			SavePosition.Text = "Last Place: " ..lastlocationx.. "," ..lastlocationy.. "," ..lastlocationz
-			--print(tostring(SavePosition.Text))
 			wait(0.5)
 		end
 		if playerdied then
 			--print("Player " ..tostring(game.Players.LocalPlayer.Name).. " Died")
 			--print(tostring(SavePosition.Text))
-			wait(5)
+			wait(0.25)
+			if farmfistactive == true then
+				local fistfarmstate = true
+			end
+			if farmpsychicactive == true then
+				local psychicfarmstate = true
+			end
 			game:GetService("ReplicatedStorage").RespawnEvent:FireServer()
 			wait(1)
             game.Players.LocalPlayer.PlayerGui.Play.Enabled = false
             game.Players.LocalPlayer.PlayerGui.plrstats.Enabled = true
-			wait(4)
+            wait(1)
+            camera.CameraType = Enum.CameraType.Track
+            camera.CameraSubject = MyPlr
+			wait(1)
 			--print("screengui disabled")
-			repeat wait(2) until game.Players.LocalPlayer.Character.Humanoid
+			repeat wait(0.5) until game.Players.LocalPlayer.Character.Humanoid
 			--print("Teleporting back to " ..tostring(SavePosition.Text))
 			if deathreturnactive then
-				wait(5)
+				wait(1)
 				local FindHum = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(lastlocationx, lastlocationy, lastlocationz)
+				wait(0.5)
+				if fistfarmstate == true then
+					farmfistactive = true
+				end
+				if psychicfarmstate == true then
+					farmpsychicactive = true
+				end
 			end
 			playerdied = false
 		end
 		wait(1)
 	end		
 end)
+
 
 -- ESP --
 
