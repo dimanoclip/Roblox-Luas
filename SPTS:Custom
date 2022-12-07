@@ -16,6 +16,8 @@ local camera = game.Workspace.CurrentCamera
 local Workspace = game:GetService("Workspace")
 local wc = workspace[plr.Name] 
 human:UnequipTools()
+local FSTool = Backpack.FSTool
+local PPTool = Backpack.PPTool
 
 -- Anti Idle --
 local VirtualUser=game:service'VirtualUser'
@@ -1700,7 +1702,7 @@ FarmFist.MouseButton1Click:Connect(function()
 		workspace[plr.Name].HumanoidRootPart.Anchored = false
 		deathreturnactive = false
 		wait(1)
-		Humanoid:UnequipTools()
+		human:UnequipTools()
 		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-190.5, 50, 28)
 	end
 end)
@@ -1719,7 +1721,7 @@ FarmBody.MouseButton1Click:Connect(function()
 		workspace[plr.Name].HumanoidRootPart.Anchored = false
 		deathreturnactive = false
 		wait(1)
-		Humanoid:UnequipTools()
+		human:UnequipTools()
 		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-190.5, 50, 28)
 	end
 end)
@@ -1738,7 +1740,7 @@ FarmPsychic.MouseButton1Click:Connect(function()
 		workspace[plr.Name].HumanoidRootPart.Anchored = false
 		deathreturnactive = false
 		wait(1)
-		Humanoid:UnequipTools()
+		human:UnequipTools()
 		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-190.5, 50, 28)
 	end
 end)
