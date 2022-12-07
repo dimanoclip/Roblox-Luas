@@ -1,7 +1,7 @@
 -- Guis
 Gui = Instance.new("ScreenGui", game.CoreGui)
 But = Instance.new("TextButton", Gui)
-mi = Instance.new("TextButton", Button)
+mi = Instance.new("TextButton", But)
 op = Instance.new("TextButton", Gui)
 
 --Hop Button
