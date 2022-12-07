@@ -173,12 +173,14 @@ function UpdateESP(plr)
 					Find.Frame.Dist.Visible = false
 					Find.Frame.Fist.Visible = false
 					Find.Frame.BT.Visible = false
+					Find.Frame.TK.Visible = false
 					return
 				else
 					Find.Frame.Names.Visible = true
 					Find.Frame.Dist.Visible = true
 					Find.Frame.Fist.Visible = true
 					Find.Frame.BT.Visible = true
+					Find.Frame.TK.Visible = true
 				end
 				Find.Frame.Dist.Text = "Distance: " .. string.format("%.0f", Dist)
 				if Find4 then
@@ -203,8 +205,10 @@ end
 local MainGUI = Instance.new("ScreenGui")
 local TopFrame = Instance.new("Frame")
 local MainFrame = Instance.new("Frame")
+local MainFrame1 = Instance.new("Frame")
 local Open = Instance.new("TextButton")
 local Close = Instance.new("TextButton")
+local Close1 = Instance.new("TextButton")
 local Minimize = Instance.new("TextButton")
 local Enable = Instance.new("TextButton", MainGUI)
 local Disable = Instance.new("TextButton", MainGUI)
@@ -273,6 +277,9 @@ local SavePosition = Instance.new("TextLabel")
 local FarmBodyLabel = Instance.new("TextLabel") -- For example button
 local esptrack = Instance.new("TextButton")
 local ESPLength = Instance.new("TextBox")
+
+-- Top players
+
 local PlayerInfo = Instance.new("TextButton")
 local PlayerInfoFrame = Instance.new("Frame")
 local ShowTopPlayers = Instance.new("TextButton")
@@ -294,11 +301,15 @@ local ShowStatsBody2 = Instance.new("TextLabel")
 local ShowStatsSpeed2 = Instance.new("TextLabel")
 local ShowStatsJump2 = Instance.new("TextLabel")
 local ShowStatsPsychic2 = Instance.new("TextLabel")
-local PlayerName = Instance.new("TextBox")
+
+-- Stats Checker
+
+local PlayerName = Instance.new("TextLabel")
 local StatsFrame = Instance.new("Frame")
 local ShowStats1 = Instance.new("TextLabel")
 local ShowStats2 = Instance.new("TextLabel")
-local PlayerName1 = Instance.new("TextLabel")
+
+local PlayerName1 = Instance.new("TextBox")
 local StatsFrame1 = Instance.new("Frame")
 local ShowStats3 = Instance.new("TextLabel")
 local ShowStats4 = Instance.new("TextLabel")
@@ -337,8 +348,17 @@ MainFrame.BackgroundColor3 = Color3.new(0, 0, 0)
 MainFrame.BackgroundTransparency = 0.5
 MainFrame.BorderColor3 = Color3.new(1, 1, 1)
 MainFrame.BorderSizePixel = 2
-MainFrame.Position = UDim2.new(0.5, -292.5, 0, -32)
-MainFrame.Size = UDim2.new(0, 740, 0, 30)
+MainFrame.Position = UDim2.new(0.5, -232.5, 0, -32)
+MainFrame.Size = UDim2.new(0, 491, 0, 30)
+
+MainFrame1.Name = "MainFrame1"
+MainFrame1.Parent = MainGUI
+MainFrame1.BackgroundColor3 = Color3.new(0, 0, 0)
+MainFrame1.BackgroundTransparency = 0.5
+MainFrame1.BorderColor3 = Color3.new(1, 1, 1)
+MainFrame1.BorderSizePixel = 2
+MainFrame1.Position = UDim2.new(0.5, 720, 0, 400)
+MainFrame1.Size = UDim2.new(0, 235, 0, 30)
 
 Close.Name = "Close"
 Close.Parent = MainFrame
@@ -1183,13 +1203,13 @@ ShowStats2.TextSize = 15
 ShowStats2.TextXAlignment = Enum.TextXAlignment.Right
 
 PlayerName1.Name = "PlayerName1"
-PlayerName1.Parent = MainFrame
+PlayerName1.Parent = MainFrame1
 PlayerName1.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
 PlayerName1.BackgroundTransparency = 0
 PlayerName1.BorderColor3 = Color3.new(1, 1, 1)
 PlayerName1.BorderSizePixel = 1
-PlayerName1.Position = UDim2.new(0, 550, 0, 5)
-PlayerName1.Size = UDim2.new(0, 140, 0, 20)
+PlayerName1.Position = UDim2.new(0, 45, 0, 5)
+PlayerName1.Size = UDim2.new(0, 150, 0, 20)
 PlayerName1.Font = Enum.Font.Fantasy
 PlayerName1.TextColor3 = Color3.new(1, 1, 1)
 PlayerName1.Text = tostring(MyPlr.Name)
@@ -1198,39 +1218,37 @@ PlayerName1.TextScaled = true
 PlayerName1.TextWrapped = false
 
 StatsFrame1.Name = "StatsFrame1"
-StatsFrame1.Parent = MainFrame
-StatsFrame1.Active = true
-StatsFrame1.Draggable = true
+StatsFrame1.Parent = MainFrame1
 StatsFrame1.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 StatsFrame1.BorderColor3 = Color3.new(1, 1, 1)
 StatsFrame1.BackgroundTransparency = 0.5
 StatsFrame1.BorderSizePixel = 2
-StatsFrame1.Position = UDim2.new(0, 500, 0, 33)
-StatsFrame1.Size = UDim2.new(0, 240, 0, 130)
+StatsFrame1.Position = UDim2.new(0, 0, 0, 33)
+StatsFrame1.Size = UDim2.new(0, 235, 0, 120)
 StatsFrame1.Visible = false
 
 ShowStats3.Name = "ShowStats3"
 ShowStats3.Parent = StatsFrame1
 ShowStats3.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 ShowStats3.BackgroundTransparency = 1
-ShowStats3.Position = UDim2.new(0, 20, 0, 20)
-ShowStats3.Size = UDim2.new(0, 55, 0, 90)
+ShowStats3.Position = UDim2.new(0, 15, 0, 15)
+ShowStats3.Size = UDim2.new(0, 50, 0, 90)
 ShowStats3.Font = Enum.Font.Fantasy
 ShowStats3.TextColor3 = Color3.new(1, 1, 1)
 ShowStats3.Text = " "
-ShowStats3.TextSize = 22
+ShowStats3.TextSize = 20
 ShowStats3.TextXAlignment = Enum.TextXAlignment.Right
 
 ShowStats4.Name = "ShowStats4"
 ShowStats4.Parent = StatsFrame1
 ShowStats4.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 ShowStats4.BackgroundTransparency = 1
-ShowStats4.Position = UDim2.new(0, 130, 0, 20)
+ShowStats4.Position = UDim2.new(0, 130, 0, 15)
 ShowStats4.Size = UDim2.new(0, 103, 0, 90)
 ShowStats4.Font = Enum.Font.Fantasy
 ShowStats4.TextColor3 = Color3.new(1, 1, 1)
 ShowStats4.Text = "Stats"
-ShowStats4.TextSize = 22
+ShowStats4.TextSize = 20
 ShowStats4.TextXAlignment = Enum.TextXAlignment.Right
 
 -- Close --
@@ -1253,7 +1271,7 @@ Minimize.MouseButton1Down:connect(function()
 end)
 
 Close.MouseButton1Down:connect(function()
-MainGUI:Destroy()
+	MainGUI:Destroy()
 end)
 
 -- Menus --
@@ -1287,6 +1305,9 @@ end
 		
 function converttoletter(num)
 	if num / 1e57 >=1 then
+		newnum = num / 1e303
+		return round(newnum, 3).. "Ce"
+	elseif num / 1e57 >=1 then
 		newnum = num / 1e57
 		return round(newnum, 3).. "OcDe"
 	elseif num / 1e54 >=1 then
@@ -1541,7 +1562,7 @@ Enable.BackgroundTransparency = 0.5
 Enable.BorderColor3 = Color3.new(1, 1, 1)
 Enable.BorderSizePixel = 2
 Enable.Size = UDim2.new(0, 90, 0, 30)
-Enable.Position = UDim2.new(0.3, 0, 0, -32)
+Enable.Position = UDim2.new(0.32, 0, 0, -32)
 Enable.Font = Enum.Font.Fantasy
 Enable.Text = "Disabled"
 Enable.TextColor3 = Color3.new(1, 1, 1)
@@ -1554,7 +1575,7 @@ Disable.BackgroundTransparency = 0.5
 Disable.BorderColor3 = Color3.new(1, 1, 1)
 Disable.BorderSizePixel = 2
 Disable.Size = UDim2.new(0, 90, 0, 30)
-Disable.Position = UDim2.new(0.3, 0, 0, -32)
+Disable.Position = UDim2.new(0.32, 0, 0, -32)
 Disable.Font = Enum.Font.Fantasy
 Disable.Text = "Enabled"
 Disable.TextColor3 = Color3.new(1, 1, 1)
@@ -2184,7 +2205,7 @@ spawn(function()
 				StatBestFistText1.TextColor3 = Color3.new(0.1, 0.8, 1)
 			elseif fistplrStatus.Value == "Protector" then
 				StatBestFistText1.TextColor3 = Color3.new(0.1, 0.1, 1)
-			elseif fistplrStatus.Value == "Supervillain" then
+			elseif fistplrStatus.Value == "SuperVillian" then
 				StatBestFistText1.TextColor3 = Color3.new(0.3, 0.1, 0.1)
 			elseif fistplrStatus.Value == "Superhero" then
 				StatBestFistText1.TextColor3 = Color3.new(0.8, 0.8, 0)
@@ -2225,7 +2246,7 @@ spawn(function()
 				StatBestBodyText1.TextColor3 = Color3.new(0.1, 0.8, 1)
 			elseif bodyplrStatus.Value == "Protector" then
 				StatBestBodyText1.TextColor3 = Color3.new(0.1, 0.1, 1)
-			elseif bodyplrStatus.Value == "Supervillain" then
+			elseif bodyplrStatus.Value == "SuperVillian" then
 				StatBestBodyText1.TextColor3 = Color3.new(0.3, 0.1, 0.1)
 			elseif bodyplrStatus.Value == "Superhero" then
 				StatBestBodyText1.TextColor3 = Color3.new(0.8, 0.8, 0)
@@ -2266,7 +2287,7 @@ spawn(function()
 				StatBestSpeedText1.TextColor3 = Color3.new(0.1, 0.8, 1)
 			elseif speedplrStatus.Value == "Protector" then
 				StatBestSpeedText1.TextColor3 = Color3.new(0.1, 0.1, 1)
-			elseif speedplrStatus.Value == "Supervillain" then
+			elseif speedplrStatus.Value == "SuperVillian" then
 				StatBestSpeedText1.TextColor3 = Color3.new(0.3, 0.1, 0.1)
 			elseif speedplrStatus.Value == "Superhero" then
 				StatBestSpeedText1.TextColor3 = Color3.new(0.8, 0.8, 0)
@@ -2307,7 +2328,7 @@ spawn(function()
 				StatBestJumpText1.TextColor3 = Color3.new(0.1, 0.8, 1)
 			elseif JumpplrStatus.Value == "Protector" then
 				StatBestJumpText1.TextColor3 = Color3.new(0.1, 0.1, 1)
-			elseif JumpplrStatus.Value == "Supervillain" then
+			elseif JumpplrStatus.Value == "SuperVillian" then
 				StatBestJumpText1.TextColor3 = Color3.new(0.3, 0.1, 0.1)
 			elseif JumpplrStatus.Value == "Superhero" then
 				StatBestJumpText1.TextColor3 = Color3.new(0.8, 0.8, 0)
@@ -2348,7 +2369,7 @@ spawn(function()
 				StatBestPsychicText1.TextColor3 = Color3.new(0.1, 0.8, 1)
 			elseif PsychicplrStatus.Value == "Protector" then
 				StatBestPsychicText1.TextColor3 = Color3.new(0.1, 0.1, 1)
-			elseif PsychicplrStatus.Value == "Supervillain" then
+			elseif PsychicplrStatus.Value == "SuperVillian" then
 				StatBestPsychicText1.TextColor3 = Color3.new(0.3, 0.1, 0.1)
 			elseif PsychicplrStatus.Value == "Superhero" then
 				StatBestPsychicText1.TextColor3 = Color3.new(0.8, 0.8, 0)
@@ -2395,6 +2416,71 @@ end)
 
 -- Display Player Info (2nd) --
 
+function converttoletter2(num)
+	if num / 1e57 >=1 then
+		newnum = num / 1e303
+		return round(newnum, 0).. "Ce"
+	elseif num / 1e57 >=1 then
+		newnum = num / 1e57
+		return round(newnum, 0).. "OcDe"
+	elseif num / 1e54 >=1 then
+		newnum = num / 1e54
+		return round(newnum, 0).. "SpDe"
+	elseif num / 1e51 >=1 then
+		newnum = num / 1e51
+		return round(newnum, 0).. "SxDe"
+	elseif num / 1e48 >=1 then
+		newnum = num / 1e48
+		return round(newnum, 0).. "QiDe"
+	elseif num / 1e45 >=1 then
+		newnum = num / 1e45
+		return round(newnum, 0).. "QaDe"
+	elseif num / 1e42 >=1 then
+		newnum = num / 1e42
+		return round(newnum, 0).. "TDe"
+	elseif num / 1e39 >=1 then
+		newnum = num / 1e39
+		return round(newnum, 0).. "DDe"
+	elseif num / 1e36 >=1 then
+		newnum = num / 1e36
+		return round(newnum, 0).. "Un"
+	elseif num / 1e33 >=1 then
+		newnum = num / 1e33
+		return round(newnum, 0).. "De"
+	elseif num / 1e30 >=1 then
+		newnum = num / 1e30
+		return round(newnum, 0).. "No"
+	elseif num / 1e27 >=1 then
+		newnum = num / 1e27
+		return round(newnum, 0).. "Oc"
+	elseif num / 1e24 >=1 then
+		newnum = num / 1e24
+		return round(newnum, 0).. "Sp"
+	elseif num / 1e21 >=1 then
+		newnum = num / 1e21
+		return round(newnum, 0).. "Sx"
+	elseif num / 1e18 >=1 then
+		newnum = num / 1e18
+		return round(newnum, 0).. "Qi"
+	elseif num / 1e15 >=1 then
+		newnum = num / 1e15
+		return round(newnum, 0).. "Qa"
+	elseif num / 1e12 >=1 then
+		newnum = num / 1e12
+		return round(newnum, 0).. "T"
+	elseif num / 1e09 >=1 then
+		newnum = num / 1e09
+		return round(newnum, 0).. "B"
+	elseif num / 1e06 >=1 then
+		newnum = num / 1e06
+		return round(newnum, 0).. "M"
+	elseif num / 1e03 >=1 then
+		newnum = num / 1e03
+		return round(newnum, 0).. "K"
+	else return num
+	end
+end
+
 spawn(function()
 	while true do
 		statplayer = tostring(PlayerName1.Text)
@@ -2404,14 +2490,19 @@ spawn(function()
 			if string.lower(v.Name) == string.lower(statplayer) then
 				StatsFrame1.Visible = true
 				local FindHum = v.Character:WaitForChild("Humanoid")
-				local PlayerFist = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.FS.Value))
-				local PlayerBody = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.BT.Value))
-				local PlayerSpeed = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.WS.Value))
-				local PlayerJump = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.JF.Value))
-				local PlayerPsychic = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.PP.Value))
-				local PlayerTokens = converttoletter(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.Tokens.Value))
+				local PlayerFist = converttoletter2(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.FS.Value))
+				local PlayerFistMP = converttoletter2(string.format("%.0f", game.Players[v.Name].PlayerFolder.Multipliers.FSMulti.Value))
+				local PlayerBody = converttoletter2(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.BT.Value))
+				local PlayerBodyMP = converttoletter2(string.format("%.0f", game.Players[v.Name].PlayerFolder.Multipliers.BTMulti.Value))
+				local PlayerSpeed = converttoletter2(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.WS.Value))
+				local PlayerSpeedMP = converttoletter2(string.format("%.0f", game.Players[v.Name].PlayerFolder.Multipliers.WSMulti.Value))
+				local PlayerJump = converttoletter2(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.JF.Value))
+				local PlayerJumpMP = converttoletter2(string.format("%.0f", game.Players[v.Name].PlayerFolder.Multipliers.JFMulti.Value))
+				local PlayerPsychic = converttoletter2(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.PP.Value))
+				local PlayerPsychicMP= converttoletter2(string.format("%.0f", game.Players[v.Name].PlayerFolder.Multipliers.PPMulti.Value))
+				local PlayerTokens = converttoletter2(string.format("%.0f", game.Players[v.Name].PlayerFolder.DataFolder.Tokens.Value))
 				ShowStats3.Text = "Fist:\nBody:\nSpeed:\nJump:\nPsychic:\nTokens:"
-				ShowStats4.Text = PlayerFist.. "\n" ..PlayerBody.. "\n" ..PlayerSpeed.. "\n" ..PlayerJump.. "\n" ..PlayerPsychic.. "\n" ..PlayerTokens
+				ShowStats4.Text = PlayerFist.. " | " ..PlayerFistMP.. "\n" ..PlayerBody.. " | " ..PlayerBodyMP.. "\n" ..PlayerSpeed.. " | " ..PlayerSpeedMP.. "\n" ..PlayerJump.. " | " ..PlayerJumpMP.. "\n" ..PlayerPsychic.. " | " ..PlayerPsychicMP.. "\n" ..PlayerTokens
 				break
 			end
 		end
