@@ -1,8 +1,5 @@
 local camera = game.Workspace.CurrentCamera
 local plr = game:GetService("Players").LocalPlayer
 local wc = workspace[plr.Name]
-game:GetService("ReplicatedStorage").RespawnEvent:FireServer()
-game.Players.LocalPlayer.PlayerGui.plrstats.Enabled = true
-camera.CameraType = Enum.CameraType.Track
 camera.CameraSubject = wc
 game.Players.LocalPlayer.PlayerGui.Play.Enabled = false
