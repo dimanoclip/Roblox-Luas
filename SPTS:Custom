@@ -173,14 +173,12 @@ function UpdateESP(plr)
 					Find.Frame.Dist.Visible = false
 					Find.Frame.Fist.Visible = false
 					Find.Frame.BT.Visible = false
-					Find.Frame.TK.Visible = false
 					return
 				else
 					Find.Frame.Names.Visible = true
 					Find.Frame.Dist.Visible = true
 					Find.Frame.Fist.Visible = true
 					Find.Frame.BT.Visible = true
-					Find.Frame.TK.Visible = true
 				end
 				Find.Frame.Dist.Text = "Distance: " .. string.format("%.0f", Dist)
 				if Find4 then
