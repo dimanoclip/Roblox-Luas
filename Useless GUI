@@ -121,7 +121,7 @@ end
 -- Main info
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Useless GUI | SPTS: Custom", "BloodTheme")
+local Window = Library.CreateLib("Useless GUI | SPTS: Custom II", "BloodTheme")
 
 -- Info Tab
 
@@ -203,6 +203,7 @@ local Farm = Window:NewTab("Auto Farm")
 local Fist = Farm:NewSection("Fist Farm")
 Fist:NewToggle("Fist Strength", "Toggling Fist Farm", function(farmfist)
 	if farmfist then
+		local FSTool = Backpack.FSTool
 		farmfistactive = true
 		deathreturnactive = true
 		if tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 350e18 then
