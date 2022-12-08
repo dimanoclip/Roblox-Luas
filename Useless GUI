@@ -121,7 +121,7 @@ end
 -- Main info
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("ZalupaHub | SPTS: Custom", "Ocean")
+local Window = Library.CreateLib("Useless GUI | SPTS: Custom", "Ocean")
 
 -- Info Tab
 
