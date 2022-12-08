@@ -121,7 +121,7 @@ end
 -- Main info
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Useless GUI | SPTS: Custom", "Ocean")
+local Window = Library.CreateLib("Useless GUI | SPTS: Custom", "BloodTheme")
 
 -- Info Tab
 
@@ -131,7 +131,7 @@ local Creator = Info:NewSection("Creator:")
 Creator:NewLabel("Discord: Useless#3770")
 
 local ToggleGui = Info:NewSection("Toggle UI")
-ToggleGui:NewKeybind("ToggleUI", "Toggle UI", Enum.KeyCode.RightControl, function()
+ToggleGui:NewKeybind("Toggle UI", "Toggle UI", Enum.KeyCode.RightControl, function()
 	Library:ToggleUI()
 end)
 
@@ -185,6 +185,15 @@ StatCheck:NewTextBox("Player's Name", "Input player's name there", function(play
 	WS:UpdateLabel("Walk Speed: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.WS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.WSMulti.Value)))
 	JF:UpdateLabel("Jump Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.JF.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.JFMulti.Value)))
 	PP:UpdateLabel("Psychic Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.PP.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.PPMulti.Value)))
+end)
+
+StatCheck:NewButton("Reset Stats", "Clears labels", function()
+	PN:UpdateLabel("Player Name: ")
+	FS:UpdateLabel("Fist Strength: ")
+	BT:UpdateLabel("Body Toughness: ")
+	WS:UpdateLabel("Walk Speed: ")
+	JF:UpdateLabel("Jump Power: ")
+	PP:UpdateLabel("Psychic Power: ")
 end)
 
 -- Farm Tab
