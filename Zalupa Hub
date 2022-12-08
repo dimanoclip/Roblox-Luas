@@ -1,0 +1,739 @@
+-- Aliases
+
+local plr = game:GetService("Players").LocalPlayer
+local char = plr.Character
+local root = char.HumanoidRootPart
+local Plrs = game:GetService("Players")
+local MyPlr = Plrs.LocalPlayer
+local MyChar = MyPlr.Character
+local UIS = game:GetService'UserInputService'
+local RepStor = game:GetService("ReplicatedStorage")
+local CoreGui = game:GetService("CoreGui")
+local Run = game:GetService("RunService")
+local mouse = game.Players.LocalPlayer:GetMouse()
+local human = plr.Character:WaitForChild("Humanoid")
+local Humanoid = game:GetService("Players").LocalPlayer.Character.Humanoid
+local Backpack = plr.Backpack
+local camera = game.Workspace.CurrentCamera
+local Workspace = game:GetService("Workspace")
+local playgui = game.Players.LocalPlayer.PlayerGui.Play
+local wc = workspace[plr.Name] 
+
+-- Anti Idle --
+local VirtualUser=game:service'VirtualUser'
+game:service'Players'.LocalPlayer.Idled:connect(function()
+	VirtualUser:CaptureController()
+	VirtualUser:ClickButton2(Vector2.new())
+end)
+
+-- Properties
+
+workspace[plr.Name].HumanoidRootPart.Anchored = false
+
+showtopplayersactive = false
+showtopplayersfistactive = false
+showtopplayersbodyactive = false
+showtopplayersspeedactive = false
+showtopplayersjumpactive = false
+showtopplayerspsychicactive = false
+settplocation = false
+playerdied = false
+deathreturnactive = false
+resetplayerstat = false
+killplayeractive = false
+
+ESPEnabled = false
+ESPLength = 5000
+
+human:UnequipTools()
+local FSTool = Backpack.FSTool
+local PPTool = Backpack.PPTool
+
+-- Round
+
+function round(num, numDecimalPlaces)
+local mult = 10^(numDecimalPlaces or 0)
+return math.floor(num * mult + 0.5) / mult
+end
+	
+function converttoletter(num)
+if num / 1e57 >=1 then
+	newnum = num / 1e57
+	return round(newnum, 3).. "OcDe"
+elseif num / 1e54 >=1 then
+	newnum = num / 1e54
+	return round(newnum, 3).. "SpDe"
+elseif num / 1e51 >=1 then
+	newnum = num / 1e51
+	return round(newnum, 3).. "SxDe"
+elseif num / 1e48 >=1 then
+	newnum = num / 1e48
+	return round(newnum, 3).. "QiDe"
+elseif num / 1e45 >=1 then
+	newnum = num / 1e45
+	return round(newnum, 3).. "QaDe"
+elseif num / 1e42 >=1 then
+	newnum = num / 1e42
+	return round(newnum, 3).. "TDe"
+elseif num / 1e39 >=1 then
+	newnum = num / 1e39
+	return round(newnum, 3).. "DDe"
+elseif num / 1e36 >=1 then
+	newnum = num / 1e36
+	return round(newnum, 3).. "Un"
+elseif num / 1e33 >=1 then
+	newnum = num / 1e33
+	return round(newnum, 3).. "De"
+elseif num / 1e30 >=1 then
+	newnum = num / 1e30
+	return round(newnum, 3).. "No"
+elseif num / 1e27 >=1 then
+	newnum = num / 1e27
+	return round(newnum, 3).. "Oc"
+elseif num / 1e24 >=1 then
+	newnum = num / 1e24
+	return round(newnum, 3).. "Sp"
+elseif num / 1e21 >=1 then
+	newnum = num / 1e21
+	return round(newnum, 3).. "Sx"
+elseif num / 1e18 >=1 then
+	newnum = num / 1e18
+	return round(newnum, 3).. "Qi"
+elseif num / 1e15 >=1 then
+	newnum = num / 1e15
+	return round(newnum, 3).. "Qa"
+elseif num / 1e12 >=1 then
+	newnum = num / 1e12
+	return round(newnum, 3).. "T"
+elseif num / 1e09 >=1 then
+	newnum = num / 1e09
+	return round(newnum, 3).. "B"
+elseif num / 1e06 >=1 then
+	newnum = num / 1e06
+	return round(newnum, 3).. "M"
+elseif num / 1e03 >=1 then
+	newnum = num / 1e03
+	return round(newnum, 3).. "K"
+else return num
+end
+end
+
+-- Main
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("ZalupaHub | SPTS: Custom", "GrapeTheme")
+
+-- Info
+
+local Info = Window:NewTab("Info")
+
+local Creator = Info:NewSection("Creator:")
+Creator:NewLabel("Discord: Useless#3770")
+
+local ToggleGui = Info:NewSection("Toggle UI")
+ToggleGui:NewKeybind("ToggleUI", "Toggle UI", Enum.KeyCode.RightControl, function()
+	Library:ToggleUI()
+end)
+
+-- Misc
+
+local Misc = Window:NewTab("Misc")
+local ESP = Misc:NewSection("ESP")
+ESP:NewButton("ESP", "Enabling ESP", function()
+	ESPEnabled = not ESPEnabled
+	if ESPEnabled then
+		for _, v in next, Plrs:GetPlayers() do
+			if v ~= MyPlr then
+				if CharAddedEvent[v.Name] == nil then
+					CharAddedEvent[v.Name] = v.CharacterAdded:connect(function(Char)
+						if ESPEnabled then
+							RemoveESP(v)
+							CreateESP(v)
+						end
+						repeat wait() until Char:FindFirstChild("HumanoidRootPart")
+					end)
+				end
+				RemoveESP(v)
+				CreateESP(v)
+			end
+		end
+	else
+		for _, v in next, Plrs:GetPlayers() do
+			RemoveESP(v)
+		end
+	end
+end)
+
+local StatCheck = Misc:NewSection("Stats Checker:")
+local PN = StatCheck:NewLabel("Player Name: ")
+local FS = StatCheck:NewLabel("Fist Strength: ")
+local BT = StatCheck:NewLabel("Body Toughness: ")
+local WS = StatCheck:NewLabel("Walk Speed: ")
+local JF = StatCheck:NewLabel("Jump Power: ")
+local PP = StatCheck:NewLabel("Psychic Power: ")
+
+StatCheck:NewTextBox("Player's Name", "Input player's name there", function(player)
+	PN:UpdateLabel("Player Name: " .. player)
+	FS:UpdateLabel("Fist Strength: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.FS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.FSMulti.Value)))
+	BT:UpdateLabel("Body Toughness: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.BT.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.BTMulti.Value)))
+	WS:UpdateLabel("Walk Speed: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.WS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.WSMulti.Value)))
+	JF:UpdateLabel("Jump Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.JF.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.JFMulti.Value)))
+	PP:UpdateLabel("Psychic Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.PP.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.PPMulti.Value)))
+end)
+
+-- Farm
+
+local Farm = Window:NewTab("Auto Farm")
+
+local Fist = Farm:NewSection("Fist Farm")
+Fist:NewToggle("Fist Strength", "Toggling Fist Farm", function(farmfist)
+	if farmfist then
+		farmfistactive = true
+		deathreturnactive = true
+		if tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 350e18 then
+			workspace[plr.Name].HumanoidRootPart.Anchored = false
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2790, 21225, -2944)
+			wait(0.1)
+			workspace[plr.Name].HumanoidRootPart.Anchored = true
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
+		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 5e18 then
+			workspace[plr.Name].HumanoidRootPart.Anchored = false
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1926, 13220, 2144)
+			wait(0.1)
+			workspace[plr.Name].HumanoidRootPart.Anchored = true
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
+		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 500e15 then
+			workspace[plr.Name].HumanoidRootPart.Anchored = false
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2300, 7290, 2636)
+			wait(0.1)
+			workspace[plr.Name].HumanoidRootPart.Anchored = true
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
+		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 35e15 then
+			workspace[plr.Name].HumanoidRootPart.Anchored = false
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-224, 513, 328)
+			wait(0.1)
+			workspace[plr.Name].HumanoidRootPart.Anchored = true
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
+		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 5e15 then
+			workspace[plr.Name].HumanoidRootPart.Anchored = false
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1135, 1816, 985)
+			wait(0.1)
+			workspace[plr.Name].HumanoidRootPart.Anchored = true
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
+		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e12 then
+			workspace[plr.Name].HumanoidRootPart.Anchored = false
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(812, 5581, -1697)
+			wait(0.1)
+			workspace[plr.Name].HumanoidRootPart.Anchored = true
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
+		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e12 then
+			workspace[plr.Name].HumanoidRootPart.Anchored = false
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(207, 3500, 113)
+			wait(0.1)
+			workspace[plr.Name].HumanoidRootPart.Anchored = true
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
+		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e09 then
+			workspace[plr.Name].HumanoidRootPart.Anchored = false
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(179, 2520, -466)
+			wait(0.1)
+			workspace[plr.Name].HumanoidRootPart.Anchored = true
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
+		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e09 then
+			workspace[plr.Name].HumanoidRootPart.Anchored = false
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-143, 1558, -68)
+			wait(0.1)
+			workspace[plr.Name].HumanoidRootPart.Anchored = true
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
+		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e06 then
+			workspace[plr.Name].HumanoidRootPart.Anchored = false
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2476, 54, -2369)
+			workspace[plr.Name].HumanoidRootPart.Anchored = true
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
+		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e06 then
+			workspace[plr.Name].HumanoidRootPart.Anchored = false
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2400, 54, -2325)
+			workspace[plr.Name].HumanoidRootPart.Anchored = true
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
+		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e03 then
+			workspace[plr.Name].HumanoidRootPart.Anchored = false
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2468, 54, -2309)
+			workspace[plr.Name].HumanoidRootPart.Anchored = true
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
+		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e03 then
+			workspace[plr.Name].HumanoidRootPart.Anchored = false
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-92, 50, -66)
+			wait(0.1)
+			workspace[plr.Name].HumanoidRootPart.Anchored = true
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
+		end
+	else 
+		farmfistactive = false
+		workspace[plr.Name].HumanoidRootPart.Anchored = false
+		deathreturnactive = false
+		wait(1)
+		human:UnequipTools()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-190.5, 50, 28)
+	end
+end)
+
+local Body = Farm:NewSection("Body Farm")
+Body:NewToggle("Body Toughness", "Toggling Body Farm", function(farmbody)
+	if farmbody then
+		farmbodyactive = true
+		workspace[plr.Name].HumanoidRootPart.Anchored = false
+		deathreturnactive = true
+	else
+		farmbodyactive = false
+		deathreturnactive = false
+		wait(1)
+		human:UnequipTools()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-190.5, 50, 28)
+	end
+end)
+
+local Psyc = Farm:NewSection("Psychic Farm")
+Psyc:NewToggle("Psychic Power", "Toggling Psychic Farm", function(farmpsychic)
+	if farmpsychic then
+		farmpsychicactive = true
+		workspace[plr.Name].HumanoidRootPart.Anchored = false
+		deathreturnactive = true
+	else
+		farmpsychicactive = false
+		workspace[plr.Name].HumanoidRootPart.Anchored = false
+		deathreturnactive = false
+		wait(1)
+		human:UnequipTools()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-190.5, 50, 28)
+	end
+end)
+
+-- ESP
+
+CharAddedEvent = { }
+
+Plrs.PlayerAdded:connect(function(plr)
+	if CharAddedEvent[plr.Name] == nil then
+		CharAddedEvent[plr.Name] = plr.CharacterAdded:connect(function(char)
+			if ESPEnabled then
+				RemoveESP(plr)
+				CreateESP(plr)
+			end
+		end)
+	end
+end)
+
+Plrs.PlayerRemoving:connect(function(plr)
+	if CharAddedEvent[plr.Name] ~= nil then
+		CharAddedEvent[plr.Name]:Disconnect()
+		CharAddedEvent[plr.Name] = nil
+	end
+	RemoveESP(plr)
+end)
+
+function CreateESP(plr)
+	if plr ~= nil then
+		local GetChar = plr.Character
+		if not GetChar then return end
+		local GetHead do
+			repeat wait() until GetChar:FindFirstChild("Head")
+		end
+		GetHead = GetChar.Head
+		
+		local bb = Instance.new("BillboardGui", CoreGui)
+		bb.Adornee = GetHead
+		bb.ExtentsOffset = Vector3.new(0, 1, 0)
+		bb.AlwaysOnTop = true
+		bb.Size = UDim2.new(0, 5, 0, 5)
+		bb.StudsOffset = Vector3.new(0, 3, 0)
+		bb.Name = "ESP_" .. plr.Name
+		
+		local frame = Instance.new("Frame", bb)
+		frame.ZIndex = 10
+		frame.BackgroundTransparency = 1
+		frame.Size = UDim2.new(1, 0, 1, 0)
+		
+		local TxtName = Instance.new("TextLabel", frame)
+		TxtName.Name = "Names"
+		TxtName.ZIndex = 10
+		TxtName.Text = plr.Name
+		TxtName.BackgroundTransparency = 1
+		TxtName.Position = UDim2.new(0, 0, 0, -45)
+		TxtName.Size = UDim2.new(1, 0, 10, 0)
+		TxtName.Font = "SourceSansBold"
+		TxtName.TextColor3 = Color3.new(0, 0, 0)
+		TxtName.TextSize = 14
+		TxtName.TextStrokeTransparency = 0.5
+		
+		local TxtDist = Instance.new("TextLabel", frame)
+		TxtDist.Name = "Dist"
+		TxtDist.ZIndex = 10
+		TxtDist.Text = ""
+		TxtDist.BackgroundTransparency = 1
+		TxtDist.Position = UDim2.new(0, 0, 0, -35)
+		TxtDist.Size = UDim2.new(1, 0, 10, 0)
+		TxtDist.Font = "SourceSansBold"
+		TxtDist.TextColor3 = Color3.new(0, 0, 0)
+		TxtDist.TextSize = 15
+		TxtDist.TextStrokeTransparency = 0.5
+
+		local TxtFist = Instance.new("TextLabel", frame)
+		TxtFist.Name = "Fist"
+		TxtFist.ZIndex = 10
+		TxtFist.Text = ""
+		TxtFist.BackgroundTransparency = 1
+		TxtFist.Position = UDim2.new(0, 0, 0, -25)
+		TxtFist.Size = UDim2.new(1, 0, 10, 0)
+		TxtFist.Font = "SourceSansBold"
+		TxtFist.TextColor3 = Color3.new(0, 0, 0)
+		TxtFist.TextSize = 15
+		TxtFist.TextStrokeTransparency = 0.5
+
+		local TxtBody = Instance.new("TextLabel", frame)
+		TxtBody.Name = "BT"
+		TxtBody.ZIndex = 10
+		TxtBody.Text = ""
+		TxtBody.BackgroundTransparency = 1
+		TxtBody.Position = UDim2.new(0, 0, 0, -15)
+		TxtBody.Size = UDim2.new(1, 0, 10, 0)
+		TxtBody.Font = "SourceSansBold"
+		TxtBody.TextColor3 = Color3.new(0, 0, 0)
+		TxtBody.TextSize = 15
+		TxtBody.TextStrokeTransparency = 0.5
+	end
+end
+
+function UpdateESP(plr)
+	local Find = CoreGui:FindFirstChild("ESP_" .. plr.Name)
+	if Find then
+		local plrStatus = game.Players[plr.Name].leaderstats.Status
+		if plrStatus.Value == "Criminal" then
+			Find.Frame.Names.TextColor3 = Color3.fromRGB(255, 113, 106)
+		elseif plrStatus.Value == "Lawbreaker" then
+			Find.Frame.Names.TextColor3 = Color3.fromRGB(255, 142, 100)
+		elseif plrStatus.Value == "Guardian" then
+			Find.Frame.Names.TextColor3 = Color3.fromRGB(3, 12, 255)
+		elseif plrStatus.Value == "Protector" then
+			Find.Frame.Names.TextColor3 = Color3.fromRGB(0, 144, 211)
+		elseif plrStatus.Value == "SuperVillian" then
+			Find.Frame.Names.TextColor3 = Color3.fromRGB(187, 0, 250)
+		elseif plrStatus.Value == "Superhero" then
+			Find.Frame.Names.TextColor3 = Color3.fromRGB(209, 255, 59)
+		else
+			Find.Frame.Names.TextColor3 = Color3.fromRGB(255, 255, 255)
+		end
+		Find.Frame.Dist.TextColor3 = Color3.new(1, 1, 1)
+		Find.Frame.Fist.TextColor3 = Color3.new(1, 1, 1)
+		Find.Frame.BT.TextColor3 = Color3.new(1, 1, 1)
+		local GetChar = plr.Character
+		if MyChar and GetChar then
+			local Find2 = MyChar:FindFirstChild("HumanoidRootPart")
+			local Find3 = GetChar:FindFirstChild("HumanoidRootPart")
+			local Find4 = GetChar:FindFirstChildOfClass("Humanoid")
+			if Find2 and Find3 then
+				local pos = Find3.Position
+				local Dist = (Find2.Position - pos).magnitude
+				if Dist > ESPLength then
+					Find.Frame.Names.Visible = false
+					Find.Frame.Dist.Visible = false
+					Find.Frame.Fist.Visible = false
+					Find.Frame.BT.Visible = false
+					return
+				else
+					Find.Frame.Names.Visible = true
+					Find.Frame.Dist.Visible = true
+					Find.Frame.Fist.Visible = true
+					Find.Frame.BT.Visible = true
+				end
+				Find.Frame.Dist.Text = "Distance: " .. string.format("%.0f", Dist)
+				if Find4 then
+					Find.Frame.Fist.Text = "Fist: " ..converttoletter(string.format("%.0f", game.Players[plr.Name].PlayerFolder.DataFolder.FS.Value))
+					Find.Frame.BT.Text = "Body: " ..converttoletter(string.format("%.0f", game.Players[plr.Name].PlayerFolder.DataFolder.BT.Value))
+				else
+					Find.Frame.Fist.Text = ""
+					Find.Frame.BT.Text = ""
+				end
+			end
+		end
+	end
+end
+
+function RemoveESP(plr)
+	local ESP = CoreGui:FindFirstChild("ESP_" .. plr.Name)
+	if ESP then
+		ESP:Destroy()
+	end
+end
+
+Run:BindToRenderStep("UpdateESP", Enum.RenderPriority.Character.Value, function()
+	for _, v in next, Plrs:GetPlayers() do
+		UpdateESP(v)
+	end
+end)
+
+-- Farming
+
+spawn(function()
+	while true do
+		while farmfistactive and not playerdied do
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
+			wait(1)
+			if tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 350e18 then
+				farmpsychicactive = false
+				farmbodyactive = false 
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2790, 21025, -2944)
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 5e18 then
+				farmpsychicactive = false
+				farmbodyactive = false 
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1926, 13100, 2144)
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 500e15 then
+				farmpsychicactive = false
+				farmbodyactive = false 
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2300, 7100, 2636)
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 35e15 then
+				farmpsychicactive = false
+				farmbodyactive = false 
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-233, 523, 321)
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 5e15 then
+				farmpsychicactive = false
+				farmbodyactive = false 
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1125, 1846, 985)
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e12 then
+				farmpsychicactive = false
+				farmbodyactive = false 
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(820, 5481, -1697)
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e12 then
+				farmpsychicactive = false
+				farmbodyactive = false 
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(207, 3450, 113)
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e09 then
+				farmpsychicactive = false
+				farmbodyactive = false 
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(179, 2480, -466)
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e09 then
+				farmpsychicactive = false
+				farmbodyactive = false 
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-143, 1528, -68)
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e06 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2476, 54, -2369)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e06 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2400, 54, -2325)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e03 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2468, 54, -2309)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				workspace[plr.Name].HumanoidRootPart.Anchored = true
+				farmpsychicactive = false
+				farmbodyactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e03 then
+				farmpsychicactive = false
+				farmbodyactive = false 
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-92, 30, -66)
+			end
+			wait(0.5)
+			FSTool:Activate()
+		end
+		wait(1)
+	end
+end)
+
+spawn(function()
+	while true do
+		if farmbodyactive and game.Players.LocalPlayer.Character:WaitForChild("Humanoid") then
+			if tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 60e18 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1823, 59, 802)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 1e18 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1810, 58, 756)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 100e15 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1805, 45, 653)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 5e15 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-245, 33, -404)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 1e15 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-78, 33, -412)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 50e12 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-82, 37, -370)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 500e09 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-80, 37, -325)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 50e09 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-248, 38, -350)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 500e06 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-242, 38, -320)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 50e06 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2440.62, 535, -2338.16)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 500e03 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-502, 262, -1255)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 50e03 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1479, 30, 1108)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false 
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 5e02 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-225, 30, -288)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmpsychicactive = false
+				farmfistactive = false  
+			end
+		end
+		wait(1)
+	end
+end)
+
+spawn(function()
+	while true do
+		if farmpsychicactive and game.Players.LocalPlayer.Character:WaitForChild("Humanoid") then
+			if tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 1e21 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(462, 1010, -844)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmfist = false
+				farmbodyactive = false
+				farmbody = false
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 50e18 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-496, 1234, -209)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmfist = false
+				farmbodyactive = false
+				farmbody = false
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 3e18 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-425, 1144, -200)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmfist = false
+				farmbodyactive = false
+				farmbody = false
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 350e15 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-429, 1120, -140)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmfist = false
+				farmbodyactive = false
+				farmbody = false
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 1e15 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-423, 1120, -267)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmfist = false
+				farmbodyactive = false
+				farmbody = false
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 1e12 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-323, 1067, -196)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmfist = false
+				farmbodyactive = false
+				farmbody = false
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 1e09 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-352, 1055, -133)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmfist = false
+				farmbodyactive = false
+				farmbody = false
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 1e06 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-340, 1055, -263)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmfist = false
+				farmbodyactive = false
+				farmbody = false
+			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 10e03 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-108, 774, -86)
+				workspace[plr.Name].HumanoidRootPart.Anchored = false
+				farmfistactive = false
+				farmfist = false
+				farmbodyactive = false
+				farmbody = false
+			end
+			wait(0.1)
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/PPToolEquip"))()
+		end
+		wait(1)
+	end
+	deathreturnactive = false
+end)
+
+-- Return On Death
+
+local player = game:GetService("Players").LocalPlayer
+
+spawn(function()
+	while true do
+		while deathreturnactive do
+			if playgui.Enabled == true then
+				repeat playgui.Enabled = false until playgui.Enabled == false
+	    	end
+			wait(0.5)
+			player.Character.Humanoid.Died:connect(function()
+				playerdied = true
+			end)
+			if not playerdied then
+				wait(1)
+				lastlocationx = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.x
+				lastlocationy = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.y
+				lastlocationz = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.z
+				wait(0.5)
+			end
+			if playerdied then
+				--print("Player " ..tostring(game.Players.LocalPlayer.Name).. " Died")
+				--print(tostring(SavePosition.Text))
+				wait(0.25)
+				game:GetService("ReplicatedStorage").RespawnEvent:FireServer()
+				wait(0.5)
+	    	    game.Players.LocalPlayer.PlayerGui.plrstats.Enabled = true
+	    	    wait(0.5)
+	    	    camera.CameraType = Enum.CameraType.Track
+	    	    wait(0.25)
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/Trash"))()
+				wait(0.5)
+				--print("screengui disabled")
+				repeat wait(0.5) until game.Players.LocalPlayer.Character.Humanoid
+				--print("Teleporting back to " ..tostring(SavePosition.Text))
+				wait(1)
+				local FindHum = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(lastlocationx, lastlocationy, lastlocationz)
+				playerdied = false
+			end
+		end
+		wait(1)
+	end		
+end)
