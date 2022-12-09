@@ -171,8 +171,17 @@ Funcs:NewButton("Serverhop", "Hoping to another server", function()
 	Teleport()
 end)
 
+local StatCheck = Misc:NewSection("Stats:")
+
 PlayerNames = {}
 PlayerDNames = {}
+
+local PL = StatCheck:NewDropdown("Player list","List of players", PlayerNames, function(nick)
+	local check = Plrs:WaitForChild(nick)
+	print(tostring(check) .. " was found.")
+	player = nick
+end)
+
 spawn(function()
 	while true do
 		wait(1)
@@ -184,23 +193,17 @@ spawn(function()
 			local display = child.DisplayName
 			local status = Plrs[player].leaderstats.Status.Value
 			PlayerNames[i] = player
+			print(player)
 			PlayerDNames[i] = (player .. " (" .. display .. ", " .. status ..")")
 		end
+		wait(2)
+		PL:Refresh(PlayerDNames)
+		wait(5)
+		PL:Refresh(PlayerNames)
 		wait(0.5)
 	end
 end)
 
-local StatCheck = Misc:NewSection("Stats:")
-local PL = StatCheck:NewDropdown("Player list","List of players", PlayerNames, function(nick)
-	local check = Plrs:WaitForChild(nick)
-	print(tostring(check) .. " was found.")
-	player = nick
-end)
-StatCheck:NewButton("Update Player List", "Refreshes Dropdown", function()
-	PL:Refresh(PlayerDNames)
-	wait(5)
-	PL:Refresh(PlayerNames)
-end)
 local PN = StatCheck:NewLabel("Player Name: ")
 local FS = StatCheck:NewLabel("Fist Strength: ")
 local BT = StatCheck:NewLabel("Body Toughness: ")
