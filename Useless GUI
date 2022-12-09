@@ -122,7 +122,7 @@ end
 -- Main info
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/KavoUI"))()
-local Window = Library.CreateLib("Useless GUI | SPTS: Custom II", "Useless")
+local Window = Library.CreateLib("Useless GUI | SPTS: Custom II", "Useless") -- Themes: Useless ; DarkTheme ; LightTheme ; BloodTheme ; GrapeTheme ; Ocean ; Midnight ; Sentinel ; Synapse ; Serpent . 
 
 -- Info Tab
 
@@ -175,6 +175,7 @@ PlayerNames = {}
 PlayerDNames = {}
 spawn(function()
 	while true do
+		wait(1)
 		PlayerNames = {}
 		PlayerDNames = {}
 		for i = 1, #children do
@@ -211,7 +212,7 @@ player = tostring(MyPlr)
 spawn(function()
 	while true do
 		while player ~= "" do
-			wait(0.25)
+			wait(0.5)
 			PN:UpdateLabel("Player Name: " .. player)
 			FS:UpdateLabel("Fist Strength: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.FS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.FSMulti.Value)))
 			BT:UpdateLabel("Body Toughness: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.BT.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.BTMulti.Value)))
