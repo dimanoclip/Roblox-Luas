@@ -1,3 +1,4 @@
+local Plrs = game:GetService("Players")
 local children = Plrs:GetChildren()
 function UpdatePlayerList()
 	PlayerNames = {}
