@@ -1,3 +1,10 @@
+--[[
+This GUI was created by xHeptc
+this is original kavoUI link: https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua
+I just copied it!
+Thanks you, xHeptc!
+]]--
+
 local Kavo = {}
 
 local tween = game:GetService("TweenService")
