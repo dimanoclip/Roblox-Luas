@@ -18,6 +18,7 @@ local camera = game.Workspace.CurrentCamera
 local Workspace = game:GetService("Workspace")
 local playgui = game.Players.LocalPlayer.PlayerGui.Play
 local wc = workspace[plr.Name] 
+local children = Plrs:GetChildren()
 
 -- Anti Idle --
 local VirtualUser=game:service'VirtualUser'
@@ -121,7 +122,14 @@ end
 -- Main info
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Useless GUI | SPTS: Custom II", "BloodTheme")
+local colors = {
+    SchemeColor = Color3.fromRGB(152,52,227),
+    Background = Color3.fromRGB(0, 0, 0),
+    Header = Color3.fromRGB(0, 0, 0),
+    TextColor = Color3.fromRGB(255,255,255),
+    ElementColor = Color3.fromRGB(10, 10, 10)
+}
+local Window = Library.CreateLib("Useless GUI | SPTS: Custom II", colors)
 
 -- Info Tab
 
@@ -133,67 +141,6 @@ Creator:NewLabel("Discord: Useless#3770")
 local ToggleGui = Info:NewSection("Toggle UI")
 ToggleGui:NewKeybind("Toggle UI", "Toggle UI", Enum.KeyCode.RightControl, function()
 	Library:ToggleUI()
-end)
-
--- Misc Tab
-
-local Misc = Window:NewTab("Misc")
-local Funcs = Misc:NewSection("Misc:")
-Funcs:NewButton("ESP", "Enabling ESP", function()
-	ESPEnabled = not ESPEnabled
-	if ESPEnabled then
-		for _, v in next, Plrs:GetPlayers() do
-			if v ~= MyPlr then
-				if CharAddedEvent[v.Name] == nil then
-					CharAddedEvent[v.Name] = v.CharacterAdded:connect(function(Char)
-						if ESPEnabled then
-							RemoveESP(v)
-							CreateESP(v)
-						end
-						repeat wait() until Char:FindFirstChild("HumanoidRootPart")
-					end)
-				end
-				RemoveESP(v)
-				CreateESP(v)
-			end
-		end
-	else
-		for _, v in next, Plrs:GetPlayers() do
-			RemoveESP(v)
-		end
-	end
-end)
-Funcs:NewButton("Rejoin", "Rejoining to same server", function()
-	coroutine.resume(Rejoin)
-end)
-Funcs:NewButton("Serverhop", "Hoping to another server", function()
-	Teleport()
-end)
-
-local StatCheck = Misc:NewSection("Stats Checker:")
-local PN = StatCheck:NewLabel("Player Name: ")
-local FS = StatCheck:NewLabel("Fist Strength: ")
-local BT = StatCheck:NewLabel("Body Toughness: ")
-local WS = StatCheck:NewLabel("Walk Speed: ")
-local JF = StatCheck:NewLabel("Jump Power: ")
-local PP = StatCheck:NewLabel("Psychic Power: ")
-
-StatCheck:NewTextBox("Player's Name", "Input player's name there", function(player)
-	PN:UpdateLabel("Player Name: " .. player)
-	FS:UpdateLabel("Fist Strength: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.FS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.FSMulti.Value)))
-	BT:UpdateLabel("Body Toughness: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.BT.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.BTMulti.Value)))
-	WS:UpdateLabel("Walk Speed: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.WS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.WSMulti.Value)))
-	JF:UpdateLabel("Jump Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.JF.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.JFMulti.Value)))
-	PP:UpdateLabel("Psychic Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.PP.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.PPMulti.Value)))
-end)
-
-StatCheck:NewButton("Reset Stats", "Clears labels", function()
-	PN:UpdateLabel("Player Name: ")
-	FS:UpdateLabel("Fist Strength: ")
-	BT:UpdateLabel("Body Toughness: ")
-	WS:UpdateLabel("Walk Speed: ")
-	JF:UpdateLabel("Jump Power: ")
-	PP:UpdateLabel("Psychic Power: ")
 end)
 
 -- Farm Tab
@@ -336,139 +283,139 @@ local SafeZone = Other:NewButton("Safe Zone", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-190.5, 50, 28)
 end)
 
-local FS1k = FSTP:NewButton("Fist 1k", "Teleport", function()
+local FS1k = FSTP:NewButton("Fist 1k (x10)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-92, 60, -66)
 end)
 
-local FS100k100M = FSTP:NewButton("Fist 100k-100M", "Teleport", function()
+local FS100k100M = FSTP:NewButton("Fist 100k-100M (x50-1k)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2425, 55, -2297)
 end)
 
-local FS1B = FSTP:NewButton("Fist 1B", "Teleport", function()
+local FS1B = FSTP:NewButton("Fist 1B (x10k)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-143, 1558, -68)
 end)
 
-local FS100B = FSTP:NewButton("Fist 100B", "Teleport", function()
+local FS100B = FSTP:NewButton("Fist 100B (x50k)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(179, 2520, -466)
 end)
 
-local FS1T = FSTP:NewButton("Fist 1T", "Teleport", function()
+local FS1T = FSTP:NewButton("Fist 1T (x500k)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(207, 3500, 113)
 end)
 
-local FS100T = FSTP:NewButton("Fist 100T", "Teleport", function()
+local FS100T = FSTP:NewButton("Fist 100T (x3M)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(812, 5581, -1697)
 end)
 
-local FS5Qa = FSTP:NewButton("Fist 5Qa", "Teleport", function()
+local FS5Qa = FSTP:NewButton("Fist 5Qa (x50M)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1135, 1816, 985)
 end)
 
-local FS35Qa = FSTP:NewButton("Fist 35Qa", "Teleport", function()
+local FS35Qa = FSTP:NewButton("Fist 35Qa (x200M)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-224, 513, 328)
 end)
 
-local FS500Qa = FSTP:NewButton("Fist 500Qa", "Teleport", function()
+local FS500Qa = FSTP:NewButton("Fist 500Qa (x1B)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2300, 7290, 2636)
 end)
 
-local FS5Qi = FSTP:NewButton("Fist 5Qi", "Teleport", function()
+local FS5Qi = FSTP:NewButton("Fist 5Qi (x5B)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1926, 13220, 2144)
 end)
 
-local FS350Qi = FSTP:NewButton("Fist 350Qi", "Teleport", function()
+local FS350Qi = FSTP:NewButton("Fist 350Qi (x25B)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2790, 21225, -2944)
 end)
 
-local BT1k = BTTP:NewButton("Body 1k", "Teleport", function()
+-- BT
+
+local BT1k = BTTP:NewButton("Body 1k (x10)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-225, 45, -288)
 end)
 
-local BT100k = BTTP:NewButton("Body 100K", "Teleport", function()
+local BT100k = BTTP:NewButton("Body 100K (x50)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1479, 52, 1108)
 end)
 
-local BT1M = BTTP:NewButton("Body 1M", "Teleport", function()
+local BT1M = BTTP:NewButton("Body 1M (x100)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-502, 270, -1255)
 end)
 
-local BT100M = BTTP:NewButton("Body 100M", "Teleport", function()
+local BT100M = BTTP:NewButton("Body 100M (x1k)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2440.62, 558.521, -2338.16)
 end)
 
-local BT1B = BTTP:NewButton("Body 1B", "Teleport", function()
+local BT1B = BTTP:NewButton("Body 1B (x10k)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-242, 40, -320)
 end)
 
-local BT100B = BTTP:NewButton("Body 100B", "Teleport", function()
+local BT100B = BTTP:NewButton("Body 100B (x50k)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-248, 40, -350)
 end)
 
-local BT1T = BTTP:NewButton("Body 1T", "Teleport", function()
+local BT1T = BTTP:NewButton("Body 1T (x100k)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-80, 40, -325)
 end)
 
-local BT100T = BTTP:NewButton("Body 100T", "Teleport", function()
+local BT100T = BTTP:NewButton("Body 100T (x500k)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-82, 45, -370)
 end)
 
-local BT5Qa = BTTP:NewButton("Body 5Qa", "Teleport", function()
+local BT5Qa = BTTP:NewButton("Body 5Qa (x50M)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-78, 44, -412)
 end)
 
-local BT35Qa = BTTP:NewButton("Body 35Qa", "Teleport", function()
+local BT35Qa = BTTP:NewButton("Body 35Qa (x200M)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-245, 40, -404)
 end)
 
-local BT500Qa = BTTP:NewButton("Body 500Qa", "Teleport", function()
+local BT500Qa = BTTP:NewButton("Body 500Qa (x1B)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1805, 45, 653)
 end)
 
-local BT5Qi = BTTP:NewButton("Body 5Qi", "Teleport", function()
+local BT5Qi = BTTP:NewButton("Body 5Qi (x5B)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1810, 60, 756)
 end)
 
-local BT350Qi = BTTP:NewButton("Body 350Qi", "Teleport", function()
+local BT350Qi = BTTP:NewButton("Body 350Qi (x25B)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1823, 61, 802)
 end)
 
-local PP10k = PPTP:NewButton("Psychic 10k", "Teleport", function()
+local PP10k = PPTP:NewButton("Psychic 10k (x10)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-108, 774, -86)
 end)
 
-local PP1M = PPTP:NewButton("Psychic 1M", "Teleport", function()
+local PP1M = PPTP:NewButton("Psychic 1M (x100)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-340, 1055, -263)
 end)
 
-local PP1B = PPTP:NewButton("Psychic 1B", "Teleport", function()
+local PP1B = PPTP:NewButton("Psychic 1B (x10k)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-352, 1055, -133)
 end)
 
-local PP1T = PPTP:NewButton("Psychic 1T", "Teleport", function()
+local PP1T = PPTP:NewButton("Psychic 1T (x10M)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-323, 1067, -196)
 end)
 
-local PP1Qa = PPTP:NewButton("Psychic 1Qa", "Teleport", function()
+local PP1Qa = PPTP:NewButton("Psychic 1Qa (x100M)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-423, 1120, -267)
 end)
 
-local PP350Qa = PPTP:NewButton("Psychic 350Qa", "Teleport", function()
+local PP350Qa = PPTP:NewButton("Psychic 350Qa (x1B)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-429, 1120, -140)
 end)
 
-local PP3Qi = PPTP:NewButton("Psychic 3Qi", "Teleport", function()
+local PP3Qi = PPTP:NewButton("Psychic 3Qi (x10B)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-425, 1144, -200)
 end)
 
-local PP50Qi = PPTP:NewButton("Psychic 50Qi", "Teleport", function()
+local PP50Qi = PPTP:NewButton("Psychic 50Qi (x100B)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-496, 1234, -209)
 end)
 
-local PP1Sx = PPTP:NewButton("Psychic 1Sx", "Teleport", function()
+local PP1Sx = PPTP:NewButton("Psychic 1Sx (x1T)", "Teleport", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(462, 1010, -844)
 end)
-
-
 
 -- ESP
 
@@ -987,3 +934,71 @@ local Rejoin = coroutine.create(function()
         warn(ErrorMessage)
     end
 end)
+
+-- Misc Tab
+
+local Misc = Window:NewTab("Misc")
+local Funcs = Misc:NewSection("Misc:")
+Funcs:NewButton("ESP", "Enabling ESP", function()
+	ESPEnabled = not ESPEnabled
+	if ESPEnabled then
+		for _, v in next, Plrs:GetPlayers() do
+			if v ~= MyPlr then
+				if CharAddedEvent[v.Name] == nil then
+					CharAddedEvent[v.Name] = v.CharacterAdded:connect(function(Char)
+						if ESPEnabled then
+							RemoveESP(v)
+							CreateESP(v)
+						end
+						repeat wait() until Char:FindFirstChild("HumanoidRootPart")
+					end)
+				end
+				RemoveESP(v)
+				CreateESP(v)
+			end
+		end
+	else
+		for _, v in next, Plrs:GetPlayers() do
+			RemoveESP(v)
+		end
+	end
+end)
+Funcs:NewButton("Rejoin", "Rejoining to same server", function()
+	coroutine.resume(Rejoin)
+end)
+Funcs:NewButton("Serverhop", "Hoping to another server", function()
+	Teleport()
+end)
+
+local StatCheck = Misc:NewSection("Stats Checker:")
+
+for i = 1, #children do
+	local child = children[i]
+	local PlrName = child.Name
+	local PlrDisName = child.DisplayName
+	StatCheck:NewButton((tostring(i) .. ". " .. tostring(PlrName) .. "(" .. tostring(PlrDisName) .. ")"), "Player", function()
+		player = tostring(PlrName)
+	end)
+end
+
+local PN = StatCheck:NewLabel("Player Name: ")
+local FS = StatCheck:NewLabel("Fist Strength: ")
+local BT = StatCheck:NewLabel("Body Toughness: ")
+local WS = StatCheck:NewLabel("Walk Speed: ")
+local JF = StatCheck:NewLabel("Jump Power: ")
+local PP = StatCheck:NewLabel("Psychic Power: ")
+
+player = tostring(MyPlr)
+
+
+while true do
+	while player ~= "" do
+		wait(0.5)
+		PN:UpdateLabel("Player Name: " .. player)
+		FS:UpdateLabel("Fist Strength: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.FS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.FSMulti.Value)))
+		BT:UpdateLabel("Body Toughness: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.BT.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.BTMulti.Value)))
+		WS:UpdateLabel("Walk Speed: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.WS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.WSMulti.Value)))
+		JF:UpdateLabel("Jump Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.JF.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.JFMulti.Value)))
+		PP:UpdateLabel("Psychic Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.PP.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.PPMulti.Value)))
+	end
+end
