@@ -1,5 +1,3 @@
--- Original: https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua
-
 local Kavo = {}
 
 local tween = game:GetService("TweenService")
@@ -160,7 +158,9 @@ function Kavo.CreateLib(kavName, themeList)
     if not themeList then
         themeList = themes
     end
-    if themeList == "DarkTheme" then
+    if themeList == "Useless" then
+        themeList = themeStyles.Useless
+    elseif themeList == "DarkTheme" then
         themeList = themeStyles.DarkTheme
     elseif themeList == "LightTheme" then
         themeList = themeStyles.LightTheme
