@@ -171,25 +171,31 @@ Funcs:NewButton("Serverhop", "Hoping to another server", function()
 	Teleport()
 end)
 
-PlayerList = {}
+PlayerNames = {}
+PlayerDNames = {}
 spawn(function()
 	while true do
-		PlayerList = {}
+		PlayerNames = {}
+		PlayerDNames = {}
 		for i = 1, #children do
 			local child = children[i]
 			local player = child.Name
-			PlayerList[i] = player
+			local display = child.DisplayName
+			PlayerNames[i] = player
+			PlayerDNames[i] = display
 		end
-		wait(60)
+		wait(0.5)
 	end
 end)
 
 local StatCheck = Misc:NewSection("Stats:")
-local PL = StatCheck:NewDropdown("Player list","List of players", PlayerList, function(nick)
+local PL = StatCheck:NewDropdown("Player list","List of players", PlayerNames, function(nick)
 	player = nick
 end)
 StatCheck:NewButton("Update Player List", "Refreshes Dropdown", function()
-	PL:Refresh(PlayerList)
+	PL:Refresh(PlayerDNames)
+	wait(5)
+	PL:Refresh(PlayerNames)
 end)
 local PN = StatCheck:NewLabel("Player Name: ")
 local FS = StatCheck:NewLabel("Fist Strength: ")
