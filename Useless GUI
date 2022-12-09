@@ -121,15 +121,8 @@ end
 
 -- Main info
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local colors = {
-    SchemeColor = Color3.fromRGB(152,52,227),
-    Background = Color3.fromRGB(0, 0, 0),
-    Header = Color3.fromRGB(0, 0, 0),
-    TextColor = Color3.fromRGB(255,255,255),
-    ElementColor = Color3.fromRGB(10, 10, 10)
-}
-local Window = Library.CreateLib("Useless GUI | SPTS: Custom II", colors)
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/KavoUI"))()
+local Window = Library.CreateLib("Useless GUI | SPTS: Custom II", "Useless")
 
 -- Info Tab
 
