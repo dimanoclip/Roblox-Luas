@@ -1,3 +1,4 @@
+local children = Plrs:GetChildren()
 function UpdatePlayerList()
 	PlayerNames = {}
 	PL:Refresh(PlayerNames)
