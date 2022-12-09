@@ -191,6 +191,8 @@ end)
 
 local StatCheck = Misc:NewSection("Stats:")
 local PL = StatCheck:NewDropdown("Player list","List of players", PlayerNames, function(nick)
+	local check = Plrs:WaitForChild(nick)
+	print(tostring(check) .. " was found.")
 	player = nick
 end)
 StatCheck:NewButton("Update Player List", "Refreshes Dropdown", function()
