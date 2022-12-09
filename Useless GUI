@@ -143,6 +143,83 @@ ToggleGui:NewKeybind("Toggle UI", "Toggle UI", Enum.KeyCode.RightControl, functi
 	Library:ToggleUI()
 end)
 
+-- Misc Tab
+
+local Misc = Window:NewTab("Misc")
+local Funcs = Misc:NewSection("Misc:")
+Funcs:NewButton("ESP", "Enabling ESP", function()
+	ESPEnabled = not ESPEnabled
+	if ESPEnabled then
+		for _, v in next, Plrs:GetPlayers() do
+			if v ~= MyPlr then
+				if CharAddedEvent[v.Name] == nil then
+					CharAddedEvent[v.Name] = v.CharacterAdded:connect(function(Char)
+						if ESPEnabled then
+							RemoveESP(v)
+							CreateESP(v)
+						end
+						repeat wait() until Char:FindFirstChild("HumanoidRootPart")
+					end)
+				end
+				RemoveESP(v)
+				CreateESP(v)
+			end
+		end
+	else
+		for _, v in next, Plrs:GetPlayers() do
+			RemoveESP(v)
+		end
+	end
+end)
+Funcs:NewButton("Rejoin", "Rejoining to same server", function()
+	coroutine.resume(Rejoin)
+end)
+Funcs:NewButton("Serverhop", "Hoping to another server", function()
+	Teleport()
+end)
+
+PlayerList = {}
+for i = 1, #children do
+	local child = children[i]
+	local player = child.Name
+	PlayerList[i] = player
+end
+
+local StatCheck = Misc:NewSection("Stats:")
+local dropdown = StatCheck:NewDropdown("Player list","List of players", PlayerList, function(nick)
+	player = nick
+end)
+StatCheck:NewButton("Update Player List", "Refreshes Dropdown", function()
+	PlayerList = {}
+	for i = 1, #children do
+		local child = children[i]
+		local player = child.Name
+		PlayerList[i] = player
+	end
+  dropdown:Refresh(PlayerList)
+end)
+local PN = StatCheck:NewLabel("Player Name: ")
+local FS = StatCheck:NewLabel("Fist Strength: ")
+local BT = StatCheck:NewLabel("Body Toughness: ")
+local WS = StatCheck:NewLabel("Walk Speed: ")
+local JF = StatCheck:NewLabel("Jump Power: ")
+local PP = StatCheck:NewLabel("Psychic Power: ")
+
+player = tostring(MyPlr)
+spawn(function()
+	while true do
+		while player ~= "" do
+			wait(0.25)
+			PN:UpdateLabel("Player Name: " .. player)
+			FS:UpdateLabel("Fist Strength: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.FS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.FSMulti.Value)))
+			BT:UpdateLabel("Body Toughness: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.BT.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.BTMulti.Value)))
+			WS:UpdateLabel("Walk Speed: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.WS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.WSMulti.Value)))
+			JF:UpdateLabel("Jump Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.JF.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.JFMulti.Value)))
+			PP:UpdateLabel("Psychic Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.PP.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.PPMulti.Value)))
+		end
+	end
+end)
+
 -- Farm Tab
 
 local Farm = Window:NewTab("Auto Farm")
@@ -934,71 +1011,3 @@ local Rejoin = coroutine.create(function()
         warn(ErrorMessage)
     end
 end)
-
--- Misc Tab
-
-local Misc = Window:NewTab("Misc")
-local Funcs = Misc:NewSection("Misc:")
-Funcs:NewButton("ESP", "Enabling ESP", function()
-	ESPEnabled = not ESPEnabled
-	if ESPEnabled then
-		for _, v in next, Plrs:GetPlayers() do
-			if v ~= MyPlr then
-				if CharAddedEvent[v.Name] == nil then
-					CharAddedEvent[v.Name] = v.CharacterAdded:connect(function(Char)
-						if ESPEnabled then
-							RemoveESP(v)
-							CreateESP(v)
-						end
-						repeat wait() until Char:FindFirstChild("HumanoidRootPart")
-					end)
-				end
-				RemoveESP(v)
-				CreateESP(v)
-			end
-		end
-	else
-		for _, v in next, Plrs:GetPlayers() do
-			RemoveESP(v)
-		end
-	end
-end)
-Funcs:NewButton("Rejoin", "Rejoining to same server", function()
-	coroutine.resume(Rejoin)
-end)
-Funcs:NewButton("Serverhop", "Hoping to another server", function()
-	Teleport()
-end)
-
-local StatCheck = Misc:NewSection("Stats Checker:")
-
-for i = 1, #children do
-	local child = children[i]
-	local PlrName = child.Name
-	local PlrDisName = child.DisplayName
-	StatCheck:NewButton((tostring(i) .. ". " .. tostring(PlrName) .. "(" .. tostring(PlrDisName) .. ")"), "Player", function()
-		player = tostring(PlrName)
-	end)
-end
-
-local PN = StatCheck:NewLabel("Player Name: ")
-local FS = StatCheck:NewLabel("Fist Strength: ")
-local BT = StatCheck:NewLabel("Body Toughness: ")
-local WS = StatCheck:NewLabel("Walk Speed: ")
-local JF = StatCheck:NewLabel("Jump Power: ")
-local PP = StatCheck:NewLabel("Psychic Power: ")
-
-player = tostring(MyPlr)
-
-
-while true do
-	while player ~= "" do
-		wait(0.5)
-		PN:UpdateLabel("Player Name: " .. player)
-		FS:UpdateLabel("Fist Strength: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.FS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.FSMulti.Value)))
-		BT:UpdateLabel("Body Toughness: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.BT.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.BTMulti.Value)))
-		WS:UpdateLabel("Walk Speed: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.WS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.WSMulti.Value)))
-		JF:UpdateLabel("Jump Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.JF.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.JFMulti.Value)))
-		PP:UpdateLabel("Psychic Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.PP.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.PPMulti.Value)))
-	end
-end
