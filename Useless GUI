@@ -18,7 +18,6 @@ local camera = game.Workspace.CurrentCamera
 local Workspace = game:GetService("Workspace")
 local playgui = game.Players.LocalPlayer.PlayerGui.Play
 local wc = workspace[plr.Name] 
-local children = Plrs:GetChildren()
 
 -- Anti Idle --
 local VirtualUser=game:service'VirtualUser'
@@ -47,8 +46,6 @@ ESPEnabled = false
 ESPLength = 5000
 
 human:UnequipTools()
-local FSTool = Backpack.FSTool
-local PPTool = Backpack.PPTool
 
 -- Round
 
@@ -165,42 +162,38 @@ Funcs:NewButton("ESP", "Enabling ESP", function()
 	end
 end)
 Funcs:NewButton("Rejoin", "Rejoining to same server", function()
-	coroutine.resume(Rejoin)
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/rejoin"))()
 end)
 Funcs:NewButton("Serverhop", "Hoping to another server", function()
 	Teleport()
 end)
 
 local StatCheck = Misc:NewSection("Stats:")
-
 PlayerNames = {}
-PlayerDNames = {}
-
 local PL = StatCheck:NewDropdown("Player list","List of players", PlayerNames, function(nick)
 	local check = Plrs:WaitForChild(nick)
 	print(tostring(check) .. " was found.")
 	player = nick
 end)
 
-spawn(function()
-	while true do
-		wait(1)
-		PlayerNames = {}
-		PlayerDNames = {}
-		for i = 1, #children do
-			local child = children[i]
-			local player = child.Name
-			local display = child.DisplayName
-			local status = Plrs[player].leaderstats.Status.Value
-			PlayerNames[i] = player
-			PlayerDNames[i] = (player .. " (" .. display .. ", " .. status ..")")
-		end
-		wait(2)
-		PL:Refresh(PlayerDNames)
-		wait(5)
+function UpdatePlayerList()
+	local children = Plrs:GetChildren()
+	PlayerNames = {}
+	PL:Refresh(PlayerNames)
+	wait(0.5)
+	for i = 1, #children do
+		local child = children[i]
+		local player = child.Name
+		local display = child.DisplayName
+		local status = Plrs[player].leaderstats.Status.Value
+		PlayerNames[i] = player
 		PL:Refresh(PlayerNames)
-		wait(0.5)
 	end
+	PL:Refresh(PlayerNames)
+end
+
+local PLRESET = StatCheck:NewButton("Reset Player List","Update player list", function()
+	UpdatePlayerList()
 end)
 
 local PN = StatCheck:NewLabel("Player Name: ")
@@ -232,7 +225,6 @@ local Farm = Window:NewTab("Auto Farm")
 local Fist = Farm:NewSection("Fist Farm")
 Fist:NewToggle("Fist Strength", "Toggling Fist Farm", function(farmfist)
 	if farmfist then
-		local FSTool = Backpack.FSTool
 		farmfistactive = true
 		deathreturnactive = true
 		if tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 350e18 then
@@ -816,72 +808,53 @@ spawn(function()
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(462, 1010, -844)
 				workspace[plr.Name].HumanoidRootPart.Anchored = false
 				farmfistactive = false
-				farmfist = false
 				farmbodyactive = false
-				farmbody = false
 			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 50e18 then
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-496, 1234, -209)
 				workspace[plr.Name].HumanoidRootPart.Anchored = false
 				farmfistactive = false
-				farmfist = false
 				farmbodyactive = false
-				farmbody = false
 			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 3e18 then
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-425, 1144, -200)
 				workspace[plr.Name].HumanoidRootPart.Anchored = false
 				farmfistactive = false
-				farmfist = false
 				farmbodyactive = false
-				farmbody = false
 			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 350e15 then
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-429, 1120, -140)
 				workspace[plr.Name].HumanoidRootPart.Anchored = false
 				farmfistactive = false
-				farmfist = false
 				farmbodyactive = false
-				farmbody = false
 			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 1e15 then
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-423, 1120, -267)
 				workspace[plr.Name].HumanoidRootPart.Anchored = false
 				farmfistactive = false
-				farmfist = false
 				farmbodyactive = false
-				farmbody = false
 			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 1e12 then
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-323, 1067, -196)
 				workspace[plr.Name].HumanoidRootPart.Anchored = false
 				farmfistactive = false
-				farmfist = false
 				farmbodyactive = false
-				farmbody = false
 			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 1e09 then
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-352, 1055, -133)
 				workspace[plr.Name].HumanoidRootPart.Anchored = false
 				farmfistactive = false
-				farmfist = false
 				farmbodyactive = false
-				farmbody = false
 			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 1e06 then
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-340, 1055, -263)
 				workspace[plr.Name].HumanoidRootPart.Anchored = false
 				farmfistactive = false
-				farmfist = false
 				farmbodyactive = false
-				farmbody = false
 			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.PP.Value)) >= 10e03 then
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-108, 774, -86)
 				workspace[plr.Name].HumanoidRootPart.Anchored = false
 				farmfistactive = false
-				farmfist = false
 				farmbodyactive = false
-				farmbody = false
 			end
 			wait(0.1)
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/PPToolEquip"))()
 		end
 		wait(1)
 	end
-	deathreturnactive = false
 end)
 
 -- Return On Death
@@ -1000,19 +973,3 @@ function Teleport()
         end)
     end
 end
-
--- Rejoin
-
-local TeleportService = game:GetService("TeleportService")
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
- 
-local Rejoin = coroutine.create(function()
-    local Success, ErrorMessage = pcall(function()
-        TeleportService:Teleport(game.PlaceId, LocalPlayer)
-    end)
- 
-    if ErrorMessage and not Success then
-        warn(ErrorMessage)
-    end
-end)
