@@ -193,7 +193,6 @@ spawn(function()
 			local display = child.DisplayName
 			local status = Plrs[player].leaderstats.Status.Value
 			PlayerNames[i] = player
-			print(player)
 			PlayerDNames[i] = (player .. " (" .. display .. ", " .. status ..")")
 		end
 		wait(2)
