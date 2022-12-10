@@ -116,10 +116,23 @@ function converttoletter(num)
 	end
 end
 
-function converttohours(num)
-	if num / 60 >= 60 then
-		newnum = num / 60
-		return round(newnum, 1).. "h"
+function converttohours(mins)
+	if mins / 60 >= 1 then
+		hours = mins / 60
+		return round(hours, 1) .. "h"
+	end
+end
+
+function converttodays(mins)
+	if mins / 60 >= 1 then
+		hours = mins / 60
+		if hours / 24 >= 1 then
+			days = hours / 24
+			return round(days, 1) .. "d"
+		else
+			days = 0
+			return days .. "d"
+		end
 	end
 end
 
@@ -213,6 +226,7 @@ local PP = StatCheck:NewLabel("Psychic Power: ")
 local TotalPower = StatCheck:NewLabel("Total Power: ")
 local Quest = StatCheck:NewLabel("Quest: ")
 local Tokens = StatCheck:NewLabel("Tokens: ")
+local TP = StatCheck:NewLabel("Time Player: ")
 
 player = tostring(MyPlr)
 spawn(function()
@@ -249,6 +263,7 @@ spawn(function()
 			elseif game.Players[player].PlayerFolder.QuestData.MainQuest.Quest.Value == 1 then
 				Quest:UpdateLabel("Quest: 2k FS | 2k BT")
 			end
+			TP:UpdateLabel("Time Played: " .. converttodays(tostring(game.Players[player].PlayerFolder.DataFolder.TimePlayed.Value)) .. " | " .. converttohours(tostring(game.Players[player].PlayerFolder.DataFolder.TimePlayed.Value)))
 		end
 	end
 end)
