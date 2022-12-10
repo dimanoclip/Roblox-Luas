@@ -204,14 +204,15 @@ local PLRESET = StatCheck:NewButton("Reset Player List","Update player list", fu
 end)
 
 local PN = StatCheck:NewLabel("Player Name: ")
+local rep = StatCheck:NewLabel("Reputation")
 local FS = StatCheck:NewLabel("Fist Strength: ")
 local BT = StatCheck:NewLabel("Body Toughness: ")
 local WS = StatCheck:NewLabel("Walk Speed: ")
 local JF = StatCheck:NewLabel("Jump Power: ")
 local PP = StatCheck:NewLabel("Psychic Power: ")
+local TotalPower = StatCheck:NewLabel("Total Power: ")
 local Quest = StatCheck:NewLabel("Quest: ")
 local Tokens = StatCheck:NewLabel("Tokens: ")
-local TP = StatCheck:NewLabel("Time Played: ")
 
 player = tostring(MyPlr)
 spawn(function()
@@ -219,13 +220,14 @@ spawn(function()
 		while player ~= "" do
 			wait(0.5)
 			PN:UpdateLabel("Player Name: " .. player)
+			rep:UpdateLabel("Reputation: " .. tostring(game.Players[player].leaderstats.Status.Value) .. " | " .. tostring(game.Players[player].PlayerFolder.DataFolder.Reputation.Value))
 			FS:UpdateLabel("Fist Strength: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.FS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.FSMulti.Value)))
 			BT:UpdateLabel("Body Toughness: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.BT.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.BTMulti.Value)))
 			WS:UpdateLabel("Walk Speed: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.WS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.WSMulti.Value)))
 			JF:UpdateLabel("Jump Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.JF.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.JFMulti.Value)))
 			PP:UpdateLabel("Psychic Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.PP.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.PPMulti.Value)))
+			TotalPower:UpdateLabel("Total Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.TotalPower.Value)))
 			Tokens:UpdateLabel("Tokens: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.Tokens.Value)))
-			TP:UpdateLabel("Time Played: " .. converttohours(tostring(game.Players[player].PlayerFolder.DataFolder.TimePlayed.Value)))
 			if game.Players[player].PlayerFolder.QuestData.MainQuest.Quest.Value == 10 then
 				Quest:UpdateLabel("Quest: 50Sx FS | 50Sx BT | 50Sx PP | 1000h")
 			elseif game.Players[player].PlayerFolder.QuestData.MainQuest.Quest.Value == 9 then
