@@ -116,6 +116,13 @@ function converttoletter(num)
 	end
 end
 
+function converttohours(num)
+	if num / 60 >= 60 then
+		newnum = num / 60
+		return round(newnum, 1).. "h"
+	end
+end
+
 -- Main info
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/KavoUI"))()
@@ -202,6 +209,9 @@ local BT = StatCheck:NewLabel("Body Toughness: ")
 local WS = StatCheck:NewLabel("Walk Speed: ")
 local JF = StatCheck:NewLabel("Jump Power: ")
 local PP = StatCheck:NewLabel("Psychic Power: ")
+local Quest = StatCheck:NewLabel("Quest: ")
+local Tokens = StatCheck:NewLabel("Tokens: ")
+local TP = StatCheck:NewLabel("Time Played: ")
 
 player = tostring(MyPlr)
 spawn(function()
@@ -214,6 +224,29 @@ spawn(function()
 			WS:UpdateLabel("Walk Speed: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.WS.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.WSMulti.Value)))
 			JF:UpdateLabel("Jump Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.JF.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.JFMulti.Value)))
 			PP:UpdateLabel("Psychic Power: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.PP.Value)) .. " | " .. converttoletter(tostring(game.Players[player].PlayerFolder.Multipliers.PPMulti.Value)))
+			Tokens:UpdateLabel("Tokens: " .. converttoletter(tostring(game.Players[player].PlayerFolder.DataFolder.Tokens.Value)))
+			TP:UpdateLabel("Time Played: " .. converttohours(tostring(game.Players[player].PlayerFolder.DataFolder.TimePlayed.Value)))
+			if game.Players[player].PlayerFolder.QuestData.MainQuest.Quest.Value == 10 then
+				Quest:UpdateLabel("Quest: 50Sx FS | 50Sx BT | 50Sx PP | 1000h")
+			elseif game.Players[player].PlayerFolder.QuestData.MainQuest.Quest.Value == 9 then
+				Quest:UpdateLabel("Quest: 50Qi Total Power")
+			elseif game.Players[player].PlayerFolder.QuestData.MainQuest.Quest.Value == 8 then
+				Quest:UpdateLabel("Quest: 1Qi FS | 1Qi BT | 1Qi PP")
+			elseif game.Players[player].PlayerFolder.QuestData.MainQuest.Quest.Value == 7 then
+				Quest:UpdateLabel("Quest: 1T PP")
+			elseif game.Players[player].PlayerFolder.QuestData.MainQuest.Quest.Value == 6 then
+				Quest:UpdateLabel("Quest: 1B FS | 1B BT | 1B PP")
+			elseif game.Players[player].PlayerFolder.QuestData.MainQuest.Quest.Value == 5 then
+				Quest:UpdateLabel("Quest: 50k WS | 50k JF")
+			elseif game.Players[player].PlayerFolder.QuestData.MainQuest.Quest.Value == 4 then
+				Quest:UpdateLabel("Quest: 10k FS")
+			elseif game.Players[player].PlayerFolder.QuestData.MainQuest.Quest.Value == 3 then
+				Quest:UpdateLabel("Quest: 100k PP")
+			elseif game.Players[player].PlayerFolder.QuestData.MainQuest.Quest.Value == 2 then
+				Quest:UpdateLabel("Quest: 2k WS | 2k JF")
+			elseif game.Players[player].PlayerFolder.QuestData.MainQuest.Quest.Value == 1 then
+				Quest:UpdateLabel("Quest: 2k FS | 2k BT")
+			end
 		end
 	end
 end)
@@ -225,6 +258,7 @@ local Farm = Window:NewTab("Auto Farm")
 local Fist = Farm:NewSection("Fist Farm")
 Fist:NewToggle("Fist Strength", "Toggling Fist Farm", function(farmfist)
 	if farmfist then
+		FSTool = Backpack.FSTool
 		farmfistactive = true
 		deathreturnactive = true
 		if tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 350e18 then
@@ -284,16 +318,19 @@ Fist:NewToggle("Fist Strength", "Toggling Fist Farm", function(farmfist)
 		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e06 then
 			workspace[plr.Name].HumanoidRootPart.Anchored = false
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2476, 54, -2369)
+			wait(0.1)
 			workspace[plr.Name].HumanoidRootPart.Anchored = true
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
 		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e06 then
 			workspace[plr.Name].HumanoidRootPart.Anchored = false
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2400, 54, -2325)
+			wait(0.1)
 			workspace[plr.Name].HumanoidRootPart.Anchored = true
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
 		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e03 then
 			workspace[plr.Name].HumanoidRootPart.Anchored = false
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2468, 54, -2309)
+			wait(0.1)
 			workspace[plr.Name].HumanoidRootPart.Anchored = true
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/FSToolEquip"))()
 		elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e03 then
@@ -496,6 +533,7 @@ end)
 CharAddedEvent = { }
 
 Plrs.PlayerAdded:connect(function(plr)
+	UpdatePlayerList()
 	if CharAddedEvent[plr.Name] == nil then
 		CharAddedEvent[plr.Name] = plr.CharacterAdded:connect(function(char)
 			if ESPEnabled then
@@ -507,6 +545,7 @@ Plrs.PlayerAdded:connect(function(plr)
 end)
 
 Plrs.PlayerRemoving:connect(function(plr)
+	UpdatePlayerList()
 	if CharAddedEvent[plr.Name] ~= nil then
 		CharAddedEvent[plr.Name]:Disconnect()
 		CharAddedEvent[plr.Name] = nil
@@ -699,20 +738,14 @@ spawn(function()
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-143, 1528, -68)
 			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e06 then
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2476, 54, -2369)
-				workspace[plr.Name].HumanoidRootPart.Anchored = false
-				workspace[plr.Name].HumanoidRootPart.Anchored = true
 				farmpsychicactive = false
 				farmbodyactive = false 
 			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e06 then
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2400, 54, -2325)
-				workspace[plr.Name].HumanoidRootPart.Anchored = false
-				workspace[plr.Name].HumanoidRootPart.Anchored = true
 				farmpsychicactive = false
 				farmbodyactive = false 
 			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 100e03 then
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2468, 54, -2309)
-				workspace[plr.Name].HumanoidRootPart.Anchored = false
-				workspace[plr.Name].HumanoidRootPart.Anchored = true
 				farmpsychicactive = false
 				farmbodyactive = false 
 			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.FS.Value)) >= 1e03 then
@@ -730,7 +763,7 @@ end)
 spawn(function()
 	while true do
 		if farmbodyactive and game.Players.LocalPlayer.Character:WaitForChild("Humanoid") then
-			if tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 60e18 then
+			if tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 70e18 then
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1823, 59, 802)
 				workspace[plr.Name].HumanoidRootPart.Anchored = false
 				farmpsychicactive = false
@@ -791,7 +824,7 @@ spawn(function()
 				farmpsychicactive = false
 				farmfistactive = false 
 			elseif tonumber(string.format("%.0f", game.Players.LocalPlayer.PlayerFolder.DataFolder.BT.Value)) >= 5e02 then
-				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-225, 30, -288)
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-225, 35, -288)
 				workspace[plr.Name].HumanoidRootPart.Anchored = false
 				farmpsychicactive = false
 				farmfistactive = false  
