@@ -1,8 +1,0 @@
-local camera = game.Workspace.CurrentCamera
-local plr = game:GetService("Players").LocalPlayer
-local wc = workspace[plr.Name]
-camera.CameraSubject = wc
-game.Players.LocalPlayer.PlayerGui.Play.Enabled = false
-game.Players.LocalPlayer.PlayerGui.Play.Enabled = false
-game.Players.LocalPlayer.PlayerGui.Play.Enabled = false
-game.Players.LocalPlayer.PlayerGui.Play.Enabled = false
