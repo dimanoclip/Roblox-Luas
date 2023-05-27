@@ -58,3 +58,4 @@ Library.SendMessage = function(text, color)
         })
     end
 end
+return Library
