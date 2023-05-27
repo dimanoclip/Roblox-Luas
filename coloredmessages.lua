@@ -1,4 +1,5 @@
-function ColoredMessage(text, color)
+local Library = {}
+Library.SendMessage = function(text, color)
     if color:lower() == "red" then
         game.StarterGui:SetCore("ChatMakeSystemMessage", {
             Text = text;
