@@ -1,9 +1,0 @@
-local plr = game:GetService("Players").LocalPlayer
-local Backpack = plr.Backpack
-local children = Backpack:GetChildren()
-for i = 1, #children do
-	local child = children[i]
-    if child.Name == "PPTool" then
-        child.Parent = workspace[plr.Name]
-    end
-end
