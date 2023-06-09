@@ -1,5 +1,5 @@
 local Library = {}
-Library.SendMessage = function(text, color)
+Library.ChatMessage = function(text, color)
     if color:lower() == "red" then
         game.StarterGui:SetCore("ChatMakeSystemMessage", {
             Text = text;
@@ -58,4 +58,14 @@ Library.SendMessage = function(text, color)
         })
     end
 end
+
+Library.Notify = function(title, text)
+	game.StarterGui:SetCore("SendNotification", {
+		Title = tostring(title),
+		Text = tostring(text) ,
+		Button1 = "Ok",
+		Duration = math.huge
+	})
+end
+
 return Library
