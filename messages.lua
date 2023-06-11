@@ -64,7 +64,7 @@ Library.Notify = function(title, text)
 		Title = tostring(title),
 		Text = tostring(text) ,
 		Button1 = "Ok",
-		Duration = 3
+		Duration = 1
 	})
 end
 
