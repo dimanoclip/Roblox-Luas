@@ -49,6 +49,13 @@ Library.Chat = function(text, color)
             Color = Color3.fromRGB(0,0,0);
             FontSize = Enum.FontSize.Size96
         })
+    elseif color:lower() == "gray" then
+        game.StarterGui:SetCore("ChatMakeSystemMessage", {
+            Text = text;
+            Font = Enum.Font.Code;
+            Color = Color3.fromRGB(6,60,60);
+            FontSize = Enum.FontSize.Size96
+        })
     else
         game.StarterGui:SetCore("ChatMakeSystemMessage", {
             Text = text;
