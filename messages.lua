@@ -59,13 +59,22 @@ Library.Chat = function(text, color)
     end
 end
 
-Library.Notify = function(title, text)
-	game.StarterGui:SetCore("SendNotification", {
-		Title = tostring(title),
-		Text = tostring(text) ,
-		Button1 = "Ok",
-		Duration = 1
-	})
+Library.Notify = function(title, text, dur)
+	if dur == nil then
+		game.StarterGui:SetCore("SendNotification", {
+			Title = tostring(title),
+			Text = tostring(text) ,
+			Button1 = "Ok",
+			Duration = 1
+		})
+	else
+		game.StarterGui:SetCore("SendNotification", {
+			Title = tostring(title),
+			Text = tostring(text) ,
+			Button1 = "Ok",
+			Duration = dur
+		})
+	end
 end
 
 return Library
