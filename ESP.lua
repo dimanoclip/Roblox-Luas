@@ -2,7 +2,7 @@ if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
 
---Press F1 To Toggle ESP--
+--Press F5 To Toggle ESP--
 
 --//Toggle\\--
 getgenv().Toggle = true
@@ -19,7 +19,7 @@ plr.Idled:connect(function()
 vu:CaptureController()vu:ClickButton2(Vector2.new())
 end)
 UserInputService.InputBegan:connect(function(a,b)
-   if a.KeyCode==Enum.KeyCode.F1 then
+   if a.KeyCode==Enum.KeyCode.F5 then
        getgenv().Toggle = not getgenv().Toggle
    end
 end)
