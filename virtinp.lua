@@ -4,9 +4,7 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 
 Library.MouseClick = function(x, y, wtime)
   VirtualInputManager:SendMouseButtonEvent(x, y, 0, true, nil, 0)
-    if wtime then
-        task.wait(wtime)
-    end
+    if wtime then task.wait(wtime) end
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, false, nil, 0)
 end
 
@@ -16,9 +14,7 @@ end
 
 Library.PressKey = function(kc, wtime)
     VirtualInputManager:SendKeyEvent(true, kc, false, nil)
-    if wtime then
-        task.wait(wtime)
-    end
+    if wtime then task.wait(wtime) end
     VirtualInputManager:SendKeyEvent(false, kc, false, nil)
 end
 
