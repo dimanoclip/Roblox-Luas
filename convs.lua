@@ -11,28 +11,28 @@ Library.ToLetters = function(num)
 		return Library.Round(newnum, 2).. "Ce"
 	elseif num / 1e57 >=1 then
 		newnum = num / 1e57
-		return Library.Round(newnum, 2).. "OcDe"
+		return Library.Round(newnum, 2).. "OD"
 	elseif num / 1e54 >=1 then
 		newnum = num / 1e54
-		return Library.Round(newnum, 2).. "SpDe"
+		return Library.Round(newnum, 2).. "SD"
 	elseif num / 1e51 >=1 then
 		newnum = num / 1e51
-		return Library.Round(newnum, 2).. "SxDe"
+		return Library.Round(newnum, 2).. "SeD"
 	elseif num / 1e48 >=1 then
 		newnum = num / 1e48
-		return Library.Round(newnum, 2).. "QiDe"
+		return Library.Round(newnum, 2).. "QD"
 	elseif num / 1e45 >=1 then
 		newnum = num / 1e45
-		return Library.Round(newnum, 2).. "QaDe"
+		return Library.Round(newnum, 2).. "QD"
 	elseif num / 1e42 >=1 then
 		newnum = num / 1e42
-		return Library.Round(newnum, 2).. "TDe"
+		return Library.Round(newnum, 2).. "TD"
 	elseif num / 1e39 >=1 then
 		newnum = num / 1e39
-		return Library.Round(newnum, 2).. "DDe"
+		return Library.Round(newnum, 2).. "DD"
 	elseif num / 1e36 >=1 then
 		newnum = num / 1e36
-		return Library.Round(newnum, 2).. "Un"
+		return Library.Round(newnum, 2).. "UD"
 	elseif num / 1e33 >=1 then
 		newnum = num / 1e33
 		return Library.Round(newnum, 2).. "De"
@@ -47,10 +47,10 @@ Library.ToLetters = function(num)
 		return Library.Round(newnum, 2).. "Sp"
 	elseif num / 1e21 >=1 then
 		newnum = num / 1e21
-		return Library.Round(newnum, 2).. "Sx"
+		return Library.Round(newnum, 2).. "Se"
 	elseif num / 1e18 >=1 then
 		newnum = num / 1e18
-		return Library.Round(newnum, 2).. "Qi"
+		return Library.Round(newnum, 2).. "Qn"
 	elseif num / 1e15 >=1 then
 		newnum = num / 1e15
 		return Library.Round(newnum, 2).. "Qa"
