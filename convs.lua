@@ -7,15 +7,21 @@ Library.ToLetters = function(num, commanums)
 	if num / 1e57 >=1 then
 		newnum = num / 1e303
 		return Library.Round(newnum, (commanums or 2)).. "Ce"
+	elseif num / 1e63 >= 1 then
+		newnum = num / 1e63
+		return Library.Round(newnum, (commanums or 2)).."VT"
+	elseif num / 1e60 >= 1 then
+		newnum = num / 1e60
+		return Library.Round(newnum, (commanums or 2)).."NV"
 	elseif num / 1e57 >=1 then
 		newnum = num / 1e57
 		return Library.Round(newnum, (commanums or 2)).. "OD"
 	elseif num / 1e54 >=1 then
 		newnum = num / 1e54
-		return Library.Round(newnum, (commanums or 2)).. "SD"
+		return Library.Round(newnum, (commanums or 2)).. "SPD"
 	elseif num / 1e51 >=1 then
 		newnum = num / 1e51
-		return Library.Round(newnum, (commanums or 2)).. "SeD"
+		return Library.Round(newnum, (commanums or 2)).. "SD"
 	elseif num / 1e48 >=1 then
 		newnum = num / 1e48
 		return Library.Round(newnum, (commanums or 2)).. "QD"
