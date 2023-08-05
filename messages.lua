@@ -71,19 +71,19 @@ Library.Notify = function(title, text, dur)
     if dur == nil then
         game.StarterGui:SetCore("SendNotification", {
             Title = tostring(title),
-            Text = text,
+            Text = tostring(text),
             Duration = 1
         })
     elseif dur < 0 then
         game.StarterGui:SetCore("SendNotification", {
             Title = tostring(title),
-            Text = text,
+            Text = tostring(text),
             Duration = math.huge
         })
     else
         game.StarterGui:SetCore("SendNotification", {
             Title = tostring(title),
-            Text = text,
+            Text = tostring(text),
             Duration = dur
         })
     end
