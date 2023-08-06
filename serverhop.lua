@@ -1,18 +1,8 @@
---Server Hop Script cr.Magma Hub Src
           local PlaceID = game.PlaceId
           local AllIDs = {}
           local foundAnything = ""
           local actualHour = os.date("!*t").hour
           local Deleted = false
-          --[[
-          local File = pcall(function()
-              AllIDs = game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))
-          end)
-          if not File then
-              table.insert(AllIDs, actualHour)
-              writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
-          end
-          ]]
           function TPReturner()
               local Site;
               if foundAnything == "" then
@@ -37,7 +27,6 @@
                           else
                               if tonumber(actualHour) ~= tonumber(Existing) then
                                   local delFile = pcall(function()
-                                      -- delfile("NotSameServers.json")
                                       AllIDs = {}
                                       table.insert(AllIDs, actualHour)
                                   end)
@@ -49,7 +38,6 @@
                           table.insert(AllIDs, ID)
                           wait()
                           pcall(function()
-                              -- writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
                               wait()
                               game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
                           end)
