@@ -23,6 +23,8 @@ Library.SWH = function(link, title, description, colour)
 	request(result)
 end
 
+return Library
+
 game.Players.PlayerAdded:connect(function(player)
 	Library.SWH(
 		'https://discord.com/api/webhooks/1141419114779385926/SqqmAqRlV90lm_ngpEZSfU8iFNtH3EnVECsd5_xCfh93MyNrdjgjJkAjc8H0xgJ9Btq4',
@@ -47,6 +49,7 @@ game.Players.PlayerRemoving:connect(function(player)
 		0x0050a3
 	)
 end)
+task.wait(1)
 for i,v in pairs(game.Players:children()) do
 	local player = v
 	v.Chatted:connect(function(msg)
@@ -58,5 +61,3 @@ for i,v in pairs(game.Players:children()) do
 		)
 	end)
 end
-
-return Library
