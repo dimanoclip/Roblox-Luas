@@ -1,4 +1,4 @@
-local swh = loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/swh.lua"))()
+local wh = loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/wh.lua"))()
 if not _G.WebHooks then
 	game.Players.PlayerAdded:connect(function(player)
 		swh.SWH(
