@@ -6,20 +6,20 @@ Library.save = function(name: string, table: table)
     if writefile then 
         if string.sub(name, -5) ~= ".json" then name = name..".json" end
         writefile(name, encode(table)) 
-    end 
+    else return end 
 end
 Library.get = function(name: string)
     if readfile and isfile then 
         if isfile(name) then 
             if string.sub(name, -5) ~= ".json" then name = name..".json" end
             return decode(readfile(name)) 
-        end 
-    end 
+        end
+    else return {} end 
 end
 Library.del = function(name: string)
     if delfile then
         if string.sub(name, -5) ~= ".json" then name = name..".json" end
         delfile(name)
-    end
+    else return end
 end
 return Library
