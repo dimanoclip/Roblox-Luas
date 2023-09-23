@@ -4,6 +4,7 @@ local function encode(table: table) return HttpService:JSONEncode(table) end
 local function decode(table: table) return HttpService:JSONDecode(table) end
 Library.save = function(name: string, table: table)
     if writefile then 
+        if string.sub(name, -4) ~= ".json" then name += ".json" end
         writefile(name, encode(table)) 
     end 
 end
