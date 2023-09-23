@@ -22,4 +22,9 @@ Library.del = function(name: string)
         delfile(name)
     else return end
 end
+Library.check = function(name: string)
+    if isfile then
+        return isfile(name)
+    else return end
+end
 return Library
