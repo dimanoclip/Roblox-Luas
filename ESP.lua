@@ -37,7 +37,7 @@ end
 local ESPTF = function(PLR, ICON)
 	local NameDist = Instance.new("TextLabel")
 	NameDist.Name = "NameDist"
-	NameDist.Parent = Icon
+	NameDist.Parent = ICON
 	NameDist.BackgroundColor3 = PLR.TeamColor.Color
 	NameDist.BackgroundTransparency = 1.000
 	NameDist.Position = UDim2.new(0, 0, 0, 0)

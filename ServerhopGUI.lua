@@ -9,7 +9,7 @@ Button.Size = UDim2.new(0, 100, 0, 40)
 Button.BackgroundTransparency = 0
 Button.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
 Button.Position = UDim2.new(0.003, 0, 0.93, 0)
-Button.Text = "Server Hop"
+Button.Text = "ServerHop"
 Button.TextColor3 = Color3.new(255, 255, 255)
 
 --Minimize Button
@@ -29,78 +29,16 @@ open.Visible = false
 open.TextColor3 = Color3.new(255, 255, 255)
 
 -- Scripts
-Button.MouseButton1Down:connect(function()
-	local PlaceID = game.PlaceId
-	local AllIDs = {}
-	local foundAnything = ""
-	local actualHour = os.date("!*t").hour
-	local Deleted = false
-	function TPReturner()
-	  local Site;
-	  if foundAnything == "" then
-	      Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
-	  else
-	      Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
-	  end
-	  local ID = ""
-	  if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
-	      foundAnything = Site.nextPageCursor
-	  end
-	  local num = 0;
-	  for i,v in pairs(Site.data) do
-	      local Possible = true
-	      ID = tostring(v.id)
-	      if tonumber(v.maxPlayers) > tonumber(v.playing) then
-	          for _,Existing in pairs(AllIDs) do
-	              if num ~= 0 then
-	                  if ID == tostring(Existing) then
-	                      Possible = false
-	                  end
-	              else
-	                  if tonumber(actualHour) ~= tonumber(Existing) then
-	                      local delFile = pcall(function()
-	                          -- delfile("NotSameServers.json")
-	                          AllIDs = {}
-	                          table.insert(AllIDs, actualHour)
-	                      end)
-	                  end
-	              end
-	              num = num + 1
-	          end
-	          if Possible == true then
-	              table.insert(AllIDs, ID)
-	              wait()
-	              pcall(function()
-	                  -- writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
-	                  wait()
-	                  game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
-	              end)
-	              wait(4)
-	          end
-	      end
-	  end
-	end
-
-	function Teleport()
-	  while wait() do
-	      pcall(function()
-	          TPReturner()
-	          if foundAnything ~= "" then
-	              TPReturner()
-	          end
-	      end)
-	  end
-	end
-
-	Teleport()
+Button.MouseButton1Down:Connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/serverhop.lua"))()
 end)
 
-min.MouseButton1Down:connect(function()
+min.MouseButton1Down:Connect(function()
 	Button.Visible = false
 	open.Visible = true
 end)
 
-open.MouseButton1Down:connect(function()
+open.MouseButton1Down:Connect(function()
 	Button.Visible = true
 	open.Visible = false
 end)
