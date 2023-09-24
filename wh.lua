@@ -7,10 +7,10 @@ Library.Send = function(link, title, desc, color)
 		["embeds"] = {{
             ["author"] = {
                 ["name"] = game.PlaceId,
-                ["url"] = "https://github.com/Dimanoname/1/blob/main/wh.lua"
+                ["url"] = "https://www.roblox.com/games/"..game.PlaceId 
             },
 			["title"] = title or "Roblox",
-            ["url"] = "https://www.roblox.com/games/"..game.PlaceId,
+            ["url"] = "https://github.com/Dimanoname/1/blob/main/wh.lua",
 			["description"] = desc or "smth happend",
 			["type"] = "rich",
 			["color"] = color or tonumber(0x000000),
