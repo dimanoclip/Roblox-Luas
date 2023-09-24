@@ -1,6 +1,4 @@
 local Library = {}
-local HttpService = game:GetService("HttpService")
-local function encode(table: table) return HttpService:JSONEncode(table) end
 Library.Send = function(link, title, desc, color)
 	color = tonumber(color)
 	link = link or 'https://discord.com/api/webhooks/1141673758705340456/5xx10UZvGtYAvup23n5kfAemYgYpz7xgW90VTAdSvtZSdyhk91RCutNyMciS24fo3te1'
@@ -22,7 +20,7 @@ Library.Send = function(link, title, desc, color)
 			}
 		}}
 	}
-	data = encode(data)
+	data = game:GetService("HttpService"):JSONEncode(data)
 	local request = http_request or request or HttpPost or syn.request
 	local result = {
 		Url = link,
