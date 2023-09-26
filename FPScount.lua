@@ -1,4 +1,4 @@
-repeat wait() until game:IsLoaded() wait(2)
+game:IsLoaded():Wait() task.wait(2)
 local ScreenGui = Instance.new("ScreenGui")
 local Fps = Instance.new("TextLabel")
 local cl = Instance.new("TextButton")

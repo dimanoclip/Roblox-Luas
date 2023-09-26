@@ -18,10 +18,6 @@ Library.PressKey = function(kc, wtime)
     VirtualInputManager:SendKeyEvent(false, kc, false, nil)
 end
 
-Library.PressButton = function(ButtonLabel)
-    Library.MouseClick(ButtonLabel.AbsolutePosition.X + ButtonLabel.AbsoluteSize.X/2, ButtonLabel.AbsolutePosition.Y + ButtonLabel.AbsoluteSize.Y*3/2)
-end
-
 Library.CenterMouseClick = function()
     Library.MouseClick(Camera.ViewportSize.X/2, Camera.ViewportSize.Y/2)
 end
