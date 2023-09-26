@@ -20,19 +20,15 @@ Library.ToString = function(secs: number)
 		hours = math.floor(mins/60); mins -= (60*hours)
         days = math.floor(hours/24); hours -= (24*days)
 	elseif secs >= 3600 then
-		mins = math.floor(secs/60)
-		secs -= (60*mins)
-		hours = math.floor(mins/60)
-		mins -= (60*hours)
+		mins = math.floor(secs/60); secs -= (60*mins)
+		hours = math.floor(mins/60); mins -= (60*hours)
     elseif secs >= 60 then
-        mins = math.floor(secs/60)
-		secs -= (60*mins)
-		if secs < 10 then secs = "0"..secs end
+        mins = math.floor(secs/60); secs -= (60*mins)
     end
     if secs < 10 then secs = "0"..secs end
     if mins < 10 then mins = "0"..mins end
     if hours < 10 then hours = "0"..hours end
     if days < 10 then days = "0"..days end
-    return table
+    return string.format("%s:%s:%s:%s", days, hours, mins, secs)
 end
 return Library
