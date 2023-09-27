@@ -1,3 +1,4 @@
+----https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/msgs.lua
 local Library = {}
 Library.Chat = function(text, color)
     if not game.StarterGui:GetCore("ChatActive") then game.StarterGui:SetCore("ChatActive", true) end

@@ -1,3 +1,4 @@
+--https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/time.lua
 local Library = {}
 Library.ToTable = function(secs: number)
     local time = {secs = secs, mins = 0, hours = 0, days = 0}

@@ -1,3 +1,4 @@
+--https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/settings.lua
 local Library = {}
 local HttpService = game:GetService("HttpService")
 local function encode(table: table) return HttpService:JSONEncode(table) end

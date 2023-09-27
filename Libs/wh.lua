@@ -1,3 +1,4 @@
+--https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/wh.lua
 local Library = {}
 Library.Send = function(link, title, desc, color)
 	color = tonumber(color)
