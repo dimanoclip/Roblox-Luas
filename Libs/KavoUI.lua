@@ -3,8 +3,6 @@
 This GUI was created by xHeptc
 this is original kavoUI link: https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua
 also check kavoUI guide: https://xheptcofficial.gitbook.io/kavo-library/
-I just stole it!
-Thanks you, xHeptc!
 ]]--
 
 local Kavo = {}
