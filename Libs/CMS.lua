@@ -1,8 +1,3 @@
---[[ 
-if you dont know a path for ur modulescript,
-you can use this script:
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/BypassedDarkDexV3.lua", true))()
-]]--
 local Library = {}
 Library.CMS = function(tbl, indent)
   if not indent then indent = 0 end
