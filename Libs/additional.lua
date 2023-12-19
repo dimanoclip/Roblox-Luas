@@ -13,4 +13,7 @@ Library.dist = function(pos1,pos2)
     if not pos2 then pos2 = (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")).Position end
     return math.floor((pos2 - pos1).magnitude)
 end
+Library.isstill = function(humanoid)
+    return (humanoid.MoveDirection == Vector3.new(0,0,0) and humanoid:GetState() ~= Enum.HumanoidStateType.Jumping and humanoid:GetState() ~= Enum.HumanoidStateType.Freefall)
+end
 return Library
