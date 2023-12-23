@@ -3,6 +3,7 @@ if not game:IsLoaded() then
 end
 --Press F5 To Toggle ESP--
 local msg = loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/1/main/messages.lua"))()
+local adds = loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/additional.lua"))()
 msg.Notify("Binds", "F5 - ESP")
 local Toggle = true
 local PlayerName = "DisplayName"
@@ -56,9 +57,7 @@ RunService.Stepped:Connect(function()
 			end
 		end
 	end
-	if DB then 
-		return 
-	end
+	if DB then return end
 	DB = true
 	pcall(function()
 		if Toggle then
@@ -76,7 +75,7 @@ RunService.Stepped:Connect(function()
 										v.Character.Head:FindFirstChild("Icon").Enabled = true
 									else
 										if v.Character.Head:FindFirstChild("Icon") and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") ~= nil then
-											local pos = math.floor(((game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")).Position - (v.Character:FindFirstChild("HumanoidRootPart")).Position).magnitude)
+											local pos = adds.dist((v.Character:FindFirstChild("HumanoidRootPart")).Position)
 											v.Character.Head.Icon["NameDist"].Text = v[PlayerName].." | "..pos
 										else
 											if v.Character.Head:FindFirstChild("Icon") and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") == nil then
