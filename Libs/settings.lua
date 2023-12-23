@@ -1,6 +1,6 @@
 --https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/settings.lua
 local Library = {}
-if _G.defname then else _G.defname = "UselessData.json" end
+if not _G.defname then _G.defname = "UselessData.json" end
 local HttpService = game:GetService("HttpService")
 local function encode(table: table) return HttpService:JSONEncode(table) end
 local function decode(table: table) return HttpService:JSONDecode(table) end
