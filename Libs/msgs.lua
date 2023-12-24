@@ -1,5 +1,5 @@
---https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/msgs.lua
 local Library = {}
+Library.Link = "https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/msgs.lua"
 Library.Chat = function(text, color)
     if not game.StarterGui:GetCore("ChatActive") then game.StarterGui:SetCore("ChatActive", true) end
     if color:lower() == "red" then

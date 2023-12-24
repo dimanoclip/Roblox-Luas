@@ -1,5 +1,5 @@
---https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/additional.lua
 local Library = {}
+Library.Link = "https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/additional.lua"
 Library.Children = function(table, callback)
     if table and (type(table) == "userdata" or type(table) == "table") then local tablename,ttable
         if type(table) == "userdata" then tablename,ttable = table.Name, table; while ttable.Name ~= "Game" do tablename = tostring(ttable.Parent).."."..tablename ttable = ttable.Parent end

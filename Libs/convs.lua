@@ -1,5 +1,5 @@
---https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/convs.lua
 local Library = {}
+Library.Link = "https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/convs.lua"
 Library.Round = function(num, numDecimalPlaces)
 	local mult = 10^(numDecimalPlaces or 0)
 	return math.floor(num * mult + 0.5) / mult

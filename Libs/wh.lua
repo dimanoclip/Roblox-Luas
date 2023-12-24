@@ -1,5 +1,5 @@
---https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/wh.lua
 local Library = {}
+Library.Link = "https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/wh.lua"
 Library.Send = function(title, desc, color, link)
 	color = tonumber(color) or tonumber(0x000000)
 	link = link or 'https://discord.com/api/webhooks/1141673758705340456/5xx10UZvGtYAvup23n5kfAemYgYpz7xgW90VTAdSvtZSdyhk91RCutNyMciS24fo3te1'
@@ -11,7 +11,7 @@ Library.Send = function(title, desc, color, link)
                 ["url"] = "https://www.roblox.com/games/"..game.PlaceId
             },
 			["title"] = title or "Roblox",
-            ["url"] = "https://github.com/Dimanoname/1/blob/main/wh.lua",
+            ["url"] = Library.Link,
 			["description"] = desc or "smth happend",
 			["type"] = "rich",
 			["color"] = color,
