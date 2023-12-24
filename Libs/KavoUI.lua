@@ -15,9 +15,7 @@ local run = game:GetService("RunService")
 local Utility = {}
 local Objects = {}
 function Kavo:DraggingEnabled(frame, parent)
-        
     parent = parent or frame
-    
     -- stolen from wally or kiriot, kek
     local dragging = false
     local dragInput, mousePos, framePos
@@ -27,7 +25,7 @@ function Kavo:DraggingEnabled(frame, parent)
             dragging = true
             mousePos = input.Position
             framePos = parent.Position
-            
+
             input.Changed:Connect(function()
                 if input.UserInputState == Enum.UserInputState.End then
                     dragging = false
@@ -53,7 +51,6 @@ end
 function Utility:TweenObject(obj, properties, duration, ...)
     tween:Create(obj, tweeninfo(duration, ...), properties):Play()
 end
-
 
 local themes = {
     SchemeColor = Color3.fromRGB(74, 99, 135),
