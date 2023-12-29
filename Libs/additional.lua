@@ -9,18 +9,18 @@ Library.Children = function(table, callback)
         for i,v in table do local type = v.ClassName callback(i,v,type) end
     else return end
 end
-Library.dist = function(pos)
+Library.dist_to = function(pos)
     return math.floor(((game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")).Position - pos).magnitude)
 end
-Library.moving = function(humanoid)
+Library.is_moving = function(humanoid)
     if (humanoid.MoveDirection == Vector3.new(0,0,0) and humanoid:GetState() ~= Enum.HumanoidStateType.Jumping and humanoid:GetState() ~= Enum.HumanoidStateType.Freefall) then return false end
     return true
 end
-Library.isexist = function(instance)
+Library.is_exist = function(instance)
     if instance.Parent:FindFirstChild(instance) then return true end
     return false
 end
-Library.isalive = function(ply)
+Library.is_alive = function(ply)
     if ply.Character:FindFirstChild("Humanoid") and ply.Character:FindFirstChild("Humanoid").Health > 0 then return true end
     return false
 end
