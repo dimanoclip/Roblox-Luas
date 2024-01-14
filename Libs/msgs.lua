@@ -16,7 +16,7 @@ Library.Chat = function(text, color)
     game.StarterGui:SetCore("ChatMakeSystemMessage", {
         Text = text,
         Font = Enum.Font.Code,
-        Color = type(color) == "string" and colors[color] or color,
+        Color = type(color) == "string" and colors[color:lower()] or color,
         FontSize = Enum.FontSize.Size96
     })
 end
