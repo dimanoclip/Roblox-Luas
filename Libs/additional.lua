@@ -24,4 +24,18 @@ Library.is_alive = function(ply)
     if ply.Character:FindFirstChild("Humanoid") and ply.Character:FindFirstChild("Humanoid").Health > 0 then return true end
     return false
 end
+Library.int = function(value)
+    if tonumber(value) then return tonumber(value) end
+end
+Library.str = function(value)
+    return tostring(value)
+end
+Library.has_value = function(src, value)
+    if type(src) == "string" then
+        return string.find(src, value) and true
+    elseif type(src) == "table" then
+        for i,v in pairs(src) do if v == value then return true end end
+    end
+    return false
+end
 return Library
