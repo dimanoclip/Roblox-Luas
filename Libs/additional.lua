@@ -38,4 +38,9 @@ Library.has_value = function(src, value)
     end
     return false
 end
+Library.get_friends = function(player)
+    local friends = {}
+    for i,v in pairs(game.Players:children()) do if player:IsFriendsWith(v.UserId) then table.insert(friends, v) end end
+    return friends
+end
 return Library
