@@ -10,7 +10,7 @@ Library.Children = function(table, callback)
     else return end
 end
 Library.dist_to = function(pos)
-    return math.floor(((game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")).Position - pos).magnitude)
+    return math.floor(((game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")).Position - pos).magnitude) or 0
 end
 Library.is_moving = function(humanoid)
     if (humanoid.MoveDirection == Vector3.new(0,0,0) and humanoid:GetState() ~= Enum.HumanoidStateType.Jumping and humanoid:GetState() ~= Enum.HumanoidStateType.Freefall) then return false end
@@ -26,9 +26,10 @@ Library.is_alive = function(ply)
 end
 Library.int = function(value)
     if tonumber(value) then return tonumber(value) end
+    return 0
 end
 Library.str = function(value)
-    return tostring(value)
+    return tostring(value) or ""
 end
 Library.has_value = function(src, value)
     if type(src) == "string" then
