@@ -44,4 +44,10 @@ Library.get_friends = function(player)
     for i,v in pairs(game.Players:children()) do if player:IsFriendsWith(v.UserId) then table.insert(friends, v) end end
     return friends
 end
+Library.ss = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpySource.lua"))()
+end
+Library.dd = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/BypassedDarkDexV3.lua", true))()
+end
 return Library
