@@ -11,7 +11,7 @@ local colors = {
     white = Color3.fromRGB(255,255,255)
 }
 Library.Link = "https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/msgs.lua"
-Library.Chat = function(text, color)
+Library.Chat = function(text:string, color:string)
     if not game.StarterGui:GetCore("ChatActive") then game.StarterGui:SetCore("ChatActive", true) end
     game.StarterGui:SetCore("ChatMakeSystemMessage", {
         Text = text,
