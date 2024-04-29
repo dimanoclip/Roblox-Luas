@@ -45,10 +45,10 @@ Library.get_friends = function(player)
     return friends
 end
 Library.ss = function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpySource.lua"))()
+    loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpySource.lua"))()
 end
 Library.dd = function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/AlterX404/DarkDEX-V5/main/DarkDEX-V5", true))()
+    loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/AlterX404/DarkDEX-V5/main/DarkDEX-V5", true))()
 end
 Library.aa = function()
     game:GetService('Players').LocalPlayer.Idled:Connect(function() game:GetService('VirtualUser'):CaptureController() game:GetService('VirtualUser'):ClickButton2(Vector2.new()) end)
