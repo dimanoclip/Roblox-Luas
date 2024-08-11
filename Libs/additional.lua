@@ -1,5 +1,6 @@
 local Library = {}
 Library.Link = "https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/additional.lua"
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/additional.lua"))()
 Library.Children = function(table, callback)
     if table and (type(table) == "userdata" or type(table) == "table") then local tablename,ttable
         if type(table) == "userdata" then tablename,ttable = table.Name, table; while ttable.Name ~= "Game" do tablename = tostring(ttable.Parent).."."..tablename ttable = ttable.Parent end
@@ -45,12 +46,15 @@ Library.get_friends = function(player)
     return friends
 end
 Library.ss = function()
+    print("Loaded simplespy")
     loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpySource.lua"))()
 end
 Library.dd = function()
+    print("Loaded darkdex")
     loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/AlterX404/DarkDEX-V5/main/DarkDEX-V5", true))()
 end
 Library.aa = function()
+    print("Loaded antiafk")
     game:GetService('Players').LocalPlayer.Idled:Connect(function() game:GetService('VirtualUser'):CaptureController() game:GetService('VirtualUser'):ClickButton2(Vector2.new()) end)
 end
 return Library

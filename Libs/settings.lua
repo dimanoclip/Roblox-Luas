@@ -1,6 +1,7 @@
 local HttpService = game:GetService("HttpService")
 local Library = {}
 Library.Link = "https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/settings.lua"
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/settings.lua"))()
 local function encode(table: table) return HttpService:JSONEncode(table) end
 local function decode(table: table) return HttpService:JSONDecode(table) end
 local function check() if writefile and readfile and isfile and delfile then return true end return false end
