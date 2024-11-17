@@ -66,10 +66,10 @@ Library.ToLetters = function(num, commanums)
 		return Library.Round(newnum, commanums).."Sp"
 	elseif num / 1e21 >=1 then
 		newnum = num / 1e21
-		return Library.Round(newnum, commanums).."Se"
+		return Library.Round(newnum, commanums).."Sx"
 	elseif num / 1e18 >=1 then
 		newnum = num / 1e18
-		return Library.Round(newnum, commanums).."Qn"
+		return Library.Round(newnum, commanums).."Qi"
 	elseif num / 1e15 >=1 then
 		newnum = num / 1e15
 		return Library.Round(newnum, commanums).."Qa"
