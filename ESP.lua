@@ -15,7 +15,7 @@ local DB = false
 local ESPT = function(PLR)
 	local Icon = Instance.new("BillboardGui")
 	local NameDist = Instance.new("TextLabel")
-	Icon.Parent = PLR.Character.Head
+	Icon.Parent = PLR.Character:FindFirstChild('Head')
 	Icon.Name = "Icon"
 	Icon.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	Icon.Active = true
@@ -52,8 +52,8 @@ end
 RunService.Stepped:Connect(function()
 	if not Toggle then
 		for i,v in pairs(P:GetChildren()) do
-			if v.Character.Head:FindFirstChild("Icon") ~= nil then
-				v.Character.Head:FindFirstChild("Icon"):Remove()
+			if v.Character:FindFirstChild('Head'):FindFirstChild("Icon") ~= nil then
+				v.Character:FindFirstChild('Head'):FindFirstChild("Icon"):Remove()
 			end
 		end
 	end
@@ -65,21 +65,21 @@ RunService.Stepped:Connect(function()
 				if v:IsA("Player") then
 					if v ~= game.Players.LocalPlayer then
 						if v.Character ~= nil then
-							if v.Character.Head:FindFirstChild("Icon") == nil then
+							if v.Character:FindFirstChild('Head'):FindFirstChild("Icon") == nil then
 								ESPT(v)
 							else
-								if v.Character.Head.Icon:FindFirstChild("NameDist") == nil then
-									ESPTF(v, v.Character.Head.Icon)
+								if v.Character:FindFirstChild('Head').Icon:FindFirstChild("NameDist") == nil then
+									ESPTF(v, v.Character:FindFirstChild('Head').Icon)
 								else
-									if v.Character.Head:FindFirstChild("Icon").Enabled == false then
-										v.Character.Head:FindFirstChild("Icon").Enabled = true
+									if v.Character:FindFirstChild('Head'):FindFirstChild("Icon").Enabled == false then
+										v.Character:FindFirstChild('Head'):FindFirstChild("Icon").Enabled = true
 									else
-										if v.Character.Head:FindFirstChild("Icon") and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") ~= nil then
+										if v.Character:FindFirstChild('Head'):FindFirstChild("Icon") and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") ~= nil then
 											local pos = adds.dist((v.Character:FindFirstChild("HumanoidRootPart")).Position)
-											v.Character.Head.Icon["NameDist"].Text = v[PlayerName].." | "..pos
+											v.Character:FindFirstChild('Head').Icon["NameDist"].Text = v.DisplayName.." | "..pos
 										else
-											if v.Character.Head:FindFirstChild("Icon") and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") == nil then
-												v.Character.Head.Icon["NameDist"].Text = v[PlayerName]
+											if v.Character:FindFirstChild('Head'):FindFirstChild("Icon") and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") == nil then
+												v.Character:FindFirstChild('Head').Icon["NameDist"].Text = v.DisplayName
 											end
 										end
 									end

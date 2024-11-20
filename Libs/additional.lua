@@ -57,4 +57,7 @@ Library.aa = function()
     print("Loaded antiafk")
     game:GetService('Players').LocalPlayer.Idled:Connect(function() game:GetService('VirtualUser'):CaptureController() game:GetService('VirtualUser'):ClickButton2(Vector2.new()) end)
 end
+Library.get_connect = function()
+    setclipboard(string.format('game:GetService("TeleportService"):TeleportToPlaceInstance(%s,"%s", game.Players.LocalPlayer)', game.PlaceId, game.JobId))
+end
 return Library

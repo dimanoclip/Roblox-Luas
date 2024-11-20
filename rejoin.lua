@@ -1,2 +1,2 @@
-local Success, ErrorMessage = pcall(function() game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer) end)
+local Success, ErrorMessage = pcall(function() game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer) end)
 if ErrorMessage and not Success then warn(ErrorMessage) end
