@@ -27,7 +27,8 @@ Library.Notify = function(title, text, dur)
     game.StarterGui:SetCore("SendNotification", {
         Title = tostring(title),
         Text = tostring(text),
-        Duration = dur > 0 and dur or math.huge
+        Duration = dur > 0 and dur or math.huge,
+        Button1 = "OK"
     })
 end
 
