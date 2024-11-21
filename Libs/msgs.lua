@@ -23,19 +23,12 @@ Library.Chat = function(text:string, color:string)
 end
 
 Library.Notify = function(title, text, dur)
-    if dur then
-        game.StarterGui:SetCore("SendNotification", {
-            Title = tostring(title),
-            Text = tostring(text),
-            Duration = dur
-        })
-    else
-        game.StarterGui:SetCore("SendNotification", {
-            Title = tostring(title),
-            Text = tostring(text),
-            Duration = dur < 0 and math.huge or 1
-        })
-    end
+    dur = dur or -1
+    game.StarterGui:SetCore("SendNotification", {
+        Title = tostring(title),
+        Text = tostring(text),
+        Duration = dur > 0 and dur or math.huge
+    })
 end
 
 return Library
