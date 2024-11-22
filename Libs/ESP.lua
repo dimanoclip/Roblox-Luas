@@ -1,5 +1,4 @@
 
---Press F5 To Toggle ESP--
 local adds = loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/additional.lua"))()
 local P = game:GetService("Players")
 local LP = P.LocalPlayer
@@ -7,8 +6,8 @@ local RunService=game:GetService("RunService")
 local DB = false
 local ESP_players = {}
 local Library = {}
-Library.add_player = function(player) table.insert(ESP_players, player.Name, player) end
-Library.rem_player = function(player) table.remove(ESP_players, player.Name) end
+Library.add = function(player) table.insert(ESP_players, player.Name, player) end
+Library.rem = function(player) table.remove(ESP_players, player.Name) end
 Library.Link = "https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/ESP.lua"
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/ESP.lua"))()
 local CreateESP = function(PLR)
@@ -86,3 +85,4 @@ RunService.Stepped:Connect(function()
 	task.wait()
 	DB = false
 end)
+return Library
