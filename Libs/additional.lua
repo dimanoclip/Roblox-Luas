@@ -11,7 +11,12 @@ Library.Children = function(table, callback)
     else return end
 end
 Library.dist_to = function(pos)
-    return math.floor(((game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")).Position - pos).magnitude) or 0
+    local check_for_instance = pcall(function() pos:IsA('123') end)
+    if not check_for_instance then pos = pos
+    elseif pos:IsA('Part') then pos = pos.Position
+    elseif pos:IsA('Model') then pos = pos.PrimaryPart.Position
+    elseif pos:IsA('Player') then pos = pos.Character.PrimaryPart.Position end
+    return math.floor(((game.Players.LocalPlayer.Character.HumanoidRootPart).Position - pos).magnitude) or 0
 end
 Library.is_moving = function(humanoid)
     if (humanoid.MoveDirection == Vector3.new(0,0,0) and humanoid:GetState() ~= Enum.HumanoidStateType.Jumping and humanoid:GetState() ~= Enum.HumanoidStateType.Freefall) then return false end
