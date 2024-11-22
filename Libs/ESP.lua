@@ -49,6 +49,8 @@ local UpdateESP = function(PLR, ICON)
 end
 RunService.Stepped:Connect(function()
 	for i,v in pairs(P:GetChildren()) do
+		if ESP_players[v.Name] then continue end
+		if v == game.Players.LocalPlayer or v.Character == nil then continue end
 		if v.Character:FindFirstChild('Head'):FindFirstChild("Icon") ~= nil then
 			v.Character:FindFirstChild('Head'):FindFirstChild("Icon"):Remove()
 		end
