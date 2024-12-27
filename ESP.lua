@@ -91,7 +91,7 @@ RunService.Stepped:Connect(function()
 end)
 -----------------------------------------------------------------
 UserInputService.InputBegan:connect(function(a,b)
-   if a.KeyCode==Enum.KeyCode.F1 then
+   if a.KeyCode==Enum.KeyCode.F7 then
        Toggle = not Toggle
    end
 end)

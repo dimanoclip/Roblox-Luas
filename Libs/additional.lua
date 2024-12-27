@@ -50,6 +50,18 @@ Library.get_friends = function(player)
     for i,v in pairs(game.Players:children()) do if player:IsFriendsWith(v.UserId) then table.insert(friends, v) end end
     return friends
 end
+Library.format_number = function(number)
+    local str_num = tostring(number)
+    if tonumber(str_num:sub(-1)) > 3 then
+        return str_num..'th'
+    elseif tonumber(str_num:sub(-1)) == 3 then
+        return str_num..'rd'
+    elseif tonumber(str_num:sub(-1)) == 2 then
+        return str_num..'nd'
+    elseif tonumber(str_num:sub(-1)) == 1 then
+        return str_num..'st'
+    end
+end
 Library.ss = function()
     print("Loaded simplespy")
     loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpySource.lua"))()
