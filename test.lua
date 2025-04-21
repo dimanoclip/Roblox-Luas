@@ -1,12 +1,12 @@
-local Services							= setmetatable({}, { __index = function(Self, Key) return game.GetService(game, Key) end })
-local Client							= Services.Players.LocalPlayer
-local SMethod							= (WebSocket and WebSocket.connect)
+local Services = setmetatable({}, { __index = function(Self, Key) return game.GetService(game, Key) end })
+local Client = Services.Players.LocalPlayer
+local SMethod = (WebSocket and WebSocket.connect)
 
 if not SMethod then return Client:Kick("Executor is too shitty.") end
 
-local Main							= function()
+local Main = function()
 	local Success, WebSocket = pcall(SMethod, "ws://localhost:9000/")
-    local Closed = false
+	local Closed = false
 
 	if not Success then return end
 
@@ -17,7 +17,6 @@ local Main							= function()
 
 	WebSocket.OnMessage:Connect(function(Unparsed)
 		local Parsed = Services.HttpService:JSONDecode(Unparsed)
-		
 		if (Parsed.Method == "Execute") then
 			local Function, Error = loadstring(Parsed.Data)
 
@@ -25,21 +24,19 @@ local Main							= function()
 				Method = "Error",
 				Message = Error
 			}))	end
-			
-			local success, Error = pcall(Function())
+			local success, err = pcall(Function())
 			if not success then return WebSocket:Send(Services.HttpService:JSONEncode({
 				Method = "Error",
-				Message = Error
+				Message = err
 			}))	end
-            
 		end
 	end)
 
-    WebSocket.OnClose:Connect(function()
-        Closed							= true
-    end)
+	WebSocket.OnClose:Connect(function()
+		Closed = true
+	end)
 
-    repeat wait() until Closed
+	repeat wait() until Closed
 end
 
 while wait(1) do
