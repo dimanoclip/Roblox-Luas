@@ -27,7 +27,7 @@ local Main							= function()
 			}))	end
 			
 			local success, Error = pcall(Function())
-			if Error then return WebSocket:Send(Services.HttpService:JSONEncode({
+			if not success then return WebSocket:Send(Services.HttpService:JSONEncode({
 				Method = "Error",
 				Message = Error
 			}))	end
