@@ -1,4 +1,5 @@
 local Library = {}
+local ts = game:GetService('TeleportService')
 Library.Link = "https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/additional.lua"
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/additional.lua"))()
 Library.Children = function(table, callback)
@@ -60,6 +61,15 @@ Library.format_number = function(number)
         return str_num..'nd'
     elseif tonumber(str_num:sub(-1)) == 1 then
         return str_num..'st'
+    end
+end
+Library.join_place = function(placeid, jobid)
+    placeid = placeid or game.PlaceId
+    jobid = jobid and tostring(jobid) or jobid
+    if jobid then
+        ts:TeleportToPlaceInstance(placeid, jobid, game.Players.LocalPlayer)
+    else
+        ts:Teleport(placeid, game.Players.LocalPlayer)
     end
 end
 Library.ss = function()
