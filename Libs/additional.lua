@@ -72,6 +72,9 @@ Library.join_place = function(placeid, jobid)
         ts:Teleport(placeid, game.Players.LocalPlayer)
     end
 end
+Library.copy_connect = function()
+    setclipboard(string.format("game:GetService('TeleportService'):TeleportToPlaceInstance(%s, '%s', game.Players.LocalPlayer)", tostring(game.PlaceId), game.JobId))
+end
 Library.ss = function()
     print("Loaded simplespy")
     loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpySource.lua"))()
