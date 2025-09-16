@@ -12,7 +12,7 @@ Library.Children = function(table, callback)
     else return end
 end
 Library.dist_to = function(pos)
-    local check_for_instance = pcall(function() pos:IsA('123') end)
+    local check_for_instance = pcall(function() pos:IsA('Vector3') end)
     if not check_for_instance then pos = pos
     elseif pos:IsA('Part') then pos = pos.Position
     elseif pos:IsA('Model') then pos = pos.PrimaryPart.Position
@@ -81,13 +81,10 @@ Library.ss = function()
 end
 Library.dd = function()
     print("Loaded darkdex")
-    loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/AlterX404/DarkDEX-V5/main/DarkDEX-V5", true))()
+    loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/refs/heads/main/dex.lua", true))()
 end
 Library.aa = function()
     print("Loaded antiafk")
     game:GetService('Players').LocalPlayer.Idled:Connect(function() game:GetService('VirtualUser'):CaptureController() game:GetService('VirtualUser'):ClickButton2(Vector2.new()) end)
-end
-Library.get_connect = function()
-    setclipboard(string.format('game:GetService("TeleportService"):TeleportToPlaceInstance(%s,"%s", game.Players.LocalPlayer)', game.PlaceId, game.JobId))
 end
 return Library
