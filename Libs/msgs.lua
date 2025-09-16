@@ -1,25 +1,27 @@
 local Library = {}
 local colors = {
-    red = Color3.fromRGB(190,0,0),
-    green = Color3.fromRGB(0,255,190),
-    blue = Color3.fromRGB(0,120,255),
-    purple = Color3.fromRGB(200,0,255),
-    yellow = Color3.fromRGB(255, 200,0),
-    orange = Color3.fromRGB(255,150,0),
-    black = Color3.fromRGB(0,0,0),
-    gray = Color3.fromRGB(60,60,60),
-    white = Color3.fromRGB(255,255,255)
+    red = '#BE0000',
+    mint = '#00FFBE',
+    green = '#00FF32',
+    blue = '#0078FF',
+    purple = '#825AFF',
+    pink = '#C800FF',
+    yellow = '#FFC800',
+    orange = '#FF9600',
+    black = '#000000',
+    gray = '#3C3C3C',
+    white = '#ffffff'
 }
+local TextChatService = game:GetService("TextChatService")
 Library.Link = "https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/msgs.lua"
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/msgs.lua"))()
 Library.Chat = function(text:string, color:string)
     if not game.StarterGui:GetCore("ChatActive") then game.StarterGui:SetCore("ChatActive", true) end
-    game.StarterGui:SetCore("ChatMakeSystemMessage", {
-        Text = text,
-        Font = Enum.Font.Code,
-        Color = type(color) == "string" and colors[color:lower()] or color,
-        FontSize = Enum.FontSize.Size96
-    })
+    if color and type(color) == "string" and colors[color:lower()] then
+        TextChatService.TextChannels.RBXSystem:DisplaySystemMessage(
+            string.format("<font color='%s' face='Code' size='24'>%s</font>", colors[color] and colors[color] or color, text)
+        )
+    end
 end
 
 Library.Notify = function(title, text, dur)
@@ -31,5 +33,4 @@ Library.Notify = function(title, text, dur)
         Button1 = "OK"
     })
 end
-
 return Library
