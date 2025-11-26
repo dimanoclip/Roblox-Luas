@@ -19,7 +19,7 @@ Library.Chat = function(text:string, color:string)
     if not game.StarterGui:GetCore("ChatActive") then game.StarterGui:SetCore("ChatActive", true) end
     if color and type(color) == "string" and colors[color:lower()] then
         TextChatService.TextChannels.RBXSystem:DisplaySystemMessage(
-            string.format("<font color='%s' face='Code' size='24'>%s</font>", colors[color] and colors[color] or color, text)
+            string.format("<b> <font color='%s' face='Code' size='18'>%s</font> </b>", colors[color] and colors[color] or color, text)
         )
     end
 end
