@@ -75,15 +75,15 @@ Library.copy_connect = function()
     setclipboard(string.format("game:GetService('TeleportService'):TeleportToPlaceInstance(%s, '%s', game.Players.LocalPlayer)", tostring(game.PlaceId), game.JobId))
 end
 Library.ss = function()
-    print("Loaded simplespy")
     loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpySource.lua"))()
+    print("Loaded simplespy")
 end
 Library.dd = function()
-    print("Loaded darkdex")
     loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/refs/heads/main/dex.lua", true))()
+    print("Loaded darkdex")
 end
 Library.aa = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Anti-AFK.lua"))()
     print("Loaded antiafk")
-    game:GetService('Players').LocalPlayer.Idled:Connect(function() game:GetService('VirtualUser'):CaptureController() game:GetService('VirtualUser'):ClickButton2(Vector2.new()) end)
 end
 return Library

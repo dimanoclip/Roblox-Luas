@@ -1,3 +1,4 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/autoclicker.lua"))()
 local on
 local StartBind=Enum.KeyCode.F5
 local FinishBind=Enum.KeyCode.F6

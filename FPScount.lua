@@ -1,3 +1,4 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/FPScount.lua"))()
 game:IsLoaded():Wait() task.wait(2)
 local ScreenGui = Instance.new("ScreenGui")
 local Fps = Instance.new("TextLabel")

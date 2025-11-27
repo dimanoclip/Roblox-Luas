@@ -1,3 +1,4 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/GetCoords.lua"))()
 local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
 local SavePosition = Instance.new("TextLabel", ScreenGui)
 

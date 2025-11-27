@@ -1,3 +1,4 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Anti-AFK.lua"))()
 local gcn = getconnections or get_signal_cons
 if gcn then
 	for i, v in gcn(game.Players.LocalPlayer.Idled) do

@@ -1,3 +1,4 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/clicktp.lua"))()
 local Player = game.Players.LocalPlayer
 local PlyRP = Player.Character:WaitForChild("HumanoidRootPart")
 local mouse = Player:GetMouse()
