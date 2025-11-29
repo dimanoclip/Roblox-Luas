@@ -84,6 +84,5 @@ Library.dd = function()
 end
 Library.aa = function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Anti-AFK.lua"))()
-    print("Loaded antiafk")
 end
 return Library
