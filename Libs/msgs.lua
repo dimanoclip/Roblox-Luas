@@ -29,9 +29,10 @@ local TextChatService = game:GetService("TextChatService")
 Library.Link = "https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/msgs.lua"
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/msgs.lua"))()
 Library.Chat = function(text:string, color:string)
+    color = color:lower()
     if color and type(color) == "string" and Library.hex_colors[color:lower()] then
         TextChatService.TextChannels.RBXSystem:DisplaySystemMessage(
-            string.format("<font color='%s' face='Code' size='18'>%s</font>", Library.hex_colors[color] and Library.hex_colors[color] or color, text)
+            string.format("<font color='%s' face='Code' size='18'>%s</font>", Library.hex_colors[color], text)
         )
     end
 end
