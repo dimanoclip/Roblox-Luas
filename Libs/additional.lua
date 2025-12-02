@@ -71,6 +71,23 @@ Library.join_place = function(placeid, jobid)
         ts:Teleport(placeid, game.Players.LocalPlayer)
     end
 end
+Library.hlplayer = function(ply, fillcolor, outlinecolor, transparency)
+    if ply.Character:FindFirstChild("U_Highlight") then return end
+    fillcolor = fillcolor or Color3.fromRGB(0,0,0)
+    outlinecolor = outlinecolor or Color3.fromRGB(255,255,255)
+    transparency = transparency or 0
+    local hl = Instance.new("Highlight")
+    hl.Name = "U_Highlight"
+    hl.Parent = ply.Character
+    hl.FillColor = fillcolor
+    hl.OutlineColor = outlinecolor
+    hl.DepthMode = Enum.HighlightDepthMode.Occluded
+    hl.FillTransparency = transparency
+    return hl
+end
+Library.unhlplayer = function(ply)
+        ply.Character:FindFirstChild("U_Highlight"):Remove()
+end
 Library.copy_connect = function()
     setclipboard(string.format("game:GetService('TeleportService'):TeleportToPlaceInstance(%s, '%s', game.Players.LocalPlayer)", tostring(game.PlaceId), game.JobId))
 end
