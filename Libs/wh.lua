@@ -3,7 +3,7 @@ Library.Link = "https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Li
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/wh.lua"))()
 Library.Send = function(title, desc, color, link)
 	color = tonumber(color) or tonumber(0x000000)
-	link = link or 'https://discord.com/api/webhooks/1141673758705340456/5xx10UZvGtYAvup23n5kfAemYgYpz7xgW90VTAdSvtZSdyhk91RCutNyMciS24fo3te1'
+	link = link or 'https://discord.com/api/webhooks/1445372335363325972/ilGbDuX56r0XY4dpcR0WeT5_ZWJpZ4fLiUz1t198Vs_DLS2L1D_Lu3yMJtXpEEGyNX-n'
 	local data = {
 		["content"] = "",
 		["embeds"] = {{
