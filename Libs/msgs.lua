@@ -14,11 +14,11 @@ Library.hex_colors = {
 }
 Library.rgb_colors = {
     red = Color3.fromRGB(190,0,0),
-    mint = '#00FFBE',
-    green = Color3.fromRGB(0,255,190),
+    mint = Color3.fromRGB(0,255,190),
+    green = Color3.fromRGB(0,255,50),
     blue = Color3.fromRGB(0,120,255),
-    purple = Color3.fromRGB(200,0,255),
-    pink = '#C800FF',
+    purple = Color3.fromRGB(130,90,255),
+    pink = Color3.fromRGB(200, 0,255),
     yellow = Color3.fromRGB(255, 200,0),
     orange = Color3.fromRGB(255,150,0),
     black = Color3.fromRGB(0,0,0),
@@ -36,7 +36,6 @@ Library.Chat = function(text:string, color:string)
         )
     end
 end
-
 Library.Notify = function(title, text, dur)
     dur = dur or -1
     game.StarterGui:SetCore("SendNotification", {
