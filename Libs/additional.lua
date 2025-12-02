@@ -1,5 +1,7 @@
 local Library = {}
 local ts = game:GetService('TeleportService')
+local pls = game.Players
+local lp = pls.LocalPlayer
 Library.Link = "https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/additional.lua"
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/additional.lua"))()
 Library.Children = function(table, callback)
@@ -45,9 +47,12 @@ Library.has_value = function(src, value)
     end
     return false
 end
+Library.getping = function() 
+    return lp:GetNetworkPing()*2000
+end
 Library.get_friends = function(player)
     local friends = {}
-    for i,v in pairs(game.Players:children()) do if player:IsFriendsWith(v.UserId) then table.insert(friends, v) end end
+    for i,v in pairs(pls:GetChildren()) do if player:IsFriendsWith(v.UserId) then table.insert(friends, v) end end
     return friends
 end
 Library.format_number = function(number)
