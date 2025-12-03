@@ -1,6 +1,6 @@
 local Library = {}
-Library.Link = "https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/time.lua"
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/Libs/time.lua"))()
+Library.Link = "https://raw.githubusercontent.com/dimanoclip/Roblox-Luas/main/Libs/time.lua"
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/dimanoclip/Roblox-Luas/main/Libs/time.lua"))()
 Library.ToTable = function(secs: number)
     local time = {secs = secs, mins = 0, hours = 0, days = 0}
     if time.secs >= 86400 then

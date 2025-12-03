@@ -1,4 +1,4 @@
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/Dimanoname/Roblox-Luas/main/ATS.lua"))()
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/dimanoclip/Roblox-Luas/main/ATS.lua"))()
 wait()
 script:Destroy()
 function descend(obj,class,func)
