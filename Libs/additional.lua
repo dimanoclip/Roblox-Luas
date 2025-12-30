@@ -14,10 +14,13 @@ Library.Children = function(table, callback)
     else return end
 end
 Library.dist_to = function(pos)
-    if pos:IsA('Vector3') then pos = pos
-    elseif pos:IsA('Part') or pos:IsA('MeshPart') then pos = pos.Position
-    elseif pos:IsA('Model') then pos = pos.PrimaryPart.Position
-    elseif pos:IsA('Player') then pos = pos.Character.PrimaryPart.Position end
+    if not pos then return end
+    if typeof(pos) == 'Vector3' then pos = pos
+    elseif typeof(pos) == 'Instance' then
+        if pos:IsA('Part') or pos:IsA('MeshPart') then pos = pos.Position
+        elseif pos:IsA('Model') then pos = pos.PrimaryPart.Position
+        elseif pos:IsA('Player') then pos = pos.Character.PrimaryPart.Position end
+    end
     return math.floor(((game.Players.LocalPlayer.Character.HumanoidRootPart).Position - pos).magnitude) or 0
 end
 Library.is_moving = function(humanoid)
@@ -98,11 +101,9 @@ Library.copy_connect = function()
 end
 Library.ss = function()
     loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpySource.lua"))()
-    print("Loaded simplespy")
 end
 Library.dd = function()
     loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/refs/heads/main/dex.lua", true))()
-    print("Loaded darkdex")
 end
 Library.aa = function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/dimanoclip/Roblox-Luas/main/Anti-AFK.lua"))()
