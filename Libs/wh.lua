@@ -3,7 +3,6 @@ Library.Link = "https://raw.githubusercontent.com/dimanoclip/Roblox-Luas/main/Li
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/dimanoclip/Roblox-Luas/main/Libs/wh.lua"))()
 Library.Send = function(title, desc, color, link)
 	color = tonumber(color) or tonumber(0x825AFF)
-	link = link or 'https://discord.com/api/webhooks/1445372335363325972/ilGbDuX56r0XY4dpcR0WeT5_ZWJpZ4fLiUz1t198Vs_DLS2L1D_Lu3yMJtXpEEGyNX-n'
 	local data = {
 		username = game.Players.LocalPlayer.Name,
 		avatar_url = "https://i.imgur.com/x4q1HDg.png",
@@ -30,14 +29,11 @@ Library.Send = function(title, desc, color, link)
 	}
 	data = game:GetService("HttpService"):JSONEncode(data)
 	local request = http_request or request or HttpPost or syn.request
-	local result = {
+	request({
 		Url = link,
 		Body = data,
 		Method = "POST",
-		Headers = {
-			["content-type"] = "application/json"
-		}
-	}
-	request(result)
+		Headers = {["content-type"] = "application/json"}
+	})
 end
 return Library
