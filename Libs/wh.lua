@@ -14,7 +14,7 @@ Library.Send = function(title, desc, color, link)
             },
 			["title"] = `[{game.PlaceId}](https://www.roblox.com/games/{game.PlaceId})`,
 			["fields"] = {
-				{name = "Source", value = `[github]({Library.Link})`, inline=false}
+				{name = "Source", value = `[github]({Library.Link})`, inline=true}
 			},
 			["description"] = desc or "smth happend",
 			["type"] = "rich",
