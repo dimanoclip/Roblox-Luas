@@ -1,5 +1,6 @@
 local Library = {}
 local ts = game:GetService('TeleportService')
+local msg = loadstring(game:HttpGet("https://raw.githubusercontent.com/dimanoclip/Roblox-Luas/main/Libs/msgs.lua"))()
 local pls = game.Players
 local lp = pls.LocalPlayer
 Library.Link = "https://raw.githubusercontent.com/dimanoclip/Roblox-Luas/main/Libs/additional.lua"
@@ -100,9 +101,11 @@ Library.copy_connect = function()
     setclipboard(string.format("game:GetService('TeleportService'):TeleportToPlaceInstance(%s, '%s', game.Players.LocalPlayer)", tostring(game.PlaceId), game.JobId))
 end
 Library.ss = function()
+    msg.Notify("Simple Spy", "Loading", 1)
     loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpySource.lua"))()
 end
 Library.dd = function()
+    msg.Notify("Dark Dex", "Loading", 1)
     loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/refs/heads/main/dex.lua", true))()
 end
 Library.aa = function()
