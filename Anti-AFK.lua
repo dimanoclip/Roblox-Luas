@@ -1,7 +1,7 @@
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/dimanoclip/Roblox-Luas/main/Anti-AFK.lua"))()
-if not getgenv().Useless or not getgenv().Useless.AntiAfkLoaded then
-	getgenv().Useless = {}
-	getgenv().Useless.AntiAfkLoaded = false
+if not _G.Useless or not _G.Useless.AntiAfkLoaded then
+	_G.Useless = {}
+	_G.Useless.AntiAfkLoaded = false
 	local gcn = getconnections or get_signal_cons
 	if gcn then
 		for i, v in gcn(game.Players.LocalPlayer.Idled) do
@@ -20,6 +20,6 @@ if not getgenv().Useless or not getgenv().Useless.AntiAfkLoaded then
 		VirtualUser:ClickButton2(Vector2.new())
 	end)
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/dimanoclip/Roblox-Luas/main/Libs/msgs.lua"))().Notify("Anti-AFK", "Loaded", 1)
-	getgenv().Useless.AntiAfkLoaded = true
-	queue_on_teleport('getgenv().Useless.AntiAfkLoaded = false; loadstring(game:HttpGet("https://raw.githubusercontent.com/dimanoclip/Roblox-Luas/main/Anti-AFK.lua"))()')
+	_G.Useless.AntiAfkLoaded = true
+	queue_on_teleport('_G.Useless.AntiAfkLoaded = false; loadstring(game:HttpGet("https://raw.githubusercontent.com/dimanoclip/Roblox-Luas/main/Anti-AFK.lua"))()')
 end
