@@ -5,15 +5,6 @@ local pls = game.Players
 local lp = pls.LocalPlayer
 Library.Link = "https://raw.githubusercontent.com/dimanoclip/Roblox-Luas/main/Libs/additional.lua"
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/dimanoclip/Roblox-Luas/main/Libs/additional.lua"))()
-Library.Children = function(table, callback)
-    if table and (type(table) == "userdata" or type(table) == "table") then local tablename,ttable
-        if type(table) == "userdata" then tablename,ttable = table.Name, table; while ttable.Name ~= "Game" do tablename = tostring(ttable.Parent).."."..tablename ttable = ttable.Parent end
-        if table:IsA("ModuleScript") then table = require(table) elseif table:IsA("Instance") then table = table:GetChildren() end
-        elseif type(table) == "table" then tablename = "Local list"; table = table end
-        warn(string.format("%s:",tablename))
-        for i,v in table do local type = v.ClassName callback(i,v,type) end
-    else return end
-end
 Library.dist_to = function(pos)
     if not pos then return end
     if typeof(pos) == 'Vector3' then pos = pos
@@ -29,7 +20,7 @@ Library.is_moving = function(humanoid)
     return true
 end
 Library.is_exist = function(instance)
-    if instance.Parent:FindFirstChild(instance) then return true end
+    if instance and instance.Parent:FindFirstChild(instance.Name) then return true end
     return false
 end
 Library.is_alive = function(ply)
@@ -97,7 +88,7 @@ end
 Library.unhlplayer = function(ply)
         ply.Character:FindFirstChild("U_Highlight"):Remove()
 end
-Library.copy_connect = function()
+Library.get_teleport = function()
     setclipboard(string.format("game:GetService('TeleportService'):TeleportToPlaceInstance(%s, '%s', game.Players.LocalPlayer)", tostring(game.PlaceId), game.JobId))
 end
 Library.ss = function()
